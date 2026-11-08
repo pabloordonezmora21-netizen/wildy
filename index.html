@@ -3693,6 +3693,38 @@ body.has-tabs .ai-list {
     animation: none;
   }
 }
+.push-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 14px;
+  margin: 0 0 16px;
+}
+.pc-ic {
+  font-size: 26px;
+  line-height: 1;
+  flex: none;
+}
+.pc-t {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+.pc-t p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.pc-b {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
 .pickpet {
   width: 100%;
   text-align: left;
@@ -4660,7 +4692,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   };
   const num = (s) => parseFloat(String(s).replace(",", "."));
   let user = null, owner = {}, people = {}, pets = [];
-  let view = { name: "home" }, calMonth = null, pendingDelete = false, photoDraft = "", avatarDraft = null, photoTarget = "pet", authMode = "login", authMsg = "", inviteCode = null, busy = false, staleWhileTyping = false;
+  let view = { name: new URLSearchParams(location.search).get("ver") === "avisos" ? "avisos" : "home" }, calMonth = null, pendingDelete = false, photoDraft = "", avatarDraft = null, photoTarget = "pet", authMode = "login", authMsg = "", inviteCode = null, busy = false, staleWhileTyping = false;
   function toast(msg) {
     const t = document.createElement("div");
     t.className = "toast";
@@ -5276,6 +5308,7 @@ C\xF3digo: ${inviteCode.code}`;
     app.innerHTML = `
   <button class="back" data-act="home">\u2039 Mis mascotas</button>
   <h1 style="font-size:34px;margin-block:6px 16px">Ajustes</h1>
+  ${pushCard()}
   <form class="form" id="oform">
     <div class="photo-pick">${avatarHTML(true)}
       <button type="button" class="btn soft small" data-act="pickavatar">${(avatarDraft != null ? avatarDraft : o.photo_url) ? "Cambiar foto" : "Poner foto"}</button></div>
@@ -7267,6 +7300,7 @@ C\xF3digo: ${inviteCode.code}`;
     app.innerHTML = `
   <h1 class="feed-title">Avisos</h1>
   <p class="sub" style="margin-top:-4px">Vacunas, citas y cumplea\xF1os de tus mascotas. Los recordatorios se a\xF1aden en el calendario de cada ficha.</p>
+  ${pushCard()}
   ${l.length ? sec("\u26A0\uFE0F Atrasados", late) + sec("Hoy", now) + sec("Pr\xF3ximos d\xEDas", soon) : `<div class="soc-empty"><div>\u{1F43E}</div><b>Todo al d\xEDa</b><p>No hay nada pendiente en las pr\xF3ximas dos semanas.</p></div>`}`;
   }
   const TABS = [
@@ -7375,6 +7409,96 @@ C\xF3digo: ${inviteCode.code}`;
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeParty();
   });
+  const VAPID_PUB = "BAwbnF21VMqGzxf8m3HtcxJXBu0ZIsa_aDmRvoA_AxYPL0jUONnFcgBjgovxA6CT_1cZN24qN4TmFMsG0pr7LB8";
+  const PUSH_URL = "https://wildy-push.pablo-ordonez-mora-21.workers.dev";
+  const push = { sub: null, checked: false, busy: false };
+  const isIOSdev = () => /iPhone|iPad|iPod/.test(navigator.userAgent) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+  const isStandalone = () => window.navigator.standalone === true || window.matchMedia && matchMedia("(display-mode: standalone)").matches;
+  const pushSupported = () => "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  function b64uToBytes(s) {
+    const p = "=".repeat((4 - s.length % 4) % 4);
+    const r = atob((s + p).replace(/-/g, "+").replace(/_/g, "/"));
+    return Uint8Array.from(r, (c) => c.charCodeAt(0));
+  }
+  async function pushCheck() {
+    if (push.checked || !pushSupported()) return;
+    push.checked = true;
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      push.sub = await reg.pushManager.getSubscription();
+    } catch (_) {
+    }
+    if (["avisos", "settings"].includes(view.name)) render();
+  }
+  function pushCard() {
+    if (!push.checked) setTimeout(pushCheck, 0);
+    const wrap = (ic, h, p, btns) => `<section class="push-card"><div class="pc-ic" aria-hidden="true">${ic}</div><div class="pc-t"><b>${h}</b><p>${p}</p>${btns ? `<div class="pc-b">${btns}</div>` : ""}</div></section>`;
+    if (isIOSdev() && !isStandalone()) return wrap("\u{1F4F2}", "Recibe los avisos en tu iPhone", "Para que Wildy te avise de vacunas y cumplea\xF1os, a\xF1\xE1dela a la pantalla de inicio (Compartir \u2192 \xABA\xF1adir a pantalla de inicio\xBB) y \xE1brela desde ese icono. Necesitas iOS 16.4 o posterior.");
+    if (!pushSupported()) return wrap("\u{1F515}", "Este navegador no admite avisos", "Abre Wildy en Chrome (Android) o inst\xE1lala en la pantalla de inicio del iPhone para recibir notificaciones.");
+    if (Notification.permission === "denied") return wrap("\u{1F515}", "Avisos bloqueados", "Has bloqueado las notificaciones de Wildy. Act\xEDvalas en los ajustes del m\xF3vil (Notificaciones \u2192 Wildy) y vuelve aqu\xED.");
+    if (push.sub) return wrap(
+      "\u{1F514}",
+      "Avisos activados en este m\xF3vil",
+      "Cada d\xEDa a las 9:00 te avisamos de vacunas y citas (el d\xEDa antes y el mismo d\xEDa) y de los cumplea\xF1os.",
+      `<button class="btn soft small" data-act="push_test"${push.busy ? " disabled" : ""}>Enviar prueba</button><button class="btn ghost small" data-act="push_off"${push.busy ? " disabled" : ""}>Desactivar</button>`
+    );
+    return wrap(
+      "\u{1F514}",
+      "Activa los avisos en el m\xF3vil",
+      "Te llegar\xE1 una notificaci\xF3n a las 9:00 cuando toque vacuna, cita o cumplea\xF1os, aunque tengas Wildy cerrada.",
+      `<button class="btn small" data-act="push_on"${push.busy ? " disabled" : ""}>${push.busy ? "Activando\u2026" : "Activar avisos"}</button>`
+    );
+  }
+  async function pushTest() {
+    try {
+      const { data } = await sb.auth.getSession();
+      const tok = data && data.session && data.session.access_token;
+      const r = await fetch(PUSH_URL + "/test", { method: "POST", headers: { Authorization: "Bearer " + tok } });
+      const j = await r.json().catch(() => ({}));
+      toast(j.ok ? "Prueba enviada: te llegar\xE1 en unos segundos" : "No se ha podido enviar la prueba. Int\xE9ntalo en un rato.");
+    } catch (_) {
+      toast("No hay conexi\xF3n para enviar la prueba");
+    }
+  }
+  async function pushClick(a) {
+    if (push.busy) return;
+    if (a === "push_test") return pushTest();
+    push.busy = true;
+    render();
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      if (a === "push_on") {
+        const perm = await Notification.requestPermission();
+        if (perm !== "granted") {
+          toast(perm === "denied" ? "Has bloqueado los avisos. Act\xEDvalos en los ajustes del m\xF3vil." : "No se han activado los avisos");
+        } else {
+          let sub = await reg.pushManager.getSubscription();
+          if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uToBytes(VAPID_PUB) });
+          const j = sub.toJSON();
+          const { error } = await sb.from("push_subs").upsert({ endpoint: j.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth, user_id: user.id }, { onConflict: "endpoint" });
+          if (error) throw error;
+          push.sub = sub;
+          toast("\xA1Avisos activados! \u{1F514}");
+          setTimeout(pushTest, 600);
+        }
+      } else if (a === "push_off") {
+        const sub = push.sub || await reg.pushManager.getSubscription();
+        if (sub) {
+          const ep = sub.endpoint;
+          await sub.unsubscribe().catch(() => {
+          });
+          await sb.from("push_subs").delete().eq("endpoint", ep);
+        }
+        push.sub = null;
+        toast("Avisos desactivados en este m\xF3vil");
+      }
+    } catch (e) {
+      window.WILDY_LOG && WILDY_LOG("push: " + (e && e.message || e), "push");
+      toast("No se han podido activar los avisos. Int\xE9ntalo de nuevo.");
+    }
+    push.busy = false;
+    render();
+  }
   app.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-act]");
     if (!b) return;
@@ -7382,6 +7506,7 @@ C\xF3digo: ${inviteCode.code}`;
     if (a.startsWith("soc")) return socialClick(a, b);
     if (a.startsWith("st_")) return sitiosClick(a, b);
     if (a.startsWith("ai_")) return aiClick(a, b);
+    if (a.startsWith("push_")) return pushClick(a);
     if (a === "mode") {
       authMode = b.dataset.mode;
       authMsg = "";
