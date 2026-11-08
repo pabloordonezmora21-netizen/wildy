@@ -4994,10 +4994,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     <button class="add" data-act="new"><span class="plus">+</span>A\xF1adir mascota</button>
     <button class="add qrbtn" data-act="qrs" aria-label="Ver los c\xF3digos QR de las mascotas"><span class="plus"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M3 3h8v8H3zm2 2v4h4V5zm8-2h8v8h-8zm2 2v4h4V5zM3 13h8v8H3zm2 2v4h4v-4zm8-2h2v2h-2zm2 2h2v2h-2zm2-2h2v2h-2zm2 2h2v2h-2zm-6 2h2v2h-2zm2 2h2v2h-2zm2-2h2v2h-2zm2 2h2v2h-2z"/></svg></span>QR</button>
   </div>
-  <button class="soc-entry" data-act="meetups"><span class="soc-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-    <span class="t"><b>Quedadas en el parque</b><span>Mira qu\xE9 perros van al pipic\xE1n y ap\xFAntate</span></span><span aria-hidden="true">\u203A</span></button>
-  <button class="soc-entry sit-entry" data-act="goplaces"><span class="soc-ic">\u{1F3DE}\uFE0F</span>
-    <span class="t"><b>Sitios para ir con tu perro</b><span>Lagos, campos, playas caninas, bares y m\xE1s</span></span><span aria-hidden="true">\u203A</span></button>
   <div class="list">${pets.map((p) => {
       const nb = nextCele(p.birth);
       const up = (p.events || []).filter((e) => !e.done && parse(e.date) >= today()).sort((a, b) => a.date < b.date ? -1 : 1)[0];
