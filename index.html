@@ -3763,6 +3763,139 @@ body.has-tabs .ai-list {
     animation: none;
   }
 }
+.fc-img {
+  aspect-ratio: 4/3;
+}
+.fc-img img {
+  z-index: 1;
+}
+.fc-kind,
+.fc-n,
+.fc-over {
+  z-index: 2;
+}
+.fc-n {
+  top: 12px;
+  bottom: auto;
+}
+.fc-over {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  gap: 4px;
+  padding: 48px 14px 12px;
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(10, 6, 7, .78));
+  color: #fff;
+}
+.fc-over .fc-t {
+  font-size: 21px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .4);
+}
+.fc-over .fc-meta {
+  color: rgba(255, 255, 255, .88);
+}
+.chat-rules {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: var(--red-soft);
+  border-radius: 16px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 120px;
+}
+.cm {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.cm.cm-mine {
+  flex-direction: row-reverse;
+}
+.cm-av {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--red);
+  color: var(--red-ink);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+.cm-av img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cm-b {
+  max-width: 78%;
+  display: grid;
+  gap: 3px;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  border-bottom-left-radius: 6px;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+.cm.cm-mine .cm-b {
+  background: var(--red);
+  color: var(--red-ink);
+  border-color: transparent;
+  border-radius: 18px;
+  border-bottom-right-radius: 6px;
+}
+.cm-n {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--red);
+}
+.cm-n i {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--muted);
+}
+.cm-t {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.cm-w {
+  font-size: 11px;
+  opacity: .7;
+}
+.cm-menu {
+  flex-basis: 100%;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-left: 42px;
+}
+.cm.cm-mine .cm-menu {
+  justify-content: flex-end;
+  padding: 0;
+}
 .pickpet {
   width: 100%;
   text-align: left;
@@ -4985,6 +5118,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 0);
     } else if (view.name === "ask") renderAsk();
     else if (view.name === "avisos") renderAvisos();
+    else if (view.name === "chat") renderChat();
     else if (view.name === "newpass") renderNewPass();
     else renderPet();
     if (view.name !== "social" && social.sheet) {
@@ -4999,6 +5133,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     drawQR();
     renderTabs();
     party();
+    if (view.name !== "chat") chatLeave();
     if (view.name === "home") setTimeout(pushMaybeAsk, 1500);
   }
   let lastEmail = "", resendAt = 0, resendTimer = null;
@@ -6355,7 +6490,7 @@ C\xF3digo: ${inviteCode.code}`;
     });
     drawMarkers();
   }
-  const sit = { photos: {}, thumbs: {}, pcount: {}, wiki: {}, mode: "feed", detail: null, feedKey: "", feedN: 24, feedScroll: 0, flyTo: null, viewIdx: 0, cat: "all", loc: null, center: null, zoom: 12, sel: null, adding: false, sheet: null, err: "", busy: 0, draft: null };
+  const sit = { geo: {}, photos: {}, thumbs: {}, pcount: {}, wiki: {}, mode: "feed", detail: null, feedKey: "", feedN: 24, feedScroll: 0, flyTo: null, viewIdx: 0, cat: "all", loc: null, center: null, zoom: 12, sel: null, adding: false, sheet: null, err: "", busy: 0, draft: null };
   let smap = null, smapEl = null, sLayer = null, sTiles = [], sStyle = null, sTimer = null, sLastKey = "", sLocKey = "";
   const sitKinds = () => (CATS.find((c) => c[0] === sit.cat) || CATS[0])[2];
   function sitBounds() {
@@ -6512,13 +6647,54 @@ C\xF3digo: ${inviteCode.code}`;
   }
   async function loadSitPhotos(p) {
     const [wiki, { data }] = await Promise.all([p.id in sit.wiki ? sit.wiki[p.id] : wikiPhoto(p), sb.from("place_photos").select("id,url,user_id").eq("place_id", p.id).order("created_at", { ascending: false }).limit(30)]);
-    sit.photos[p.id] = { wiki, list: (data || []).map((x) => ({ id: x.id, url: x.url, mine: x.user_id === user.id })) };
+    sit.photos[p.id] = { wiki, list: (data || []).map((x) => ({ id: x.id, url: x.url, mine: x.user_id === user.id })), geo: sit.geo[p.id] || [] };
+    geoPhotos(p).then((g) => {
+      if (sit.photos[p.id]) {
+        sit.photos[p.id].geo = g;
+        if (view.name === "sitios" && sit.detail === p.id) render();
+      }
+    });
     if (view.name === "sitios" && (sit.detail === p.id || sit.sel === p.id)) render();
   }
   const sitPhotoList = (id) => {
-    const ph = sit.photos[id];
-    return ph ? [...ph.wiki ? [{ url: ph.wiki, wiki: true }] : [], ...ph.list] : [];
+    const ph = sit.photos[id], p = placeCache.get(id);
+    if (!ph) return [];
+    const seen = /* @__PURE__ */ new Set();
+    const add = (arr, x) => {
+      const k = String(x.url).split("/").pop().replace(/^\d+px-/, "");
+      if (seen.has(k)) return;
+      seen.add(k);
+      arr.push(x);
+    };
+    const out = [];
+    if (ph.wiki) add(out, { url: ph.wiki, wiki: true });
+    ph.list.forEach((x) => add(out, x));
+    (ph.geo || []).forEach((g) => add(out, { url: g.url, geo: true }));
+    if (p) out.push({ url: satUrl(p, 1e3, 700), sat: true });
+    return out;
   };
+  const SAT_SPAN = { lake: 0.012, nature: 0.015, viewpoint: 6e-3, beach: 8e-3, picnic: 4e-3, dog_park: 22e-4, food: 16e-4, stay: 18e-4, vet: 16e-4, other: 4e-3 };
+  function satUrl(p, w, h) {
+    w = w || 800;
+    h = h || 500;
+    const cs = Math.max(Math.cos(p.a * Math.PI / 180), 0.2), lo = SAT_SPAN[p.k] || 4e-3, la = lo * cs * h / w;
+    return `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=${(p.o - lo / 2).toFixed(5)},${(p.a - la / 2).toFixed(5)},${(p.o + lo / 2).toFixed(5)},${(p.a + la / 2).toFixed(5)}&bboxSR=4326&imageSR=3857&size=${w},${h}&format=jpg&f=image`;
+  }
+  const GEO_R = { lake: 900, nature: 900, viewpoint: 600, beach: 700, picnic: 400, dog_park: 150, food: 120, stay: 200, vet: 120, other: 250 };
+  const fold = (t) => String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const GENERIC = /* @__PURE__ */ new Set(["parque", "area", "areas", "recreativa", "recreativo", "playa", "embalse", "pantano", "laguna", "lago", "mirador", "zona", "calle", "camino", "perros", "canina", "canino", "pipican", "de", "del", "la", "las", "los", "el"]);
+  async function geoPhotos(p) {
+    if (p.id in sit.geo) return sit.geo[p.id];
+    sit.geo[p.id] = [];
+    try {
+      const u = `https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=geosearch&ggscoord=${p.a}|${p.o}&ggsradius=${GEO_R[p.k] || 300}&ggsnamespace=6&ggslimit=20&prop=imageinfo&iiprop=url|mime&iiurlwidth=900`;
+      const j = await (await fetch(u)).json();
+      const words = fold(p.n).split(/[^a-zñ0-9]+/).filter((w) => w.length >= 4 && !GENERIC.has(w));
+      sit.geo[p.id] = Object.values(j.query && j.query.pages || {}).sort((a, b) => a.index - b.index).filter((x) => x.imageinfo && x.imageinfo[0] && /jpe?g/.test(x.imageinfo[0].mime) && !/(map|mapa|plano|logo|escudo|flag|bandera|diagram|señal|senal|cartel|panel|location|locator|situaci)/i.test(x.title)).slice(0, 10).map((x) => ({ url: x.imageinfo[0].thumburl || x.imageinfo[0].url, match: words.some((w) => fold(x.title).includes(w)) }));
+    } catch (_) {
+    }
+    return sit.geo[p.id];
+  }
   function sitSetLoc(loc) {
     sit.loc = loc;
     sit.center = null;
@@ -7010,12 +7186,13 @@ C\xF3digo: ${inviteCode.code}`;
     const items = feedItems(), shown = items.slice(0, sit.feedN), cat = CATS.find((c) => c[0] === sit.cat) || CATS[0];
     el.innerHTML = shown.map(({ p, d, ph }) => {
       const K = KINDS[p.k] || KINDS.other, c = KCOL[p.k] || KCOL.other, sc = social.scores[p.id], n = sit.pcount[p.id] || 0;
+      const src = ph || satUrl(p);
       return `<button class="feed-card" data-act="st_open" data-id="${esc(p.id)}">
-      <span class="fc-img" style="background:linear-gradient(135deg,${c[0]},${c[1]})">${ph ? `<img src="${esc(ph)}" alt="" loading="lazy">` : `<span class="fc-emo" aria-hidden="true">${K[0]}</span>`}
-        <span class="fc-kind">${K[0]} ${K[1]}</span>${n ? `<span class="fc-n">\u{1F4F7} ${n}</span>` : ""}</span>
-      <span class="fc-body"><span class="fc-t">${esc(p.n)}</span>
-        <span class="fc-meta">\u{1F4CD} a ${distTxt(d)}${sc ? ` \xB7 <i class="st">\u2605 ${fmt1(sc.avg)}</i> (${sc.n})` : ""}${p.community ? " \xB7 \u{1F465} Comunidad" : ""}</span>
-        ${sc && sc.top.length ? `<span class="tchips sm">${sc.top.slice(0, 3).map((t) => `<span class="tchip">${esc(TAGS[t.t] || "")}</span>`).join("")}</span>` : ""}</span></button>`;
+      <span class="fc-img" style="background:linear-gradient(135deg,${c[0]},${c[1]})"><span class="fc-emo" aria-hidden="true">${K[0]}</span><img src="${esc(src)}" alt="" loading="lazy" onerror="this.remove()">
+        <span class="fc-kind">${K[0]} ${K[1]}</span>${ph ? n ? `<span class="fc-n">\u{1F4F7} ${n}</span>` : "" : '<span class="fc-n">\u{1F6F0}\uFE0F Vista a\xE9rea</span>'}
+        <span class="fc-over"><span class="fc-t">${esc(p.n)}</span>
+          <span class="fc-meta">\u{1F4CD} a ${distTxt(d)}${sc ? ` \xB7 \u2605 ${fmt1(sc.avg)} (${sc.n})` : ""}${p.community ? " \xB7 \u{1F465} Comunidad" : ""}</span></span></span>
+      ${sc && sc.top.length ? `<span class="fc-body"><span class="tchips sm">${sc.top.slice(0, 3).map((t) => `<span class="tchip">${esc(TAGS[t.t] || "")}</span>`).join("")}</span></span>` : ""}</button>`;
     }).join("") + (sit.busy ? '<span class="feed-skel" aria-hidden="true"></span><span class="feed-skel" aria-hidden="true"></span>' : "") + (items.length > sit.feedN ? '<button class="btn ghost block" data-act="st_more">Ver m\xE1s sitios</button>' : "") || `<div class="soc-empty"><div>${cat[1].split(" ")[0]}</div><b>A\xFAn no hay sitios por aqu\xED</b><p>${["food", "stay"].includes(sit.cat) ? "Los bares y alojamientos que admiten perros los a\xF1ade la comunidad. \xBFConoces alguno? A\xF1\xE1delo abajo." : "Prueba con otra zona o con otra etiqueta."}</p></div>`;
   }
   async function feedPhotos(ids) {
@@ -7043,6 +7220,19 @@ C\xF3digo: ${inviteCode.code}`;
           sit.thumbs[id] = u;
           sit.pcount[id] = (sit.pcount[id] || 0) + 1;
         }
+      }));
+      renderFeedList();
+    }
+    const g = need.filter((id) => {
+      const p = placeCache.get(id);
+      return !sit.thumbs[id] && p && ["lake", "nature", "viewpoint", "beach", "picnic"].includes(p.k);
+    }).slice(0, 40);
+    for (let i = 0; i < g.length; i += 4) {
+      await Promise.all(g.slice(i, i + 4).map(async (id) => {
+        const l = await geoPhotos(placeCache.get(id));
+        const m = l.find((x) => x.match);
+        if (m && !sit.thumbs[id]) sit.thumbs[id] = m.url;
+        if (l.length) sit.pcount[id] = (sit.pcount[id] || 0) + l.length;
       }));
       renderFeedList();
     }
@@ -7083,7 +7273,7 @@ C\xF3digo: ${inviteCode.code}`;
     app.innerHTML = `
   <button class="back" data-act="st_back">\u2039 Volver</button>
   <div class="dt-hero" style="background:linear-gradient(135deg,${c[0]},${c[1]})">
-    ${l.length ? `<div class="dt-slides">${l.map((x, i) => `<button class="dt-slide" data-act="st_view" data-i="${i}" aria-label="Ver foto ${i + 1} a pantalla completa"><img src="${esc(x.url)}" alt="" ${i ? 'loading="lazy"' : ""}>${x.wiki ? "<em>Wikimedia</em>" : ""}</button>`).join("")}</div>${l.length > 1 ? `<span class="ph-count">\u{1F4F7} ${l.length} \xB7 desliza</span>` : ""}` : `<span class="fc-emo big" aria-hidden="true">${K[0]}</span><span class="dt-loading">${sit.photos[p.id] ? "A\xFAn no hay fotos de este sitio" : "Buscando fotos\u2026"}</span>`}
+    ${l.length ? `<div class="dt-slides">${l.map((x, i) => `<button class="dt-slide" data-act="st_view" data-i="${i}" aria-label="Ver foto ${i + 1} a pantalla completa"><img src="${esc(x.url)}" alt="" ${i ? 'loading="lazy"' : ""}>${x.wiki ? "<em>Wikimedia</em>" : x.geo ? "<em>Foto de la zona \xB7 Wikimedia</em>" : x.sat ? "<em>Vista a\xE9rea \xB7 Esri</em>" : ""}</button>`).join("")}</div>${l.length > 1 ? `<span class="ph-count">\u{1F4F7} ${l.length} \xB7 desliza</span>` : ""}` : `<span class="fc-emo big" aria-hidden="true">${K[0]}</span><span class="dt-loading">${sit.photos[p.id] ? "A\xFAn no hay fotos de este sitio" : "Buscando fotos\u2026"}</span>`}
   </div>
   <h1 class="dt-title">${esc(p.n)}</h1>
   <div class="tchips"><span class="tchip on">${K[0]} ${K[1]}</span><span class="tchip">\u{1F4CD} a ${distTxt(d)}</span>${sc ? `<span class="tchip">\u2605 ${fmt1(sc.avg)} \xB7 ${sc.n} opini${sc.n === 1 ? "\xF3n" : "ones"}</span>` : ""}${p.community ? '<span class="tchip">\u{1F465} Comunidad</span>' : ""}</div>
@@ -7346,10 +7536,11 @@ C\xF3digo: ${inviteCode.code}`;
     ["home", "Inicio", '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>'],
     ["meetups", "Quedadas", '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'],
     ["goplaces", "Sitios", '<path d="M3 20l6-12 4 7 3-4 5 9z"/><circle cx="17" cy="6" r="2"/>'],
+    ["chat", "Chat", '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>'],
     ["ai_open", "Pregunta", '<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>'],
     ["avisos", "Avisos", '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/>']
   ];
-  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", settings: "home", social: "meetups", sitios: "goplaces", ask: "ai_open", avisos: "avisos" };
+  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", settings: "home", social: "meetups", sitios: "goplaces", ask: "ai_open", avisos: "avisos", chat: "chat" };
   function renderTabs() {
     let bar = document.getElementById("tabbar");
     const show = !!user && view.name !== "newpass" && !window.WILDY_LANDING;
@@ -7385,9 +7576,11 @@ C\xF3digo: ${inviteCode.code}`;
         } else if (a === "avisos") {
           view = { name: "avisos" };
           markSeen();
+        } else if (a === "chat") {
+          view = { name: "chat" };
         }
         render();
-        window.scrollTo(0, 0);
+        if (view.name !== "chat") window.scrollTo(0, 0);
       });
     }
     bar.hidden = false;
@@ -7596,6 +7789,215 @@ C\xF3digo: ${inviteCode.code}`;
       if (b) b.focus();
     }, 50);
   }
+  const ROOMS = [["general", "\u{1F4AC} General"], ["consejos", "\u{1F4A1} Consejos"], ["perdidos", "\u{1F50E} Perdidos y encontrados"]];
+  const chat = { room: "general", msgs: [], loading: false, ch: null, chRoom: null, more: true, menu: null, blocked: null, sending: false };
+  async function chatBlocks() {
+    if (chat.blocked) return;
+    chat.blocked = /* @__PURE__ */ new Set();
+    try {
+      const { data } = await sb.from("blocks").select("blocked_id").eq("user_id", user.id);
+      (data || []).forEach((r) => chat.blocked.add(r.blocked_id));
+    } catch (_) {
+    }
+  }
+  function chatLeave() {
+    if (chat.ch) {
+      try {
+        sb.removeChannel(chat.ch);
+      } catch (_) {
+      }
+      chat.ch = null;
+      chat.chRoom = null;
+    }
+  }
+  async function chatLoad(older) {
+    const room = chat.room;
+    chat.loading = true;
+    renderChatList();
+    try {
+      let q = sb.from("community_msgs").select("*").eq("room", room).order("created_at", { ascending: false }).limit(50);
+      if (older && chat.msgs.length) q = q.lt("created_at", chat.msgs[0].created_at);
+      const { data, error } = await q;
+      if (error) throw error;
+      if (chat.room !== room) return;
+      const l = (data || []).slice().reverse();
+      chat.msgs = older ? l.concat(chat.msgs) : l;
+      chat.more = (data || []).length === 50;
+    } catch (e) {
+      toast("No se ha podido cargar el chat");
+    }
+    chat.loading = false;
+    renderChatList(!older);
+    if (!chat.ch || chat.chRoom !== room) {
+      chatLeave();
+      chat.chRoom = room;
+      chat.ch = sb.channel("chat-" + room).on("postgres_changes", { event: "INSERT", schema: "public", table: "community_msgs", filter: "room=eq." + room }, (pl) => {
+        const m = pl.new;
+        if (!m || chat.room !== room || chat.msgs.some((x) => x.id === m.id)) return;
+        const el = document.getElementById("chat-list");
+        const near = !el || window.innerHeight + window.scrollY >= document.body.scrollHeight - 160;
+        chat.msgs.push(m);
+        renderChatList(near || m.user_id === user.id);
+      }).on("postgres_changes", { event: "DELETE", schema: "public", table: "community_msgs" }, (pl) => {
+        const id = pl.old && pl.old.id;
+        if (id == null) return;
+        chat.msgs = chat.msgs.filter((x) => x.id !== id);
+        renderChatList();
+      }).subscribe();
+    }
+  }
+  function chatWhen(ts) {
+    const d = new Date(ts), t = today();
+    if (d >= t) return ago(ts);
+    const y = addDays(t, -1);
+    return (d >= y ? "ayer" : d.getDate() + " " + MES[d.getMonth()]) + " \xB7 " + pad(d.getHours()) + ":" + pad(d.getMinutes());
+  }
+  function renderChat() {
+    let rules = true;
+    try {
+      rules = !localStorage.getItem("wildy.chatRules");
+    } catch (_) {
+    }
+    app.innerHTML = `
+  <h1 class="feed-title">Chat de Wildy</h1>
+  <div class="chips scroll st-cats" role="tablist">${ROOMS.map((r) => `<button role="tab" aria-selected="${chat.room === r[0]}" class="chip ${chat.room === r[0] ? "on" : ""}" data-act="chat_room" data-v="${r[0]}">${r[1]}</button>`).join("")}</div>
+  ${rules ? `<div class="chat-rules"><span>\u{1F43E} S\xE9 amable y ayuda a los dem\xE1s. No compartas tu direcci\xF3n ni datos personales. Toca un mensaje para denunciarlo o bloquear a esa persona.</span><button class="lnk" data-act="chat_rules">Entendido</button></div>` : ""}
+  <div id="chat-list" class="chat-list" aria-live="polite"></div>
+  <form id="chatform" class="ai-bar ai-dock chat-dock">
+    <label for="chat-q" class="sr">Escribe un mensaje</label>
+    <textarea id="chat-q" name="q" rows="1" maxlength="500" enterkeyhint="send" placeholder="Escribe a la comunidad\u2026"></textarea>
+    <button type="submit" aria-label="Enviar">\u279C</button>
+  </form>`;
+    const ta = document.getElementById("chat-q");
+    ta.addEventListener("input", () => {
+      ta.style.height = "auto";
+      ta.style.height = Math.min(ta.scrollHeight, 140) + "px";
+    });
+    ta.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+        e.preventDefault();
+        chatSubmit(ta.form);
+      }
+    });
+    renderChatList(true);
+    chatBlocks().then(() => {
+      if (!chat.ch || chat.chRoom !== chat.room || !chat.msgs.length) chatLoad();
+    });
+  }
+  function renderChatList(toBottom) {
+    const el = document.getElementById("chat-list");
+    if (!el) return;
+    const bl = chat.blocked || /* @__PURE__ */ new Set(), l = chat.msgs.filter((m) => !bl.has(m.user_id));
+    if (chat.loading && !l.length) {
+      el.innerHTML = '<p class="sub" style="text-align:center">Cargando mensajes\u2026</p>';
+      return;
+    }
+    if (!l.length) {
+      el.innerHTML = `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F4AC}</div><b>\xA1S\xE9 el primero en escribir!</b><p>${chat.room === "perdidos" ? "Si has perdido o encontrado una mascota, avisa aqu\xED a la comunidad." : chat.room === "consejos" ? "Pregunta o comparte trucos con otros due\xF1os." : "Saluda a la comunidad de Wildy."}</p></div>`;
+      return;
+    }
+    el.innerHTML = (chat.more ? `<button class="btn ghost small" style="justify-self:center" data-act="chat_more">Ver mensajes anteriores</button>` : "") + l.map((m) => {
+      const mine = m.user_id === user.id, open = chat.menu === m.id;
+      return `<div class="cm ${mine ? "cm-mine" : ""}">
+      ${mine ? "" : `<span class="cm-av" aria-hidden="true">${m.pet_photo ? `<img src="${esc(m.pet_photo)}" alt="">` : esc((m.name || "?")[0].toUpperCase())}</span>`}
+      <button class="cm-b" data-act="chat_menu" data-id="${m.id}" aria-expanded="${open}">
+        ${mine ? "" : `<span class="cm-n">${esc(m.name)}${m.pet_name ? ` <i>con ${esc(m.pet_name)}</i>` : ""}</span>`}
+        <span class="cm-t">${esc(m.body)}</span><span class="cm-w">${chatWhen(m.created_at)}</span></button>
+      ${open ? `<div class="cm-menu">${mine ? `<button class="btn ghost small" data-act="chat_del" data-id="${m.id}">Borrar mensaje</button>` : `<button class="btn ghost small" data-act="chat_report" data-id="${m.id}" data-uid="${esc(m.user_id)}">Denunciar</button><button class="btn ghost small" data-act="chat_block" data-uid="${esc(m.user_id)}" data-name="${esc(m.name)}">Bloquear a ${esc(m.name)}</button>`}</div>` : ""}
+    </div>`;
+    }).join("");
+    if (toBottom) requestAnimationFrame(() => window.scrollTo(0, document.body.scrollHeight));
+  }
+  async function chatSubmit(form) {
+    const ta = form.querySelector("textarea");
+    const t = (ta.value || "").trim();
+    const btn = form.querySelector("button[type=submit]");
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = "";
+    }
+    if (!t || chat.sending) return;
+    chat.sending = true;
+    try {
+      const pet = pets[0] ? pets[0].id : null;
+      const { data, error } = await sb.rpc("post_msg", { rm: chat.room, txt: t, pet });
+      if (error) throw error;
+      ta.value = "";
+      ta.style.height = "auto";
+      if (typeof data === "number" && !chat.msgs.some((x) => x.id === data)) {
+        chat.msgs.push({ id: data, user_id: user.id, room: chat.room, name: (owner.name || "Yo").split(" ")[0], pet_name: pets[0] && pets[0].name, pet_photo: pets[0] && pets[0].photo_url, body: t, created_at: (/* @__PURE__ */ new Date()).toISOString() });
+        renderChatList(true);
+      }
+    } catch (e) {
+      const m = String(e && e.message || "");
+      toast(/despacio/.test(m) ? "Espera unos segundos entre mensajes" : /limite/.test(m) ? "Has llegado al l\xEDmite de mensajes de hoy" : "No se ha podido enviar. Revisa tu conexi\xF3n.");
+    }
+    chat.sending = false;
+  }
+  async function chatClick(a, b) {
+    if (a === "chat_room") {
+      if (chat.room === b.dataset.v) return;
+      chat.room = b.dataset.v;
+      chat.msgs = [];
+      chat.menu = null;
+      chat.more = true;
+      chatLeave();
+      render();
+      return chatLoad();
+    }
+    if (a === "chat_rules") {
+      try {
+        localStorage.setItem("wildy.chatRules", "1");
+      } catch (_) {
+      }
+      return render();
+    }
+    if (a === "chat_more") return chatLoad(true);
+    if (a === "chat_menu") {
+      const id = +b.dataset.id;
+      chat.menu = chat.menu === id ? null : id;
+      return renderChatList();
+    }
+    if (a === "chat_del") {
+      const id = +b.dataset.id;
+      try {
+        const { error } = await sb.from("community_msgs").delete().eq("id", id).eq("user_id", user.id);
+        if (error) throw error;
+        chat.msgs = chat.msgs.filter((x) => x.id !== id);
+        chat.menu = null;
+        renderChatList();
+        toast("Mensaje borrado");
+      } catch (e) {
+        fail(e);
+      }
+      return;
+    }
+    if (a === "chat_report") {
+      try {
+        const { error } = await sb.from("reports").insert({ reported: b.dataset.uid, msg_id: +b.dataset.id, reason: "Mensaje del chat" });
+        if (error) throw error;
+        chat.menu = null;
+        renderChatList();
+        toast("Denuncia enviada. Gracias por avisar");
+      } catch (e) {
+        fail(e);
+      }
+      return;
+    }
+    if (a === "chat_block") {
+      try {
+        const { error } = await sb.from("blocks").upsert({ user_id: user.id, blocked_id: b.dataset.uid });
+        if (error) throw error;
+        (chat.blocked || (chat.blocked = /* @__PURE__ */ new Set())).add(b.dataset.uid);
+        chat.menu = null;
+        renderChatList();
+        toast("Has bloqueado a " + b.dataset.name + ". Ya no ver\xE1s sus mensajes");
+      } catch (e) {
+        fail(e);
+      }
+      return;
+    }
+  }
   app.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-act]");
     if (!b) return;
@@ -7604,6 +8006,7 @@ C\xF3digo: ${inviteCode.code}`;
     if (a.startsWith("st_")) return sitiosClick(a, b);
     if (a.startsWith("ai_")) return aiClick(a, b);
     if (a.startsWith("push_")) return pushClick(a);
+    if (a.startsWith("chat_")) return chatClick(a, b);
     if (a === "mode") {
       authMode = b.dataset.mode;
       authMsg = "";
@@ -7825,6 +8228,7 @@ C\xF3digo: ${inviteCode.code}`;
     if (f.startsWith("soc")) return socialSubmit(f, e.target);
     if (f.startsWith("st_")) return sitiosSubmit(f, e.target);
     if (f === "aihome" || f === "aiform") return aiSubmit(f, e.target);
+    if (f === "chatform") return chatSubmit(e.target);
     if (f === "authform") {
       const email = val("a-email"), pass = val("a-pass");
       try {
