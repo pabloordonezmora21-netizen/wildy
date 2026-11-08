@@ -3725,6 +3725,44 @@ body.has-tabs .ai-list {
   flex-wrap: wrap;
   margin-top: 6px;
 }
+#pushask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+#pushask .pm .btn {
+  width: 100%;
+}
+.pa-bell {
+  font-size: 54px;
+  line-height: 1;
+  animation: ring 1.6s ease-in-out 2;
+}
+@keyframes ring {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  10%, 30% {
+    transform: rotate(14deg);
+  }
+  20%, 40% {
+    transform: rotate(-14deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pa-bell {
+    animation: none;
+  }
+}
 .pickpet {
   width: 100%;
   text-align: left;
@@ -4961,6 +4999,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     drawQR();
     renderTabs();
     party();
+    if (view.name === "home") setTimeout(pushMaybeAsk, 1500);
   }
   let lastEmail = "", resendAt = 0, resendTimer = null;
   function renderCheck() {
@@ -7407,7 +7446,17 @@ C\xF3digo: ${inviteCode.code}`;
     if (d) d.remove();
   }
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeParty();
+    if (e.key === "Escape") {
+      closeParty();
+      const pa = document.getElementById("pushask");
+      if (pa) {
+        try {
+          localStorage.setItem(pushAskKey(), String(Date.now()));
+        } catch (_) {
+        }
+        pa.remove();
+      }
+    }
   });
   const VAPID_PUB = "BAwbnF21VMqGzxf8m3HtcxJXBu0ZIsa_aDmRvoA_AxYPL0jUONnFcgBjgovxA6CT_1cZN24qN4TmFMsG0pr7LB8";
   const PUSH_URL = "https://wildy-push.pablo-ordonez-mora-21.workers.dev";
@@ -7415,6 +7464,7 @@ C\xF3digo: ${inviteCode.code}`;
   const isIOSdev = () => /iPhone|iPad|iPod/.test(navigator.userAgent) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
   const isStandalone = () => window.navigator.standalone === true || window.matchMedia && matchMedia("(display-mode: standalone)").matches;
   const pushSupported = () => "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  const swReady = () => Promise.race([navigator.serviceWorker.ready, new Promise((_, ko) => setTimeout(() => ko(new Error("sw timeout")), 5e3))]);
   function b64uToBytes(s) {
     const p = "=".repeat((4 - s.length % 4) % 4);
     const r = atob((s + p).replace(/-/g, "+").replace(/_/g, "/"));
@@ -7424,7 +7474,7 @@ C\xF3digo: ${inviteCode.code}`;
     if (push.checked || !pushSupported()) return;
     push.checked = true;
     try {
-      const reg = await navigator.serviceWorker.ready;
+      const reg = await swReady();
       push.sub = await reg.pushManager.getSubscription();
     } catch (_) {
     }
@@ -7463,12 +7513,13 @@ C\xF3digo: ${inviteCode.code}`;
   async function pushClick(a) {
     if (push.busy) return;
     if (a === "push_test") return pushTest();
+    const permP = a === "push_on" ? Notification.requestPermission() : null;
     push.busy = true;
     render();
     try {
-      const reg = await navigator.serviceWorker.ready;
+      const reg = await swReady();
       if (a === "push_on") {
-        const perm = await Notification.requestPermission();
+        const perm = await permP;
         if (perm !== "granted") {
           toast(perm === "denied" ? "Has bloqueado los avisos. Act\xEDvalos en los ajustes del m\xF3vil." : "No se han activado los avisos");
         } else {
@@ -7498,6 +7549,52 @@ C\xF3digo: ${inviteCode.code}`;
     }
     push.busy = false;
     render();
+  }
+  function pushAskKey() {
+    return "wildy.pushAsk." + (user ? user.id : "");
+  }
+  function pushMaybeAsk() {
+    if (!user || view.name !== "home" || document.getElementById("pushask") || document.getElementById("partymodal")) return;
+    try {
+      const t = +localStorage.getItem(pushAskKey()) || 0;
+      if (Date.now() - t < 5 * 864e5) return;
+    } catch (_) {
+      return;
+    }
+    const iosWeb = isIOSdev() && !isStandalone();
+    if (!iosWeb) {
+      if (!pushSupported() || Notification.permission !== "default") return;
+      if (!push.checked) {
+        pushCheck().then(() => setTimeout(pushMaybeAsk, 300));
+        return;
+      }
+      if (push.sub) return;
+    }
+    const d = document.createElement("div");
+    d.id = "pushask";
+    d.setAttribute("role", "dialog");
+    d.setAttribute("aria-modal", "true");
+    d.setAttribute("aria-labelledby", "pa-t");
+    d.innerHTML = `<div class="pm-back" data-pa="no"></div><div class="pm">
+    <div class="pa-bell" aria-hidden="true">\u{1F514}</div>
+    <h2 id="pa-t">${iosWeb ? "Instala Wildy para recibir avisos" : "\xBFQuieres que Wildy te avise?"}</h2>
+    <p>${iosWeb ? "En iPhone, los avisos solo llegan si Wildy est\xE1 en la pantalla de inicio. Toca <b>Compartir</b> y luego <b>\xABA\xF1adir a pantalla de inicio\xBB</b>, y \xE1brela desde ese icono." : "Te mandaremos una notificaci\xF3n a las 9:00 cuando toque vacuna, cita o cumplea\xF1os de tus mascotas. Nada m\xE1s."}</p>
+    ${iosWeb ? '<button class="btn" data-pa="no">Entendido</button>' : '<button class="btn" data-pa="yes">S\xED, avisadme</button><button class="btn ghost" data-pa="no">Ahora no</button>'}</div>`;
+    d.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-pa]");
+      if (!b) return;
+      try {
+        localStorage.setItem(pushAskKey(), String(Date.now()));
+      } catch (_) {
+      }
+      d.remove();
+      if (b.dataset.pa === "yes") pushClick("push_on");
+    });
+    document.body.appendChild(d);
+    setTimeout(() => {
+      const b = d.querySelector(".btn");
+      if (b) b.focus();
+    }, 50);
   }
   app.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-act]");
