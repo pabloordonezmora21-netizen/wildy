@@ -7898,5 +7898,23 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
+<script>
+(function() {
+  if (!/pages\.dev$/.test(location.hostname)) return;
+  var u = "https://app.wildyoyu.com/" + (location.search || "?app=1") + location.hash;
+  var b = document.createElement("div");
+  b.setAttribute("role", "status");
+  b.style.cssText = "position:fixed;left:0;right:0;top:0;z-index:70;background:#d42a3a;color:#fff;font:600 14px/1.35 system-ui,sans-serif;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.4)";
+  b.innerHTML = "<span>\u{1F43E} Wildy se ha mudado a <b>app.wildyoyu.com</b>. Funciona mejor y tambi\xE9n durante el f\xFAtbol.</span>";
+  var a = document.createElement("a");
+  a.href = u;
+  a.textContent = "Ir a la nueva";
+  a.style.cssText = "background:#fff;color:#d42a3a;border-radius:999px;padding:6px 14px;text-decoration:none;font-weight:800";
+  b.appendChild(a);
+  document.body ? document.body.appendChild(b) : document.addEventListener("DOMContentLoaded", function() {
+    document.body.appendChild(b);
+  });
+})();
+</script>
 </body>
 </html>
