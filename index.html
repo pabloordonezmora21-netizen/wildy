@@ -4267,6 +4267,110 @@ button.rev {
   max-width: none;
   min-width: 0;
 }
+.me.me-only {
+  padding: 4px;
+}
+.h-field {
+  display: grid;
+  gap: 6px;
+}
+.h-in {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg);
+  padding: 0 12px;
+}
+.h-in span {
+  font-weight: 800;
+  color: var(--red);
+}
+.h-in input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  padding: 11px 0;
+  outline: none;
+}
+.h-in:focus-within {
+  border-color: var(--red);
+}
+.h-help {
+  font-size: 12px;
+}
+.ps-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 6px 0 14px;
+  margin: 0 0 12px;
+}
+.ps-form:focus-within {
+  border-color: var(--red);
+}
+.ps-at {
+  font-weight: 800;
+  color: var(--red);
+}
+.ps-form input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  padding: 12px 0;
+  outline: none;
+}
+.ps-form input::-webkit-search-cancel-button {
+  display: none;
+}
+.ps-x {
+  border: 0;
+  background: none;
+  font-size: 22px;
+  color: var(--muted);
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+#ps-res {
+  margin-bottom: 12px;
+}
+.prof-handle {
+  font-weight: 700;
+  color: var(--red);
+  font-size: 14px;
+  margin-top: 2px;
+}
+.req-acts {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+.req-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.chip.chip-alert:not(.on) {
+  border-color: var(--red);
+  color: var(--red);
+}
 .top-r .me span {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5863,7 +5967,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   function renderHome() {
     app.innerHTML = `
   <header class="top"><div><div class="logo">${logo}Wildy</div><div class="sub">by Wildyoyu</div></div>
-    <div class="top-r">${dmBtn()}<button class="me" data-act="settings" aria-label="Abrir ajustes">${avatarHTML()}<span>${esc(owner.name || "Ajustes")}</span></button></div></header>
+    <div class="top-r">${dmBtn()}<button class="me me-only" data-act="settings" aria-label="Abrir ajustes${owner.name ? " de " + esc(owner.name) : ""}">${avatarHTML()}</button></div></header>
   ${!owner.phone && !(pets.length && pets.every(hasQR)) ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">Ir a ajustes</button></div>` : ""}
   <form id="aihome" class="ai-bar" role="search">
     <span class="ai-ic" aria-hidden="true">\u2728</span>
@@ -8287,7 +8391,7 @@ C\xF3digo: ${inviteCode.code}`;
     }
     bar.hidden = false;
     const cur2 = TAB_OF[view.name] || "home", n = alertBadge();
-    bar.innerHTML = TABS.map(([a, l, ic]) => `<button data-act="${a}" class="${cur2 === a ? "on" : ""}" ${cur2 === a ? 'aria-current="page"' : ""}><span class="tb-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ic}</svg>${a === "avisos" && n ? `<i class="tb-n">${n}</i>` : ""}</span><span>${l}</span></button>`).join("");
+    bar.innerHTML = TABS.map(([a, l, ic]) => `<button data-act="${a}" class="${cur2 === a ? "on" : ""}" ${cur2 === a ? 'aria-current="page"' : ""}><span class="tb-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ic}</svg>${a === "avisos" && n ? `<i class="tb-n">${n}</i>` : a === "chat" && comm.reqs && comm.reqs.length ? `<i class="tb-n">${comm.reqs.length}</i>` : ""}</span><span>${l}</span></button>`).join("");
   }
   let partyShown = false;
   function party() {
@@ -8752,7 +8856,7 @@ C\xF3digo: ${inviteCode.code}`;
 <li><b>Cuenta:</b> tu correo y una contrase\xF1a cifrada.</li>
 <li><b>Perfil:</b> tu nombre, foto, ciudad y, si los a\xF1ades, tel\xE9fonos y un mensaje para la placa QR de tu mascota.</li>
 <li><b>Mascotas:</b> nombre, fotos, raza, fechas, peso, vacunas, citas, gastos y seguros que t\xFA apuntes. Pueden incluir datos de salud de tus animales.</li>
-<li><b>Comunidad (solo si entras):</b> tu nombre de pila, la foto y el nombre de tu mascota, tus mensajes del chat, tus mensajes directos y las solicitudes de mensaje que env\xEDas o aceptas, tus opiniones y fotos de sitios, a qui\xE9n sigues y qui\xE9n te sigue, y las personas que bloqueas o denuncias.</li>
+<li><b>Comunidad (solo si entras):</b> tu nombre de usuario (@usuario), con el que otras personas pueden buscarte, tu nombre de pila, la foto y el nombre de tu mascota, tus mensajes del chat, tus mensajes directos y las solicitudes de mensaje que env\xEDas o aceptas, tus opiniones y fotos de sitios, a qui\xE9n sigues y qui\xE9n te sigue, las solicitudes para seguir que env\xEDas, aceptas o rechazas, y las personas que bloqueas o denuncias.</li>
 <li><b>Quedadas y sitios:</b> los planes, avisos de \xABEstoy aqu\xED\xBB y sitios que publicas. No guardamos tu ubicaci\xF3n en tiempo real; los avisos de \xABEstoy aqu\xED\xBB se borran a los 90 minutos.</li>
 <li><b>Notificaciones (solo si las activas):</b> un identificador t\xE9cnico de tu m\xF3vil para poder enviarte avisos.</li>
 <li><b>Asistente de IA:</b> las preguntas que escribes se env\xEDan para generar la respuesta y no se guardan; solo contamos cu\xE1ntas preguntas haces al d\xEDa.</li>
@@ -8901,10 +9005,14 @@ C\xF3digo: ${inviteCode.code}`;
     <p>Habla con otros due\xF1os, sigue a quien te interese y descubre sitios gracias a sus opiniones.</p>
     <ul class="gate-list">
       <li>\u{1F440} Los dem\xE1s ver\xE1n tu <b>nombre de pila</b>, el <b>nombre y la foto de tu mascota</b>, tus <b>mensajes</b>, tus <b>opiniones y fotos de sitios</b> y a qui\xE9n sigues.</li>
-      <li>\u{1F4AC} Otras personas podr\xE1n <b>escribirte y responderte</b> en el chat.</li>
+      <li>\u{1F50E} Te encontrar\xE1n por tu <b>@usuario</b> y podr\xE1n pedirte seguirte. <b>T\xFA decides</b> a qui\xE9n aceptas.</li>
+      <li>\u{1F4AC} Otras personas podr\xE1n <b>escribirte y responderte</b> en el chat, y enviarte <b>solicitudes de mensaje</b> que t\xFA aceptas o no.</li>
       <li>\u{1F512} Nunca mostramos tu correo, tu tel\xE9fono ni tu direcci\xF3n.</li>
       <li>\u{1F6AB} Puedes bloquear, denunciar y salir de la comunidad cuando quieras desde Ajustes.</li>
     </ul>
+    <div class="h-field"><label for="cg-h" class="sh-lbl">Elige tu nombre de usuario</label>
+      <div class="h-in"><span aria-hidden="true">@</span><input id="cg-h" class="h-input" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false" value="${esc(owner.handle || suggestHandle())}"></div>
+      <span class="sub h-help">As\xED te buscar\xE1n los dem\xE1s. No hace falta que sea tu nombre real. Puedes cambiarlo cuando quieras.</span></div>
     <label class="tg-check"><input type="checkbox" id="cg-ok"> <span>Acepto las <button class="lnk" data-act="legal" data-v="terms">normas de la comunidad</button> y que se muestre lo anterior seg\xFAn la <button class="lnk" data-act="legal" data-v="privacy">pol\xEDtica de privacidad</button>.</span></label>
     <button class="btn block" data-act="comm_join" id="cg-go" disabled>Entrar en la comunidad</button>
   </div>`;
@@ -8912,6 +9020,26 @@ C\xF3digo: ${inviteCode.code}`;
       document.getElementById("cg-go").disabled = !e.target.checked;
     });
   }
+  function suggestHandle() {
+    const b = (String(owner.name || "").split(" ")[0] || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 12);
+    return (b.length >= 3 ? b : "wildy") + (1e3 + Math.floor(Math.random() * 9e3));
+  }
+  const handleErr = (m) => /ocupado/.test(m) ? "Ese nombre de usuario ya est\xE1 cogido. Prueba otro." : /formato/.test(m) ? "Usa de 3 a 20 letras min\xFAsculas, n\xFAmeros, punto o guion bajo (sin espacios ni tildes)." : null;
+  async function saveHandle(h) {
+    h = String(h || "").trim().replace(/^@/, "").toLowerCase();
+    const { data, error } = await sb.rpc("set_handle", { h });
+    if (error) throw error;
+    owner.handle = data || h;
+    if (comm.prof[user.id]) comm.prof[user.id].handle = owner.handle;
+    return owner.handle;
+  }
+  document.addEventListener("input", (e) => {
+    const t = e.target;
+    if (t && t.classList && t.classList.contains("h-input")) {
+      const v = t.value.toLowerCase().replace(/[^a-z0-9_.]/g, "");
+      if (v !== t.value) t.value = v;
+    }
+  });
   async function setCommunity(on) {
     const v = on ? (/* @__PURE__ */ new Date()).toISOString() : null;
     const { error } = await sb.from("profiles").upsert({ id: user.id, community_at: v }, { onConflict: "id" });
@@ -8919,7 +9047,10 @@ C\xF3digo: ${inviteCode.code}`;
     owner.community_at = v;
     if (people[user.id]) people[user.id].community_at = v;
   }
-  const comm = { sec: "chat", feedScope: "all", feed: null, feedBusy: false, peopleScope: "all", people: {}, prof: {}, blocks: null };
+  const comm = { reqs: [], q: "", found: null, sec: "chat", feedScope: "all", feed: null, feedBusy: false, peopleScope: "all", people: {}, prof: {}, blocks: null };
+  const fst = (p) => p.follow_state || (p.i_follow ? "following" : "none");
+  const FBTN = (id, st, name, small) => `<button class="btn ${st === "none" ? "" : "ghost"}${small ? " small" : ""}" data-act="comm_follow" data-id="${esc(id)}" data-st="${st}" data-name="${esc(name || "")}">${st === "following" ? "Siguiendo \u2713" : st === "requested" ? "Solicitado" : "Seguir"}</button>`;
+  const atH = (h) => h ? "@" + esc(h) : "";
   const starsTxt = (n) => "\u2605".repeat(n || 0) + "\u2606".repeat(5 - (n || 0));
   const cAv = (photo, name, cls) => `<span class="${cls || "cm-av"}" aria-hidden="true">${photo ? `<img src="${esc(photo)}" alt="">` : esc((name || "?")[0].toUpperCase())}</span>`;
   function commHeader() {
@@ -8965,31 +9096,84 @@ C\xF3digo: ${inviteCode.code}`;
   async function loadPeople(scope) {
     const { data, error } = await sb.rpc("people_list", { scope });
     comm.people[scope] = error ? [] : data || [];
+    if (scope === "requests" && !error) {
+      comm.reqs = comm.people[scope];
+      renderTabs();
+    }
     renderPeopleList();
   }
   function renderCommPeople() {
+    const rq = (comm.reqs || []).length;
     app.innerHTML = commHeader() + `
-  <div class="chips st-cats">${[["all", "Sugeridas"], ["following", "Sigo"], ["followers", "Me siguen"]].map((s) => `<button class="chip ${comm.peopleScope === s[0] ? "on" : ""}" data-act="comm_pscope" data-v="${s[0]}">${s[1]}</button>`).join("")}</div>
-  <button class="me-row" data-act="comm_user" data-id="${esc(user.id)}">${cAv(owner.photo_url, owner.name)}<span><b>Mi perfil</b><span class="sub">As\xED te ven los dem\xE1s</span></span><span aria-hidden="true">\u203A</span></button>
-  <div id="people-list" class="people-list"></div>`;
+  <form id="psearch" class="ps-form" role="search"><span class="ps-at" aria-hidden="true">@</span><label for="ps-q" class="sr">Buscar personas por su nombre de usuario</label>
+    <input id="ps-q" class="h-input" type="search" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search" placeholder="Busca por nombre de usuario" value="${esc(comm.q || "")}">
+    ${comm.q ? '<button type="button" class="ps-x" data-act="comm_search_clear" aria-label="Borrar b\xFAsqueda">\xD7</button>' : ""}</form>
+  <div id="ps-res"></div>
+  <div id="ps-rest"${comm.q && comm.q.length >= 2 ? " hidden" : ""}>
+  <button class="me-row" data-act="comm_user" data-id="${esc(user.id)}">${cAv(owner.photo_url, owner.name)}<span><b>Mi perfil${owner.handle ? " \xB7 @" + esc(owner.handle) : ""}</b><span class="sub">Comparte tu @usuario para que te encuentren</span></span><span aria-hidden="true">\u203A</span></button>
+  <div class="chips st-cats">${[["all", "Sugeridas"], ["following", "Sigo"], ["followers", "Me siguen"], ["requests", "Solicitudes" + (rq ? " (" + rq + ")" : "")]].map((s) => `<button class="chip ${comm.peopleScope === s[0] ? "on" : ""}${s[0] === "requests" && rq ? " chip-alert" : ""}" data-act="comm_pscope" data-v="${s[0]}">${s[1]}</button>`).join("")}</div>
+  <div id="people-list" class="people-list"></div></div>`;
+    const inp = document.getElementById("ps-q");
+    let t = null;
+    inp.addEventListener("input", () => {
+      clearTimeout(t);
+      t = setTimeout(() => peopleSearch(inp.value), 300);
+    });
+    if (comm.q && comm.q.length >= 2) renderSearch();
     if (!comm.people[comm.peopleScope]) loadPeople(comm.peopleScope);
     else renderPeopleList();
+  }
+  async function peopleSearch(q) {
+    q = String(q || "").trim().replace(/^@/, "").toLowerCase();
+    comm.q = q;
+    const rest = document.getElementById("ps-rest");
+    if (rest) rest.hidden = q.length >= 2;
+    const x = document.querySelector("#psearch .ps-x");
+    if (!q && x) x.remove();
+    else if (q && !x) document.getElementById("psearch").insertAdjacentHTML("beforeend", '<button type="button" class="ps-x" data-act="comm_search_clear" aria-label="Borrar b\xFAsqueda">\xD7</button>');
+    if (q.length < 2) {
+      comm.found = null;
+      return renderSearch();
+    }
+    comm.found = "busy";
+    renderSearch();
+    const { data, error } = await sb.rpc("people_search", { q });
+    if (comm.q !== q) return;
+    comm.found = error ? [] : data || [];
+    renderSearch();
+  }
+  function personRow(p, acts) {
+    return `<div class="person">
+    <button class="person-main" data-act="comm_user" data-id="${esc(p.user_id)}">${cAv(p.photo, p.name)}<span><b>${p.handle ? "@" + esc(p.handle) : esc(p.name)}</b><span class="sub">${p.handle ? esc(p.name) + " \xB7 " : ""}${p.reviews} opinion${p.reviews == 1 ? "" : "es"} \xB7 ${p.followers} seguidor${p.followers == 1 ? "" : "es"}</span>${p.bio ? `<span class="person-bio">${esc(p.bio)}</span>` : ""}</span></button>
+    ${acts}</div>`;
+  }
+  function renderSearch() {
+    const el = document.getElementById("ps-res");
+    if (!el) return;
+    const q = comm.q || "";
+    if (q.length < 2) {
+      el.innerHTML = "";
+      return;
+    }
+    if (comm.found === "busy" || comm.found == null) {
+      el.innerHTML = '<p class="sub" style="text-align:center">Buscando\u2026</p>';
+      return;
+    }
+    el.innerHTML = comm.found.length ? `<div class="people-list">${comm.found.map((p) => personRow(p, FBTN(p.user_id, fst(p), p.name, true))).join("")}</div>` : `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F50E}</div><b>No hay nadie con @${esc(q)}</b><p>P\xEDdele su nombre de usuario exacto. Lo ve en Comunidad \u2192 Personas \u2192 Mi perfil.</p></div>`;
   }
   function renderPeopleList() {
     const el = document.getElementById("people-list");
     if (!el) return;
-    const l = comm.people[comm.peopleScope];
+    const sc = comm.peopleScope, l = comm.people[sc];
     if (!l) {
       el.innerHTML = '<p class="sub" style="text-align:center">Cargando\u2026</p>';
       return;
     }
     if (!l.length) {
-      el.innerHTML = `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F465}</div><b>${comm.peopleScope === "following" ? "A\xFAn no sigues a nadie" : comm.peopleScope === "followers" ? "A\xFAn no te sigue nadie" : "Todav\xEDa no hay m\xE1s personas en la comunidad"}</b><p>Cuantas m\xE1s opiniones de sitios escribas, m\xE1s gente te encontrar\xE1.</p></div>`;
+      el.innerHTML = `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">${sc === "requests" ? "\u{1F4E9}" : "\u{1F465}"}</div><b>${sc === "following" ? "A\xFAn no sigues a nadie" : sc === "followers" ? "A\xFAn no te sigue nadie" : sc === "requests" ? "No tienes solicitudes" : "Todav\xEDa no hay m\xE1s personas en la comunidad"}</b><p>${sc === "requests" ? "Cuando alguien quiera seguirte, aparecer\xE1 aqu\xED y t\xFA decides si lo aceptas." : "Busca a alguien por su @usuario o comparte el tuyo para que te encuentren."}</p></div>`;
       return;
     }
-    el.innerHTML = l.map((p) => `<div class="person">
-    <button class="person-main" data-act="comm_user" data-id="${esc(p.user_id)}">${cAv(p.photo, p.name)}<span><b>${esc(p.name)}</b><span class="sub">${p.reviews} opinion${p.reviews == 1 ? "" : "es"} \xB7 ${p.followers} seguidor${p.followers == 1 ? "" : "es"}</span>${p.bio ? `<span class="person-bio">${esc(p.bio)}</span>` : ""}</span></button>
-    <button class="btn ${p.i_follow ? "ghost" : ""} small" data-act="comm_follow" data-id="${esc(p.user_id)}" data-on="${p.i_follow ? 1 : 0}">${p.i_follow ? "Siguiendo" : "Seguir"}</button></div>`).join("");
+    el.innerHTML = l.map((p) => personRow(p, sc === "requests" ? `<span class="req-acts"><button class="btn small" data-act="comm_freq_ok" data-id="${esc(p.user_id)}">Aceptar</button><button class="btn ghost small" data-act="comm_freq_no" data-id="${esc(p.user_id)}" aria-label="Rechazar a ${esc(p.name)}">\u2715</button></span>` : FBTN(p.user_id, fst(p), p.name, true))).join("");
   }
   async function loadProfile(id) {
     const { data, error } = await sb.rpc("public_profile", { uid: id });
@@ -9011,11 +9195,13 @@ C\xF3digo: ${inviteCode.code}`;
   <button class="back" data-act="prof_back">\u2039 Volver</button>
   <section class="prof-head">
     ${cAv(p.photo, p.name, "prof-av")}
-    <div><h1>${esc(p.name)}</h1>
+    <div><h1>${esc(p.name)}</h1>${p.handle ? `<div class="prof-handle">@${esc(p.handle)}${self ? ` <button class="lnk" data-act="copy" data-v="@${esc(p.handle)}">Copiar</button>` : ""}</div>` : ""}
     <div class="prof-counts"><span><b>${(p.reviews || []).length}</b> opini${(p.reviews || []).length === 1 ? "\xF3n" : "ones"}</span><span><b>${p.followers}</b> seguidor${p.followers == 1 ? "" : "es"}</span><span><b>${p.following}</b> siguiendo</span></div></div>
   </section>
-  ${self ? `<form id="bioform" class="bio-form"><label for="bio-in" class="sh-lbl">Sobre ti (lo ven los dem\xE1s)</label><textarea id="bio-in" maxlength="200" rows="2" placeholder="Ej. Due\xF1o de un mast\xEDn muy bonach\xF3n. Paseamos por Madrid R\xEDo.">${esc(p.bio || "")}</textarea><button class="btn soft small" type="submit">Guardar</button></form>` : `${p.bio ? `<p class="prof-bio">${esc(p.bio)}</p>` : ""}
-    <div class="prof-acts">${p.blocked ? `<button class="btn" data-act="comm_unblock" data-id="${esc(id)}">Desbloquear</button>` : `<button class="btn ${p.i_follow ? "ghost" : ""}" data-act="comm_follow" data-id="${esc(id)}" data-on="${p.i_follow ? 1 : 0}">${p.i_follow ? "Siguiendo \u2713" : "Seguir"}</button>${inCommunity() ? `<button class="btn soft" data-act="dm_to" data-id="${esc(id)}" data-name="${esc(p.name)}" data-photo="${esc(p.photo || "")}">\u2709\uFE0F Mensaje</button>` : ""}<button class="btn ghost small" data-act="comm_block" data-id="${esc(id)}" data-name="${esc(p.name)}">Bloquear</button>`}</div>`}
+  ${self && p.requests ? `<button class="dm-note req-link" data-act="comm_pscope" data-v="requests">\u{1F4E9} Tienes <b>${p.requests} solicitud${p.requests == 1 ? "" : "es"}</b> para seguirte \u203A</button>` : ""}
+  ${!self && p.asks_me ? `<div class="dm-req"><b>${esc(p.name)} quiere seguirte</b><div class="pc-b"><button class="btn small" data-act="comm_freq_ok" data-id="${esc(id)}">Aceptar</button><button class="btn ghost small" data-act="comm_freq_no" data-id="${esc(id)}">Rechazar</button></div></div>` : ""}
+  ${self ? `<form id="bioform" class="bio-form"><label for="h-in" class="sh-lbl">Tu nombre de usuario</label><div class="h-in"><span aria-hidden="true">@</span><input id="h-in" class="h-input" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false" value="${esc(p.handle || "")}"></div><label for="bio-in" class="sh-lbl">Sobre ti (lo ven los dem\xE1s)</label><textarea id="bio-in" maxlength="200" rows="2" placeholder="Ej. Due\xF1o de un mast\xEDn muy bonach\xF3n. Paseamos por Madrid R\xEDo.">${esc(p.bio || "")}</textarea><button class="btn soft small" type="submit">Guardar</button></form>` : `${p.bio ? `<p class="prof-bio">${esc(p.bio)}</p>` : ""}
+    <div class="prof-acts">${p.blocked ? `<button class="btn" data-act="comm_unblock" data-id="${esc(id)}">Desbloquear</button>` : `${FBTN(id, fst(p), p.name)}${inCommunity() ? `<button class="btn soft" data-act="dm_to" data-id="${esc(id)}" data-name="${esc(p.name)}" data-photo="${esc(p.photo || "")}">\u2709\uFE0F Mensaje</button>` : ""}<button class="btn ghost small" data-act="comm_block" data-id="${esc(id)}" data-name="${esc(p.name)}">Bloquear</button>`}</div>`}
   ${(p.pets || []).length ? `<div class="sec"><h2>Sus mascotas</h2><div class="prof-pets">${p.pets.map((x) => `<span class="prof-pet">${cAv(x.photo, x.name, "pp-av")}<b>${esc(x.name)}</b><span class="sub">${esc(x.breed || x.species || "")}</span></span>`).join("")}</div></div>` : ""}
   <div class="sec"><h2>Opiniones de sitios</h2>
   ${(p.reviews || []).length ? p.reviews.map((r, i) => `<button class="rev" data-act="prof_place" data-i="${i}"><span class="rev-top"><b>${esc(r.park_name || "Sitio")}</b><span class="act-stars">${starsTxt(r.stars)}</span></span>${r.tags && r.tags.length ? `<span class="tchips sm">${r.tags.slice(0, 4).map((t) => `<span class="tchip">${esc(TAGS[t] || "")}</span>`).join("")}</span>` : ""}${r.comment ? `<span class="rev-c">${esc(r.comment)}</span>` : ""}</button>`).join("") : `<p class="sub">${self ? "A\xFAn no has puntuado ning\xFAn sitio. Hazlo desde \xABSitios\xBB." : "A\xFAn no ha puntuado ning\xFAn sitio."}</p>`}
@@ -9047,6 +9233,8 @@ C\xF3digo: ${inviteCode.code}`;
     const { error } = await sb.from("blocks").upsert({ user_id: user.id, blocked_id: id, blocked_name: name || null });
     if (error) throw error;
     await sb.from("follows").delete().eq("follower", user.id).eq("followee", id);
+    await sb.from("follows").delete().eq("follower", id).eq("followee", user.id);
+    comm.reqs = (comm.reqs || []).filter((x) => x.user_id !== id);
     (chat.blocked || (chat.blocked = /* @__PURE__ */ new Set())).add(id);
     comm.blocks = null;
     comm.feed = null;
@@ -9068,6 +9256,20 @@ C\xF3digo: ${inviteCode.code}`;
     try {
       if (a === "comm_join") {
         b.disabled = true;
+        const hv = val("cg-h");
+        if (hv !== void 0 && hv !== null) {
+          try {
+            await saveHandle(hv);
+          } catch (err) {
+            b.disabled = false;
+            const m = handleErr(String(err && err.message || ""));
+            if (m) {
+              toast(m);
+              return;
+            }
+            throw err;
+          }
+        }
         await setCommunity(true);
         toast("\xA1Bienvenido a la comunidad! \u{1F43E}");
         return render();
@@ -9094,6 +9296,11 @@ C\xF3digo: ${inviteCode.code}`;
       }
       if (a === "comm_pscope") {
         comm.peopleScope = b.dataset.v;
+        if (view.name !== "chat" || comm.sec !== "people") {
+          comm.sec = "people";
+          view = { name: "chat" };
+          delete comm.people[b.dataset.v];
+        }
         return render();
       }
       if (a === "comm_user") {
@@ -9110,26 +9317,66 @@ C\xF3digo: ${inviteCode.code}`;
         return;
       }
       if (a === "comm_follow") {
-        const id = b.dataset.id, on = b.dataset.on === "1";
+        const id = b.dataset.id, st = b.dataset.st || (b.dataset.on === "1" ? "following" : "none");
         b.disabled = true;
-        const r = on ? await sb.from("follows").delete().eq("follower", user.id).eq("followee", id) : await sb.from("follows").insert({ follower: user.id, followee: id });
-        if (r.error && !/duplicate/i.test(r.error.message || "")) throw r.error;
-        Object.values(comm.people).forEach((l) => l && l.forEach((p) => {
-          if (p.user_id === id) {
-            p.i_follow = !on;
-            p.followers = +p.followers + (on ? -1 : 1);
+        let ns;
+        if (st === "none") {
+          const { data, error } = await sb.rpc("follow_req", { target: id });
+          if (error) {
+            const m = String(error.message || "");
+            if (/normas/.test(m)) {
+              owner.community_at = null;
+              return render();
+            }
+            toast(/bloqueo/.test(m) ? "No puedes seguir a esta persona" : /limite/.test(m) ? "Has enviado muchas solicitudes hoy. Prueba ma\xF1ana." : /noperfil/.test(m) ? "Esta persona ya no est\xE1 en la comunidad" : "No se ha podido enviar. Revisa tu conexi\xF3n.");
+            b.disabled = false;
+            return;
           }
-        }));
-        if (comm.prof[id]) {
-          comm.prof[id].i_follow = !on;
-          comm.prof[id].followers = +comm.prof[id].followers + (on ? -1 : 1);
+          ns = data || "requested";
+          toast(ns === "following" ? "Ya la sigues" : "Solicitud enviada. Si te acepta, ver\xE1s su actividad \u{1F43E}");
+        } else {
+          const { error } = await sb.from("follows").delete().eq("follower", user.id).eq("followee", id);
+          if (error) throw error;
+          ns = "none";
+          toast(st === "requested" ? "Solicitud cancelada" : "Has dejado de seguir");
         }
+        const d = (ns === "following" ? 1 : 0) - (st === "following" ? 1 : 0);
+        const upd = (x) => {
+          if (x && x.user_id === id || x && x.id === id) {
+            x.follow_state = ns;
+            x.i_follow = ns === "following";
+            x.followers = +x.followers + d;
+          }
+        };
+        Object.values(comm.people).forEach((l) => l && l.forEach(upd));
+        (comm.found || []).forEach(upd);
+        upd(comm.prof[id]);
         delete comm.people.following;
         comm.feed = null;
         if (sit.reviews) Object.values(sit.reviews).forEach((l) => l && l.forEach((x) => {
-          if (x.user_id === id) x.i_follow = !on;
+          if (x.user_id === id) x.i_follow = ns !== "none";
         }));
-        toast(on ? "Has dejado de seguir" : "\xA1Siguiendo! Ver\xE1s su actividad en \xABGente que sigo\xBB");
+        return render();
+      }
+      if (a === "comm_freq_ok" || a === "comm_freq_no") {
+        const id = b.dataset.id, ok = a === "comm_freq_ok";
+        b.disabled = true;
+        const { error } = await sb.rpc("follow_respond", { f: id, ok });
+        if (error) throw error;
+        comm.reqs = (comm.reqs || []).filter((x) => x.user_id !== id);
+        if (comm.people.requests) comm.people.requests = comm.people.requests.filter((x) => x.user_id !== id);
+        if (comm.prof[id]) comm.prof[id].asks_me = false;
+        if (comm.prof[user.id]) {
+          comm.prof[user.id].requests = Math.max(0, (comm.prof[user.id].requests || 1) - 1);
+          if (ok) comm.prof[user.id].followers = +comm.prof[user.id].followers + 1;
+        }
+        delete comm.people.followers;
+        toast(ok ? "Solicitud aceptada: ahora te sigue" : "Solicitud rechazada");
+        return render();
+      }
+      if (a === "comm_search_clear") {
+        comm.q = "";
+        comm.found = null;
         return render();
       }
       if (a === "comm_block") {
@@ -9192,6 +9439,15 @@ C\xF3digo: ${inviteCode.code}`;
     if (!error) dm.list = data || [];
     else if (!dm.list) dm.list = [];
     dmRefreshUI();
+    sb.rpc("people_list", { scope: "requests" }).then(({ data: r, error: e }) => {
+      if (e) return;
+      const ch = (r || []).length !== (comm.reqs || []).length;
+      comm.reqs = r || [];
+      comm.people.requests = comm.reqs;
+      renderTabs();
+      if (ch && view.name === "chat" && comm.sec === "people" && !document.activeElement.matches("input,textarea")) render();
+    }, () => {
+    });
   }
   function dmRefreshUI() {
     const n = dmUnread();
@@ -9226,7 +9482,7 @@ C\xF3digo: ${inviteCode.code}`;
       clearTimeout(k);
       k = setTimeout(loadDM, 400);
     };
-    dm.watch = sb.channel("dmt-" + user.id).on("postgres_changes", { event: "*", schema: "public", table: "dm_threads" }, kick).subscribe();
+    dm.watch = sb.channel("dmt-" + user.id).on("postgres_changes", { event: "*", schema: "public", table: "dm_threads" }, kick).on("postgres_changes", { event: "*", schema: "public", table: "follows" }, kick).subscribe();
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible" && dm.watch) kick();
     });
@@ -9944,7 +10200,24 @@ C\xF3digo: ${inviteCode.code}`;
     }
     if (f === "bioform") {
       const t = (val("bio-in") || "").trim().slice(0, 200);
+      const hv = (val("h-in") || "").trim();
       try {
+        if (hv && hv !== owner.handle && !(comm.prof[user.id] && comm.prof[user.id].handle === hv)) {
+          try {
+            await saveHandle(hv);
+          } catch (err) {
+            const m = handleErr(String(err && err.message || ""));
+            if (m) {
+              toast(m);
+              if (btn) {
+                btn.disabled = false;
+                btn.style.opacity = "";
+              }
+              return;
+            }
+            throw err;
+          }
+        }
         const { error } = await sb.from("profiles").upsert({ id: user.id, bio: t || null }, { onConflict: "id" });
         if (error) throw error;
         owner.bio = t;
