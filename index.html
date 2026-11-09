@@ -4270,6 +4270,34 @@ button.rev {
 .me.me-only {
   padding: 4px;
 }
+.brand-logo {
+  margin: 0;
+  line-height: 0;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.brand-logo img {
+  height: 54px;
+  width: auto;
+  max-width: 100%;
+}
+.brand-logo .lg-d {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme=light]) .brand-logo .lg-l {
+    display: none;
+  }
+  :root:not([data-theme=light]) .brand-logo .lg-d {
+    display: inline;
+  }
+}
+:root[data-theme=dark] .brand-logo .lg-l {
+  display: none;
+}
+:root[data-theme=dark] .brand-logo .lg-d {
+  display: inline;
+}
 .h-field {
   display: grid;
   gap: 6px;
@@ -5966,7 +5994,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   }
   function renderHome() {
     app.innerHTML = `
-  <header class="top"><div><div class="logo">${logo}Wildy</div><div class="sub">by Wildyoyu</div></div>
+  <header class="top"><h1 class="brand-logo"><img class="lg-l" src="wildy-logo.png" alt="Wildy by WildYoyu" width="663" height="200"><img class="lg-d" src="wildy-logo-dark.png" alt="Wildy by WildYoyu" width="663" height="200"></h1>
     <div class="top-r">${dmBtn()}<button class="me me-only" data-act="settings" aria-label="Abrir ajustes${owner.name ? " de " + esc(owner.name) : ""}">${avatarHTML()}</button></div></header>
   ${!owner.phone && !(pets.length && pets.every(hasQR)) ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">Ir a ajustes</button></div>` : ""}
   <form id="aihome" class="ai-bar" role="search">
