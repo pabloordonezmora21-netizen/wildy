@@ -4256,6 +4256,256 @@ button.rev {
   gap: 6px;
   width: min(100%, 420px);
 }
+.top-r {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  max-width: 62%;
+}
+.top-r .me {
+  max-width: none;
+  min-width: 0;
+}
+.top-r .me span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dm-btn {
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--surface);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.dm-btn i {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--red-ink);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--bg);
+}
+.seg.seg2 {
+  grid-template-columns: 1fr 1fr;
+}
+.seg-n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--red-ink);
+  font-size: 11px;
+}
+.dm-list {
+  display: grid;
+  gap: 6px;
+  padding-bottom: 10px;
+}
+.dm-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  background: none;
+  border-radius: 16px;
+  padding: 8px 6px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.dm-row:hover,
+.dm-row:focus-visible {
+  background: var(--surface);
+}
+.dm-av {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--red);
+  color: var(--red-ink);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 20px;
+}
+.dm-av img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dm-av.sm {
+  width: 38px;
+  height: 38px;
+  font-size: 16px;
+}
+.dm-mid {
+  flex: 1;
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.dm-mid b {
+  font-weight: 700;
+}
+.dm-last {
+  font-size: 14px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dm-row.unread .dm-mid b,
+.dm-row.unread .dm-last {
+  font-weight: 800;
+  color: var(--ink);
+}
+.dm-muted {
+  font-size: 12px;
+}
+.dm-when {
+  flex: none;
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.dm-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+}
+.dm-foot {
+  font-size: 12px;
+  text-align: center;
+  margin: 14px 0 0;
+}
+.dm-head {
+  position: -webkit-sticky;
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  padding: 6px 0 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.dm-back {
+  border: 0;
+  background: none;
+  color: var(--red);
+  font-size: 30px;
+  line-height: 1;
+  padding: 0 8px 4px 0;
+  cursor: pointer;
+}
+.dm-who {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+}
+.dm-who > span {
+  display: grid;
+  min-width: 0;
+}
+.dm-who b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dm-who .sub {
+  font-size: 12px;
+}
+.dm-mute {
+  flex: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 7px 11px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.dm-mute.on {
+  background: var(--red-soft);
+}
+.dm-req {
+  display: grid;
+  gap: 8px;
+  background: var(--red-soft);
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.dm-req p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.dm-note {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+.dm-wait {
+  text-align: center;
+  margin-top: 8px;
+}
+.dm-msgs.no-dock {
+  padding-bottom: 16px;
+}
+.dm-day {
+  align-self: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  padding: 6px 0 2px;
+}
+.dm-msgs .cm-b {
+  max-width: 82%;
+}
 .cm-edit textarea {
   font: inherit;
   border: 2px solid var(--red);
@@ -5273,7 +5523,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   const num = (s) => parseFloat(String(s).replace(",", "."));
   let user = null, owner = {}, people = {}, pets = [];
   let settingsDel = false;
-  let view = /* @__PURE__ */ ((v) => v === "avisos" ? { name: "avisos" } : v === "privacy" || v === "terms" ? { name: "legal", tab: v } : { name: "home" })(new URLSearchParams(location.search).get("ver")), calMonth = null, pendingDelete = false, photoDraft = "", avatarDraft = null, photoTarget = "pet", authMode = "login", authMsg = "", inviteCode = null, busy = false, staleWhileTyping = false;
+  let view = ((v) => v === "avisos" ? { name: "avisos" } : v === "inbox" ? { name: "inbox" } : v === "dm" ? { name: "dm", id: new URLSearchParams(location.search).get("t"), back: { name: "inbox" } } : v === "privacy" || v === "terms" ? { name: "legal", tab: v } : { name: "home" })(new URLSearchParams(location.search).get("ver")), calMonth = null, pendingDelete = false, photoDraft = "", avatarDraft = null, photoTarget = "pet", authMode = "login", authMsg = "", inviteCode = null, busy = false, staleWhileTyping = false;
   function toast(msg) {
     const t = document.createElement("div");
     t.className = "toast";
@@ -5537,6 +5787,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     } else if (view.name === "profile") renderProfile();
     else if (view.name === "legal") renderLegal();
     else if (view.name === "newpass") renderNewPass();
+    else if (view.name === "inbox") renderInbox();
+    else if (view.name === "dm") renderDM();
     else renderPet();
     if (view.name !== "social" && social.sheet) {
       social.sheet = false;
@@ -5551,6 +5803,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     renderTabs();
     party();
     if (!(view.name === "chat" && comm.sec === "chat" && inCommunity())) chatLeave();
+    if (view.name !== "dm") {
+      dmLeave();
+      dm.chId = null;
+    }
+    dmWatch();
     termsGate();
     if (view.name === "home") setTimeout(pushMaybeAsk, 1500);
   }
@@ -5606,7 +5863,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   function renderHome() {
     app.innerHTML = `
   <header class="top"><div><div class="logo">${logo}Wildy</div><div class="sub">by Wildyoyu</div></div>
-    <button class="me" data-act="settings" aria-label="Abrir ajustes">${avatarHTML()}<span>${esc(owner.name || "Ajustes")}</span></button></header>
+    <div class="top-r">${dmBtn()}<button class="me" data-act="settings" aria-label="Abrir ajustes">${avatarHTML()}<span>${esc(owner.name || "Ajustes")}</span></button></div></header>
   ${!owner.phone && !(pets.length && pets.every(hasQR)) ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">Ir a ajustes</button></div>` : ""}
   <form id="aihome" class="ai-bar" role="search">
     <span class="ai-ic" aria-hidden="true">\u2728</span>
@@ -7985,7 +8242,7 @@ C\xF3digo: ${inviteCode.code}`;
     ["ai_open", "Pregunta", '<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>'],
     ["avisos", "Avisos", '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/>']
   ];
-  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", settings: "home", social: "meetups", sitios: "goplaces", ask: "ai_open", avisos: "avisos", chat: "chat", profile: "chat", legal: "home" };
+  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", settings: "home", social: "meetups", sitios: "goplaces", ask: "ai_open", avisos: "avisos", chat: "chat", profile: "chat", legal: "home", inbox: "home", dm: "home" };
   function renderTabs() {
     let bar = document.getElementById("tabbar");
     const show = !!user && view.name !== "newpass" && !window.WILDY_LANDING;
@@ -8127,7 +8384,7 @@ C\xF3digo: ${inviteCode.code}`;
     if (push.sub) return wrap(
       "\u{1F514}",
       "Avisos activados en este m\xF3vil",
-      "Cada d\xEDa a las 9:00 te avisamos de vacunas y citas (el d\xEDa antes y el mismo d\xEDa) y de los cumplea\xF1os.",
+      "Cada d\xEDa a las 9:00 te avisamos de vacunas, citas y cumplea\xF1os, y al momento cuando te llega un mensaje directo.",
       `<button class="btn soft small" data-act="push_test"${push.busy ? " disabled" : ""}>Enviar prueba</button><button class="btn ghost small" data-act="push_off"${push.busy ? " disabled" : ""}>Desactivar</button>`
     );
     return wrap(
@@ -8495,7 +8752,7 @@ C\xF3digo: ${inviteCode.code}`;
 <li><b>Cuenta:</b> tu correo y una contrase\xF1a cifrada.</li>
 <li><b>Perfil:</b> tu nombre, foto, ciudad y, si los a\xF1ades, tel\xE9fonos y un mensaje para la placa QR de tu mascota.</li>
 <li><b>Mascotas:</b> nombre, fotos, raza, fechas, peso, vacunas, citas, gastos y seguros que t\xFA apuntes. Pueden incluir datos de salud de tus animales.</li>
-<li><b>Comunidad (solo si entras):</b> tu nombre de pila, la foto y el nombre de tu mascota, tus mensajes del chat, tus opiniones y fotos de sitios, a qui\xE9n sigues y qui\xE9n te sigue, y las personas que bloqueas o denuncias.</li>
+<li><b>Comunidad (solo si entras):</b> tu nombre de pila, la foto y el nombre de tu mascota, tus mensajes del chat, tus mensajes directos y las solicitudes de mensaje que env\xEDas o aceptas, tus opiniones y fotos de sitios, a qui\xE9n sigues y qui\xE9n te sigue, y las personas que bloqueas o denuncias.</li>
 <li><b>Quedadas y sitios:</b> los planes, avisos de \xABEstoy aqu\xED\xBB y sitios que publicas. No guardamos tu ubicaci\xF3n en tiempo real; los avisos de \xABEstoy aqu\xED\xBB se borran a los 90 minutos.</li>
 <li><b>Notificaciones (solo si las activas):</b> un identificador t\xE9cnico de tu m\xF3vil para poder enviarte avisos.</li>
 <li><b>Asistente de IA:</b> las preguntas que escribes se env\xEDan para generar la respuesta y no se guardan; solo contamos cu\xE1ntas preguntas haces al d\xEDa.</li>
@@ -8758,7 +9015,7 @@ C\xF3digo: ${inviteCode.code}`;
     <div class="prof-counts"><span><b>${(p.reviews || []).length}</b> opini${(p.reviews || []).length === 1 ? "\xF3n" : "ones"}</span><span><b>${p.followers}</b> seguidor${p.followers == 1 ? "" : "es"}</span><span><b>${p.following}</b> siguiendo</span></div></div>
   </section>
   ${self ? `<form id="bioform" class="bio-form"><label for="bio-in" class="sh-lbl">Sobre ti (lo ven los dem\xE1s)</label><textarea id="bio-in" maxlength="200" rows="2" placeholder="Ej. Due\xF1o de un mast\xEDn muy bonach\xF3n. Paseamos por Madrid R\xEDo.">${esc(p.bio || "")}</textarea><button class="btn soft small" type="submit">Guardar</button></form>` : `${p.bio ? `<p class="prof-bio">${esc(p.bio)}</p>` : ""}
-    <div class="prof-acts">${p.blocked ? `<button class="btn" data-act="comm_unblock" data-id="${esc(id)}">Desbloquear</button>` : `<button class="btn ${p.i_follow ? "ghost" : ""}" data-act="comm_follow" data-id="${esc(id)}" data-on="${p.i_follow ? 1 : 0}">${p.i_follow ? "Siguiendo \u2713" : "Seguir"}</button><button class="btn ghost small" data-act="comm_block" data-id="${esc(id)}" data-name="${esc(p.name)}">Bloquear</button>`}</div>`}
+    <div class="prof-acts">${p.blocked ? `<button class="btn" data-act="comm_unblock" data-id="${esc(id)}">Desbloquear</button>` : `<button class="btn ${p.i_follow ? "ghost" : ""}" data-act="comm_follow" data-id="${esc(id)}" data-on="${p.i_follow ? 1 : 0}">${p.i_follow ? "Siguiendo \u2713" : "Seguir"}</button>${inCommunity() ? `<button class="btn soft" data-act="dm_to" data-id="${esc(id)}" data-name="${esc(p.name)}" data-photo="${esc(p.photo || "")}">\u2709\uFE0F Mensaje</button>` : ""}<button class="btn ghost small" data-act="comm_block" data-id="${esc(id)}" data-name="${esc(p.name)}">Bloquear</button>`}</div>`}
   ${(p.pets || []).length ? `<div class="sec"><h2>Sus mascotas</h2><div class="prof-pets">${p.pets.map((x) => `<span class="prof-pet">${cAv(x.photo, x.name, "pp-av")}<b>${esc(x.name)}</b><span class="sub">${esc(x.breed || x.species || "")}</span></span>`).join("")}</div></div>` : ""}
   <div class="sec"><h2>Opiniones de sitios</h2>
   ${(p.reviews || []).length ? p.reviews.map((r, i) => `<button class="rev" data-act="prof_place" data-i="${i}"><span class="rev-top"><b>${esc(r.park_name || "Sitio")}</b><span class="act-stars">${starsTxt(r.stars)}</span></span>${r.tags && r.tags.length ? `<span class="tchips sm">${r.tags.slice(0, 4).map((t) => `<span class="tchip">${esc(TAGS[t] || "")}</span>`).join("")}</span>` : ""}${r.comment ? `<span class="rev-c">${esc(r.comment)}</span>` : ""}</button>`).join("") : `<p class="sub">${self ? "A\xFAn no has puntuado ning\xFAn sitio. Hazlo desde \xABSitios\xBB." : "A\xFAn no ha puntuado ning\xFAn sitio."}</p>`}
@@ -8906,6 +9163,478 @@ C\xF3digo: ${inviteCode.code}`;
     ${r.comment ? `<span class="rev-c">${esc(r.comment)}</span>` : ""}
     ${!r.mine && !r.i_follow && inCommunity() ? `<button class="btn ghost small" style="justify-self:start" data-act="comm_follow" data-id="${esc(r.user_id)}" data-on="0">Seguir a ${esc(r.name)}</button>` : ""}</div>`).join("");
   }
+  const dm = { list: null, tab: "chats", msgs: [], loading: false, ch: null, chId: null, watch: null, menu: null, editing: null, sending: false };
+  const DM_IC = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 10 14"/><path d="M22 3 15 21l-5-7-7-4z"/></svg>';
+  const dmIncoming = (t) => t.status === "pending" && !t.mine_request;
+  function dmUnread() {
+    return (dm.list || []).filter((t) => t.unread && !t.muted && !t.blocked).length;
+  }
+  function dmTime(ts) {
+    const d = new Date(ts);
+    return pad(d.getHours()) + ":" + pad(d.getMinutes());
+  }
+  function dmDay(ts) {
+    const d = new Date(ts), t = today();
+    if (d >= t) return "Hoy";
+    if (d >= addDays(t, -1)) return "Ayer";
+    return d.getDate() + " " + MES[d.getMonth()] + (d.getFullYear() !== t.getFullYear() ? " " + d.getFullYear() : "");
+  }
+  function dmWhen(ts) {
+    const d = new Date(ts);
+    return d >= today() ? dmTime(ts) : dmDay(ts);
+  }
+  async function loadDM() {
+    if (!user || !inCommunity()) {
+      dm.list = [];
+      return;
+    }
+    const { data, error } = await sb.rpc("dm_list");
+    if (!error) dm.list = data || [];
+    else if (!dm.list) dm.list = [];
+    dmRefreshUI();
+  }
+  function dmRefreshUI() {
+    const n = dmUnread();
+    document.querySelectorAll(".dm-btn").forEach((b) => {
+      let i = b.querySelector("i");
+      if (n) {
+        if (!i) {
+          i = document.createElement("i");
+          b.appendChild(i);
+        }
+        i.textContent = n > 9 ? "9+" : n;
+      } else if (i) i.remove();
+      b.setAttribute("aria-label", n ? `Mensajes, ${n} sin leer` : "Mensajes");
+    });
+    if (view.name === "inbox") render();
+    else if (view.name === "dm" && view.id) {
+      const t = (dm.list || []).find((x) => x.id === view.id), o = dm.cur;
+      if (t && t.unread) {
+        t.unread = false;
+        sb.rpc("dm_read", { tid: t.id }).then(() => {
+        }, () => {
+        });
+        dmRefreshUI();
+      }
+      if (t && o && (t.status !== o.status || t.blocked !== o.blocked || t.muted !== o.muted)) render();
+    }
+  }
+  function dmWatch() {
+    if (dm.watch || !user || !inCommunity()) return;
+    let k = null;
+    const kick = () => {
+      clearTimeout(k);
+      k = setTimeout(loadDM, 400);
+    };
+    dm.watch = sb.channel("dmt-" + user.id).on("postgres_changes", { event: "*", schema: "public", table: "dm_threads" }, kick).subscribe();
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && dm.watch) kick();
+    });
+    loadDM();
+  }
+  function dmStop() {
+    if (dm.watch) {
+      try {
+        sb.removeChannel(dm.watch);
+      } catch (_) {
+      }
+      dm.watch = null;
+    }
+    dmLeave();
+    dm.list = null;
+    dm.chId = null;
+  }
+  function dmLeave() {
+    if (dm.ch) {
+      try {
+        sb.removeChannel(dm.ch);
+      } catch (_) {
+      }
+      dm.ch = null;
+    }
+  }
+  function dmBtn() {
+    const n = dmUnread();
+    return `<button class="dm-btn" data-act="dm_inbox" aria-label="${n ? `Mensajes, ${n} sin leer` : "Mensajes"}">${DM_IC}${n ? `<i>${n > 9 ? "9+" : n}</i>` : ""}</button>`;
+  }
+  function renderInbox() {
+    if (!inCommunity()) {
+      renderCommunityGate();
+      app.insertAdjacentHTML("afterbegin", '<button class="back" data-act="home">\u2039 Inicio</button>');
+      const g = app.querySelector(".gate p");
+      if (g) g.insertAdjacentHTML("beforebegin", '<div class="dm-note">\u2709\uFE0F Para enviar y recibir <b>mensajes directos</b> tienes que entrar en la comunidad.</div>');
+      return;
+    }
+    const reqs = (dm.list || []).filter(dmIncoming).length;
+    app.innerHTML = `<button class="back" data-act="home">\u2039 Inicio</button>
+  <h1 class="feed-title">Mensajes</h1>
+  <div class="seg seg2" role="tablist">
+    <button role="tab" aria-selected="${dm.tab === "chats"}" class="${dm.tab === "chats" ? "on" : ""}" data-act="dm_tab" data-v="chats">\u{1F4AC} Chats</button>
+    <button role="tab" aria-selected="${dm.tab === "reqs"}" class="${dm.tab === "reqs" ? "on" : ""}" data-act="dm_tab" data-v="reqs">\u{1F4E9} Solicitudes${reqs ? ` <b class="seg-n">${reqs}</b>` : ""}</button></div>
+  <div id="dm-list" class="dm-list"></div>
+  <p class="sub dm-foot">Para escribir a alguien, abre su perfil (Comunidad \u2192 Personas) y pulsa \xABMensaje\xBB. Nadie puede escribirte si no aceptas antes su solicitud.</p>`;
+    const el = document.getElementById("dm-list");
+    if (dm.list === null) {
+      el.innerHTML = '<p class="sub" style="text-align:center">Cargando\u2026</p>';
+      loadDM();
+      return;
+    }
+    const l = dm.list.filter((t) => dm.tab === "reqs" ? dmIncoming(t) : !dmIncoming(t));
+    if (!l.length) {
+      el.innerHTML = dm.tab === "reqs" ? `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F4E9}</div><b>No tienes solicitudes</b><p>Cuando alguien quiera escribirte, su mensaje aparecer\xE1 aqu\xED y t\xFA decides si aceptarlo.</p></div>` : `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F4AC}</div><b>A\xFAn no tienes conversaciones</b><p>Busca a alguien en Comunidad \u2192 Personas y env\xEDale un mensaje.</p><button class="btn small" data-act="dm_people">Buscar personas</button></div>`;
+      return;
+    }
+    el.innerHTML = l.map((t) => {
+      const wait = t.mine_request && t.status !== "accepted";
+      const last = t.blocked ? "\u{1F6AB} Bloqueado" : wait ? "\u23F3 Solicitud enviada" : (t.last_mine ? "T\xFA: " : "") + esc(t.last_text || "");
+      return `<button class="dm-row${t.unread && !t.blocked ? " unread" : ""}" data-act="dm_open" data-id="${esc(t.id)}">${cAv(t.photo, t.name, "dm-av")}
+      <span class="dm-mid"><b>${esc(t.name)}${t.muted ? ' <span class="dm-muted" title="Silenciada">\u{1F515}</span>' : ""}</b><span class="dm-last">${last}</span></span>
+      <span class="dm-when">${dmWhen(t.last_at)}${t.unread && !t.blocked ? '<i class="dm-dot" aria-label="sin leer"></i>' : ""}</span></button>`;
+    }).join("");
+  }
+  function dmOpen(id) {
+    const t = (dm.list || []).find((x) => x.id === id);
+    view = { name: "dm", id, other: t && t.other, pname: t && t.name, photo: t && t.photo, back: view.name === "dm" ? view.back : view };
+    dm.msgs = [];
+    dm.menu = null;
+    dm.editing = null;
+    dm.chId = null;
+    render();
+    window.scrollTo(0, 0);
+  }
+  function dmCompose(other, name, photo) {
+    const t = (dm.list || []).find((x) => x.other === other);
+    if (t) return dmOpen(t.id);
+    view = { name: "dm", id: null, other, pname: name, photo, back: view };
+    dm.msgs = [];
+    dm.chId = null;
+    render();
+    window.scrollTo(0, 0);
+    const ta = document.getElementById("dm-q");
+    if (ta) ta.focus();
+  }
+  function renderDM() {
+    if (!inCommunity()) return renderInbox();
+    const t = view.id ? (dm.list || []).find((x) => x.id === view.id) : null;
+    if (view.id && !t) {
+      if (dm.list === null) {
+        app.innerHTML = '<p class="sub" style="text-align:center;margin-top:30vh">Cargando\u2026</p>';
+        loadDM().then(() => {
+          if (view.name === "dm") render();
+        });
+        return;
+      }
+      app.innerHTML = `<button class="back" data-act="dm_back">\u2039 Mensajes</button><div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F648}</div><b>Esta conversaci\xF3n ya no est\xE1 disponible</b></div>`;
+      return;
+    }
+    if (t) {
+      view.other = t.other;
+      view.pname = t.name;
+      view.photo = t.photo;
+    }
+    dm.cur = t ? { status: t.status, blocked: t.blocked, muted: t.muted } : null;
+    const nm = esc(view.pname || "esta persona");
+    const incoming = t && dmIncoming(t), waiting = t && t.mine_request && t.status !== "accepted";
+    const canWrite = !t || t.status === "accepted" && !t.blocked;
+    app.innerHTML = `
+  <header class="dm-head">
+    <button class="dm-back" data-act="dm_back" aria-label="Volver a mensajes">\u2039</button>
+    <button class="dm-who" data-act="comm_user" data-id="${esc(view.other)}">${cAv(view.photo, view.pname, "dm-av sm")}<span><b>${nm}</b><span class="sub">Ver perfil</span></span></button>
+    ${t && t.status === "accepted" ? `<button class="dm-mute${t.muted ? " on" : ""}" data-act="dm_mute" aria-pressed="${!!t.muted}" title="${t.muted ? "Esta conversaci\xF3n est\xE1 silenciada" : "Dejar de recibir avisos de esta conversaci\xF3n"}">${t.muted ? "\u{1F514} Reactivar avisos" : "\u{1F515} Silenciar"}</button>` : ""}
+  </header>
+  ${incoming ? `<div class="dm-req"><b>${nm} quiere enviarte un mensaje</b><p>Si aceptas, podr\xE9is hablar y te llegar\xE1n sus mensajes al m\xF3vil. Si no, no podr\xE1 volver a escribirte.</p><div class="pc-b"><button class="btn small" data-act="dm_accept">Aceptar</button><button class="btn ghost small" data-act="dm_decline">Rechazar</button><button class="btn ghost small" data-act="dm_block">Bloquear</button></div></div>` : ""}
+  ${!t ? `<div class="dm-note">\u2709\uFE0F Tu primer mensaje le llegar\xE1 como <b>solicitud</b>. Podr\xE9is seguir hablando cuando ${nm} la acepte.</div>` : ""}
+  ${t && t.blocked ? `<div class="dm-note">\u{1F6AB} Has bloqueado a ${nm}. <button class="lnk" data-act="dm_unblock">Desbloquear</button></div>` : ""}
+  <div id="dm-msgs" class="chat-list dm-msgs${canWrite ? "" : " no-dock"}" aria-live="polite"></div>
+  ${waiting ? `<div class="dm-note dm-wait">\u23F3 Esperando a que ${nm} acepte tu solicitud. Cuando lo haga, podr\xE9is seguir hablando.</div>` : ""}
+  ${canWrite ? `<form id="dmform" class="ai-bar ai-dock chat-dock">
+    <label for="dm-q" class="sr">Escribe un mensaje</label>
+    <textarea id="dm-q" rows="1" maxlength="1000" enterkeyhint="send" placeholder="${t ? "Mensaje\u2026" : "Escribe tu solicitud\u2026"}"></textarea>
+    <button type="submit" aria-label="Enviar">\u279C</button></form>` : ""}`;
+    const ta = document.getElementById("dm-q");
+    if (ta) {
+      ta.addEventListener("input", () => {
+        ta.style.height = "auto";
+        ta.style.height = Math.min(ta.scrollHeight, 140) + "px";
+      });
+      ta.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+          e.preventDefault();
+          dmSubmit(ta.form);
+        }
+      });
+    }
+    renderDMMsgs(true);
+    if (t && dm.chId !== t.id) dmLoad();
+    if (t && t.unread) {
+      t.unread = false;
+      sb.rpc("dm_read", { tid: t.id }).then(() => {
+      }, () => {
+      });
+      dmRefreshUI();
+    }
+  }
+  async function dmLoad() {
+    const id = view.id;
+    if (!id) return;
+    dm.chId = id;
+    dm.loading = true;
+    renderDMMsgs();
+    const { data, error } = await sb.from("dm_msgs").select("*").eq("thread_id", id).order("created_at", { ascending: false }).limit(150);
+    if (view.name !== "dm" || view.id !== id) return;
+    dm.loading = false;
+    dm.msgs = error ? [] : (data || []).reverse();
+    renderDMMsgs(true);
+    dmLeave();
+    dm.ch = sb.channel("dm-" + id).on("postgres_changes", { event: "INSERT", schema: "public", table: "dm_msgs", filter: "thread_id=eq." + id }, (pl) => {
+      const m = pl.new;
+      if (!m || view.id !== id || dm.msgs.some((x) => x.id === m.id)) return;
+      dm.msgs.push(m);
+      renderDMMsgs(true);
+      if (m.sender !== user.id) sb.rpc("dm_read", { tid: id }).then(() => {
+      }, () => {
+      });
+    }).on("postgres_changes", { event: "UPDATE", schema: "public", table: "dm_msgs", filter: "thread_id=eq." + id }, (pl) => {
+      const m = pl.new;
+      const x = m && dm.msgs.find((y) => y.id === m.id);
+      if (x && dm.editing !== m.id) {
+        Object.assign(x, m);
+        renderDMMsgs();
+      }
+    }).on("postgres_changes", { event: "DELETE", schema: "public", table: "dm_msgs" }, (pl) => {
+      const i = pl.old && pl.old.id;
+      if (i == null || !dm.msgs.some((x) => x.id === i)) return;
+      dm.msgs = dm.msgs.filter((x) => x.id !== i);
+      renderDMMsgs();
+    }).subscribe();
+  }
+  function renderDMMsgs(toBottom) {
+    const el = document.getElementById("dm-msgs");
+    if (!el) return;
+    if (dm.loading && !dm.msgs.length) {
+      el.innerHTML = '<p class="sub" style="text-align:center">Cargando\u2026</p>';
+      return;
+    }
+    if (!dm.msgs.length) {
+      el.innerHTML = view.id ? "" : `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F44B}</div><b>Saluda a ${esc(view.pname || "")}</b><p>Pres\xE9ntate y cu\xE9ntale por qu\xE9 le escribes.</p></div>`;
+      return;
+    }
+    let day = "";
+    el.innerHTML = dm.msgs.map((m) => {
+      const mine = m.sender === user.id, open = dm.menu === m.id, d = dmDay(m.created_at);
+      const sep = d !== day ? `<div class="dm-day">${day = d}</div>` : "";
+      if (mine && dm.editing === m.id) return sep + `<div class="cm cm-mine"><form class="cm-edit" id="dm_editform" data-id="${m.id}"><textarea id="dm-edit" maxlength="1000" rows="3">${esc(m.body)}</textarea><div class="pc-b"><button type="button" class="btn ghost small" data-act="dm_editcancel">Cancelar</button><button class="btn small" type="submit">Guardar</button></div></form></div>`;
+      return sep + `<div class="cm ${mine ? "cm-mine" : ""}">
+      <button class="cm-b" data-act="dm_menu" data-id="${m.id}" aria-expanded="${open}"><span class="cm-t">${esc(m.body)}</span><span class="cm-w">${dmTime(m.created_at)}${m.edited_at ? " \xB7 editado" : ""}</span></button>
+      ${open ? `<div class="cm-menu">${mine ? `<button class="btn ghost small" data-act="dm_edit" data-id="${m.id}">Editar</button><button class="btn ghost small" data-act="dm_del" data-id="${m.id}">Borrar</button>` : `<button class="btn ghost small" data-act="dm_report" data-id="${m.id}">Denunciar</button>`}</div>` : ""}
+    </div>`;
+    }).join("");
+    if (toBottom) requestAnimationFrame(() => window.scrollTo(0, document.body.scrollHeight));
+  }
+  async function dmPush(tid) {
+    try {
+      const { data } = await sb.auth.getSession();
+      const tok = data && data.session && data.session.access_token;
+      if (!tok) return;
+      fetch(PUSH_URL + "/dm", { method: "POST", keepalive: true, headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" }, body: JSON.stringify({ tid }) }).catch(() => {
+      });
+    } catch (_) {
+    }
+  }
+  async function dmSubmit(form) {
+    const ta = form.querySelector("textarea"), t = (ta.value || "").trim();
+    const btn = form.querySelector("button[type=submit]");
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = "";
+    }
+    if (!t || dm.sending) return;
+    dm.sending = true;
+    try {
+      if (!view.id) {
+        const { data: data2, error: error2 } = await sb.rpc("dm_start", { target: view.other, txt: t });
+        if (error2) throw error2;
+        ta.value = "";
+        view.id = data2;
+        dmPush(data2);
+        await loadDM();
+        dm.chId = null;
+        dm.sending = false;
+        render();
+        toast("Solicitud enviada a " + (view.pname || "esta persona"));
+        return;
+      }
+      const { data, error } = await sb.rpc("dm_send", { tid: view.id, txt: t });
+      if (error) throw error;
+      ta.value = "";
+      ta.style.height = "auto";
+      if (typeof data === "number" && !dm.msgs.some((x) => x.id === data)) {
+        dm.msgs.push({ id: data, thread_id: view.id, sender: user.id, body: t, created_at: (/* @__PURE__ */ new Date()).toISOString() });
+        renderDMMsgs(true);
+      }
+      const th = (dm.list || []).find((x) => x.id === view.id);
+      if (th) {
+        th.last_text = t;
+        th.last_mine = true;
+        th.last_at = (/* @__PURE__ */ new Date()).toISOString();
+      }
+      dmPush(view.id);
+    } catch (e) {
+      const m = String(e && e.message || "");
+      if (/normas/.test(m)) {
+        owner.community_at = null;
+        dm.sending = false;
+        return render();
+      }
+      if (/responde|pendiente/.test(m)) {
+        await loadDM();
+        const th = (dm.list || []).find((x) => x.other === view.other);
+        if (th) {
+          dm.sending = false;
+          toast(/responde/.test(m) ? "Ya te hab\xEDa escrito: acepta su solicitud para hablar" : "Ya le hab\xEDas enviado una solicitud");
+          return dmOpen(th.id);
+        }
+      }
+      toast(/bloqueo/.test(m) ? "No puedes escribir a esta persona" : /noperfil/.test(m) ? "Esta persona ya no est\xE1 en la comunidad" : /limite/.test(m) ? "Has enviado muchas solicitudes hoy. Prueba ma\xF1ana." : /despacio/.test(m) ? "Vas muy r\xE1pido, espera un momento" : "No se ha podido enviar. Revisa tu conexi\xF3n.");
+    }
+    dm.sending = false;
+  }
+  async function dmEditSubmit(f) {
+    const id = +f.dataset.id, t = (val("dm-edit") || "").trim();
+    if (!t) return;
+    try {
+      const { error } = await sb.rpc("dm_edit", { mid: id, txt: t });
+      if (error) throw error;
+      const m = dm.msgs.find((x) => x.id === id);
+      if (m) {
+        m.body = t;
+        m.edited_at = (/* @__PURE__ */ new Date()).toISOString();
+      }
+      dm.editing = null;
+      renderDMMsgs();
+      toast("Mensaje editado");
+    } catch (e) {
+      fail(e);
+    }
+  }
+  async function dmClick(a, b) {
+    try {
+      if (a === "dm_inbox") {
+        view = { name: "inbox" };
+        render();
+        window.scrollTo(0, 0);
+        if (inCommunity()) loadDM();
+        return;
+      }
+      if (a === "dm_tab") {
+        dm.tab = b.dataset.v;
+        return render();
+      }
+      if (a === "dm_people") {
+        comm.sec = "people";
+        view = { name: "chat" };
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "dm_open") return dmOpen(b.dataset.id);
+      if (a === "dm_back") {
+        view = view.back && !["dm", "profile"].includes(view.back.name) ? view.back : { name: "inbox" };
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "dm_to") {
+        b.disabled = true;
+        if (dm.list === null) await loadDM();
+        return dmCompose(b.dataset.id, b.dataset.name, b.dataset.photo || null);
+      }
+      const th = (dm.list || []).find((x) => x.id === view.id);
+      if (a === "dm_accept" || a === "dm_decline") {
+        const ok = a === "dm_accept";
+        b.disabled = true;
+        const { error } = await sb.rpc("dm_respond", { tid: view.id, ok });
+        if (error) throw error;
+        if (ok) {
+          if (th) th.status = "accepted";
+          toast("Solicitud aceptada. \xA1Ya pod\xE9is hablar!");
+          return render();
+        }
+        dm.list = (dm.list || []).filter((x) => x !== th);
+        dm.tab = "reqs";
+        view = { name: "inbox" };
+        toast("Solicitud rechazada");
+        return render();
+      }
+      if (a === "dm_block") {
+        await blockUser(view.other, view.pname);
+        if (th && dmIncoming(th)) {
+          await sb.rpc("dm_respond", { tid: view.id, ok: false });
+          dm.list = dm.list.filter((x) => x !== th);
+          view = { name: "inbox" };
+          return render();
+        }
+        if (th) th.blocked = true;
+        return render();
+      }
+      if (a === "dm_unblock") {
+        await unblockUser(view.other);
+        if (th) th.blocked = false;
+        return render();
+      }
+      if (a === "dm_mute") {
+        const m = !(th && th.muted);
+        b.disabled = true;
+        const { error } = await sb.rpc("dm_mute", { tid: view.id, m });
+        if (error) throw error;
+        if (th) th.muted = m;
+        toast(m ? "Conversaci\xF3n silenciada: no te llegar\xE1n avisos de ella" : "Avisos activados para esta conversaci\xF3n");
+        dmRefreshUI();
+        return render();
+      }
+      if (a === "dm_menu") {
+        const id = +b.dataset.id;
+        dm.menu = dm.menu === id ? null : id;
+        return renderDMMsgs();
+      }
+      if (a === "dm_del") {
+        const id = +b.dataset.id;
+        const { error } = await sb.from("dm_msgs").delete().eq("id", id).eq("sender", user.id);
+        if (error) throw error;
+        dm.msgs = dm.msgs.filter((x) => x.id !== id);
+        dm.menu = null;
+        renderDMMsgs();
+        toast("Mensaje borrado");
+        return;
+      }
+      if (a === "dm_edit") {
+        dm.editing = +b.dataset.id;
+        dm.menu = null;
+        renderDMMsgs();
+        const t = document.getElementById("dm-edit");
+        if (t) {
+          t.focus();
+          t.setSelectionRange(t.value.length, t.value.length);
+        }
+        return;
+      }
+      if (a === "dm_editcancel") {
+        dm.editing = null;
+        return renderDMMsgs();
+      }
+      if (a === "dm_report") {
+        const { error } = await sb.from("reports").insert({ reported: view.other, dm_msg_id: +b.dataset.id, reason: "Mensaje directo" });
+        if (error) throw error;
+        dm.menu = null;
+        renderDMMsgs();
+        toast("Denuncia enviada. Gracias por avisar");
+        return;
+      }
+    } catch (e) {
+      fail(e);
+      if (b) b.disabled = false;
+    }
+  }
   app.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-act]");
     if (!b) return;
@@ -8916,6 +9645,7 @@ C\xF3digo: ${inviteCode.code}`;
     if (a.startsWith("push_")) return pushClick(a);
     if (a.startsWith("chat_")) return chatClick(a, b);
     if (a.startsWith("comm_")) return commClick(a, b);
+    if (a.startsWith("dm_")) return dmClick(a, b);
     if (a === "prof_back") {
       view = view.back || { name: "chat" };
       render();
@@ -9191,6 +9921,8 @@ C\xF3digo: ${inviteCode.code}`;
     if (f.startsWith("st_")) return sitiosSubmit(f, e.target);
     if (f === "aihome" || f === "aiform") return aiSubmit(f, e.target);
     if (f === "chatform") return chatSubmit(e.target);
+    if (f === "dmform") return dmSubmit(e.target);
+    if (f === "dm_editform") return dmEditSubmit(e.target);
     if (f === "chat_editform") {
       const id = +e.target.dataset.id, t = (val("chat-edit") || "").trim();
       if (!t) return;
@@ -9454,6 +10186,7 @@ C\xF3digo: ${inviteCode.code}`;
       started = false;
       pets = [];
       owner = {};
+      dmStop();
       if (channel) {
         sb.removeChannel(channel);
         channel = null;
