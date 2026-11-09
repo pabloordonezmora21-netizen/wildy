@@ -3896,6 +3896,415 @@ body.has-tabs .ai-list {
   justify-content: flex-end;
   padding: 0;
 }
+.legal {
+  display: grid;
+  gap: 4px;
+  line-height: 1.55;
+  font-size: 15px;
+  padding-bottom: 20px;
+}
+.legal h2 {
+  font-size: 24px;
+  margin: 10px 0 0;
+}
+.legal h3 {
+  font-size: 17px;
+  margin: 14px 0 2px;
+}
+.legal p {
+  margin: 4px 0;
+}
+.legal ul {
+  margin: 4px 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 4px;
+}
+.tg-check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.tg-check input {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  margin-top: 1px;
+  accent-color: var(--red);
+}
+#termsgate {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 65;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+#termsgate .pm {
+  max-height: 90vh;
+  overflow: auto;
+}
+.gate {
+  display: grid;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 18px;
+}
+.gate-hero {
+  font-size: 40px;
+  text-align: center;
+}
+.gate p {
+  margin: 0;
+}
+.gate-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.seg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 4px;
+  margin: 0 0 12px;
+}
+.seg button {
+  border: 0;
+  background: none;
+  border-radius: 999px;
+  padding: 9px 4px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.seg button.on {
+  background: var(--bg);
+  color: var(--red);
+  box-shadow: 0 2px 8px -4px rgba(0, 0, 0, .3);
+}
+.comm-feed,
+.people-list {
+  display: grid;
+  gap: 12px;
+  padding-bottom: 20px;
+}
+.act-card {
+  display: grid;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 12px 14px;
+}
+.act-who,
+.person-main,
+.me-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+}
+.act-who > span:last-child,
+.person-main > span:last-child,
+.me-row > span:nth-child(2) {
+  display: grid;
+  min-width: 0;
+}
+.act-who .sub,
+.person-main .sub {
+  font-size: 12px;
+}
+.act-place {
+  border: 0;
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 8px 10px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.act-stars {
+  color: #f0a400;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+.act-photo {
+  border: 0;
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 4/3;
+  max-width: 100%;
+}
+.act-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.act-comment {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+.person {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 10px 12px;
+}
+.person-main {
+  flex: 1;
+}
+.person-bio {
+  font-size: 13px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.me-row {
+  width: 100%;
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 10px 12px;
+  margin: 0 0 12px;
+}
+.me-row > span:last-child {
+  margin-left: auto;
+  color: var(--muted);
+}
+.prof-head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin: 6px 0 10px;
+}
+.prof-head h1 {
+  margin: 0;
+  font-size: 26px;
+}
+.prof-av {
+  flex: none;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--red);
+  color: var(--red-ink);
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  font-weight: 800;
+}
+.prof-av img,
+.pp-av img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.prof-counts {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.prof-counts b {
+  color: var(--ink);
+}
+.prof-bio {
+  margin: 0 0 10px;
+  line-height: 1.45;
+}
+.prof-acts {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.prof-pets {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.prof-pet {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-width: 76px;
+  text-align: center;
+  font-size: 13px;
+}
+.pp-av {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+.rev {
+  display: grid;
+  gap: 6px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+}
+button.rev {
+  cursor: pointer;
+}
+.rev-top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.rev-top .cm-av {
+  width: 28px;
+  height: 28px;
+  font-size: 13px;
+}
+.rev-who {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--ink);
+}
+.rev-c {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+  font-size: 14px;
+}
+.bio-form {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+.bio-form textarea {
+  font: inherit;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  resize: vertical;
+}
+.bio-form button {
+  justify-self: start;
+}
+.cm-blocked {
+  border: 1px dashed var(--line);
+  background: none;
+  border-radius: 14px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.cm-edit {
+  display: grid;
+  gap: 6px;
+  width: min(100%, 420px);
+}
+.cm-edit textarea {
+  font: inherit;
+  border: 2px solid var(--red);
+  border-radius: 14px;
+  padding: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  resize: vertical;
+}
+.cm-edit .pc-b {
+  justify-content: flex-end;
+}
+.blk-list {
+  display: grid;
+  gap: 8px;
+}
+.blk {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 8px 12px;
+}
+.danger-zone {
+  margin-top: 14px;
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+}
+.danger-zone input {
+  font: inherit;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 10px;
+  background: var(--bg);
+  color: var(--ink);
+}
+#st-comment {
+  font: inherit;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  resize: vertical;
+  width: 100%;
+}
 .pickpet {
   width: 100%;
   text-align: left;
@@ -4863,7 +5272,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   };
   const num = (s) => parseFloat(String(s).replace(",", "."));
   let user = null, owner = {}, people = {}, pets = [];
-  let view = { name: new URLSearchParams(location.search).get("ver") === "avisos" ? "avisos" : "home" }, calMonth = null, pendingDelete = false, photoDraft = "", avatarDraft = null, photoTarget = "pet", authMode = "login", authMsg = "", inviteCode = null, busy = false, staleWhileTyping = false;
+  let settingsDel = false;
+  let view = /* @__PURE__ */ ((v) => v === "avisos" ? { name: "avisos" } : v === "privacy" || v === "terms" ? { name: "legal", tab: v } : { name: "home" })(new URLSearchParams(location.search).get("ver")), calMonth = null, pendingDelete = false, photoDraft = "", avatarDraft = null, photoTarget = "pet", authMode = "login", authMsg = "", inviteCode = null, busy = false, staleWhileTyping = false;
   function toast(msg) {
     const t = document.createElement("div");
     t.className = "toast";
@@ -5097,7 +5507,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   function render() {
     window.WILDY_OK = true;
     if (!user) {
-      renderAuth();
+      if (view.name === "legal") renderLegal();
+      else renderAuth();
       renderTabs();
       return;
     }
@@ -5118,7 +5529,13 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       }, 0);
     } else if (view.name === "ask") renderAsk();
     else if (view.name === "avisos") renderAvisos();
-    else if (view.name === "chat") renderChat();
+    else if (view.name === "chat") {
+      if (!inCommunity()) renderCommunityGate();
+      else if (comm.sec === "feed") renderCommFeed();
+      else if (comm.sec === "people") renderCommPeople();
+      else renderChat();
+    } else if (view.name === "profile") renderProfile();
+    else if (view.name === "legal") renderLegal();
     else if (view.name === "newpass") renderNewPass();
     else renderPet();
     if (view.name !== "social" && social.sheet) {
@@ -5133,7 +5550,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     drawQR();
     renderTabs();
     party();
-    if (view.name !== "chat") chatLeave();
+    if (!(view.name === "chat" && comm.sec === "chat" && inCommunity())) chatLeave();
+    termsGate();
     if (view.name === "home") setTimeout(pushMaybeAsk, 1500);
   }
   let lastEmail = "", resendAt = 0, resendTimer = null;
@@ -5173,10 +5591,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       ${reg ? `<label>Tu nombre<input id="a-name" required autocomplete="name" placeholder="Ej. Carlota"></label>` : ""}
       <label>Correo<input id="a-email" type="email" required autocomplete="email" inputmode="email"></label>
       ${forgot ? "" : `<label>Contrase\xF1a<input id="a-pass" type="password" required minlength="6" autocomplete="${reg ? "new-password" : "current-password"}"></label>`}
-      ${reg ? `<p class="sub" style="margin:0">Guardamos tus mascotas y tus datos de contacto para que la app funcione. Puedes borrar tu cuenta cuando quieras.</p>` : ""}
+      ${reg ? `<label class="tg-check"><input type="checkbox" id="a-terms" required> <span>He le\xEDdo y acepto la <button type="button" class="lnk" data-act="legal" data-v="privacy">Pol\xEDtica de privacidad</button> y los <button type="button" class="lnk" data-act="legal" data-v="terms">T\xE9rminos</button>, y tengo al menos 14 a\xF1os.</span></label>` : ""}
       <button class="btn block" type="submit">${forgot ? "Enviarme un enlace" : reg ? "Crear cuenta" : "Entrar"}</button>
     </form>
     ${forgot ? `<button class="linkbtn" data-act="mode" data-mode="login">Volver a entrar</button>` : !reg ? `<button class="linkbtn" data-act="mode" data-mode="forgot">\xBFHas olvidado la contrase\xF1a?</button>` : ""}
+    <p class="sub" style="text-align:center;font-size:12px;margin:0"><button class="lnk" data-act="legal" data-v="privacy">Privacidad</button> \xB7 <button class="lnk" data-act="legal" data-v="terms">T\xE9rminos</button></p>
   </div>`;
   }
   function renderNewPass() {
@@ -5498,6 +5917,21 @@ C\xF3digo: ${inviteCode.code}`;
     <label>Mensaje para quien la encuentre<input id="o-message" value="${esc(o.message)}" maxlength="120"></label>
     <button class="btn block" type="submit">Guardar ajustes</button>
   </form>
+  <div class="sec"><h2>Comunidad</h2>
+    ${inCommunity() ? `<p class="sub" style="margin:0 0 8px">Est\xE1s en la comunidad: otros ven tu nombre de pila, tu mascota, tus mensajes y tus opiniones.</p><div class="pc-b"><button class="btn soft small" data-act="comm_user" data-id="${esc(user.id)}">Ver mi perfil</button><button class="btn ghost small" data-act="comm_leave">Salir de la comunidad</button></div>` : `<p class="sub" style="margin:0 0 8px">No est\xE1s en la comunidad. Nadie ve tu perfil ni tus opiniones.</p><button class="btn soft small" data-act="comm_sec" data-v="chat" onclick="setTimeout(()=>document.querySelector('#tabbar [data-act=chat]').click(),0)">Unirme a la comunidad</button>`}
+  </div>
+  <div class="sec"><h2>Personas bloqueadas</h2>
+    ${comm.blocks === null ? (setTimeout(loadBlocks, 0), '<p class="sub">Cargando\u2026</p>') : comm.blocks.length ? `<div class="blk-list">${comm.blocks.map((x) => `<div class="blk"><span>\u{1F6AB} ${esc(x.blocked_name || "Persona bloqueada")}</span><button class="btn ghost small" data-act="set_unblock" data-id="${esc(x.blocked_id)}">Desbloquear</button></div>`).join("")}</div>` : '<p class="sub" style="margin:0">No has bloqueado a nadie.</p>'}
+  </div>
+  <div class="sec"><h2>Privacidad y cuenta</h2>
+    <div class="pc-b"><button class="btn ghost small" data-act="legal" data-v="privacy">Pol\xEDtica de privacidad</button><button class="btn ghost small" data-act="legal" data-v="terms">T\xE9rminos y normas</button></div>
+    <div class="danger-zone">
+      <button class="lnk" style="color:var(--warn)" data-act="del_account">${settingsDel ? "Cancelar" : "Borrar mi cuenta y todos mis datos"}</button>
+      ${settingsDel ? `<p class="sub" style="margin:6px 0">Se borrar\xE1n tu cuenta, tu perfil, tus mensajes, opiniones y fotos, y las mascotas que no compartas con nadie. Las que compartes seguir\xE1n para los dem\xE1s. <b>No se puede deshacer.</b></p>
+      <label class="sh-lbl" for="del-word">Escribe BORRAR para confirmar</label><input id="del-word" autocomplete="off" style="max-width:220px">
+      <button class="btn small" style="background:var(--warn);margin-top:8px" data-act="del_confirm">Borrar definitivamente</button>` : ""}
+    </div>
+  </div>
   <div class="sec" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn ghost small" data-act="logout">Cerrar sesi\xF3n</button></div>`;
   }
   async function renderLost(id) {
@@ -6712,6 +7146,7 @@ C\xF3digo: ${inviteCode.code}`;
     sit.detail = id;
     sit.sheet = null;
     if (!sit.photos[id]) loadSitPhotos(p);
+    if (sit.reviews) delete sit.reviews[id];
     render();
     window.scrollTo(0, 0);
   }
@@ -6798,7 +7233,9 @@ C\xF3digo: ${inviteCode.code}`;
     <p class="sub" style="margin:-8px 0 0;text-align:center;font-weight:700">${["Toca las estrellas", "Muy mal", "Regular", "Bien", "Muy bien", "\xA1Genial!"][d.stars]}</p>
     <div class="sh-sec"><span class="sh-lbl">\xBFC\xF3mo es? <em>elige las que quieras</em></span>
       <div class="tchips">${TAGS.map((t, i) => `<button class="tchip ${d.tags.has(i) ? "on" : ""}" data-act="st_tag" data-v="${i}">${esc(t)}</button>`).join("")}</div></div>
-    <button class="btn block sh-go" data-act="st_saverate" ${d.stars ? "" : "disabled"}>Guardar puntuaci\xF3n</button>
+    <label class="sh-sec"><span class="sh-lbl">Tu opini\xF3n <em>opcional</em></span><textarea id="st-comment" maxlength="600" rows="3" placeholder="\xBFQu\xE9 tal con perros? Sombra, agua, ambiente, si hay que ir con correa\u2026">${esc(d.comment || "")}</textarea></label>
+    ${inCommunity() ? "" : '<p class="warn-soft">Tu opini\xF3n la ver\xE1n otras personas cuando entres en la Comunidad.</p>'}
+    <button class="btn block sh-go" data-act="st_saverate" ${d.stars ? "" : "disabled"}>Guardar opini\xF3n</button>
     ${sc && sc.mine ? '<button class="linkbtn" data-act="st_delrate" style="justify-self:center">Quitar mi puntuaci\xF3n</button>' : ""}`;
     } else if (sit.sheet === "add") {
       const d = sit.draft;
@@ -6932,9 +7369,14 @@ C\xF3digo: ${inviteCode.code}`;
     }
     if (a === "st_rate") {
       const sc = social.scores[sit.sel];
-      sit.draft = { stars: sc && sc.mine || 0, tags: new Set(sc && sc.my_tags || []) };
+      const my = (sit.reviews && sit.reviews[sit.sel] || []).find((r) => r.mine);
+      sit.draft = { stars: sc && sc.mine || my && my.stars || 0, tags: new Set(sc && sc.my_tags || my && my.tags || []), comment: my && my.comment || "" };
       sit.sheet = "rate";
       return renderSitSheet();
+    }
+    if (a === "st_star" || a === "st_tag") {
+      const c = document.getElementById("st-comment");
+      if (c && sit.draft) sit.draft.comment = c.value;
     }
     if (a === "st_star") {
       sit.draft.stars = +b.dataset.v;
@@ -6950,8 +7392,10 @@ C\xF3digo: ${inviteCode.code}`;
       if (!p) return;
       b.disabled = true;
       try {
-        const r = a === "st_saverate" ? await sb.from("park_ratings").upsert({ user_id: user.id, park_id: p.id, park_name: p.n, park_lat: p.a, park_lon: p.o, stars: sit.draft.stars, tags: [...sit.draft.tags], updated_at: (/* @__PURE__ */ new Date()).toISOString() }, { onConflict: "user_id,park_id" }) : await sb.from("park_ratings").delete().eq("user_id", user.id).eq("park_id", p.id);
+        const r = a === "st_saverate" ? await sb.from("park_ratings").upsert({ user_id: user.id, park_id: p.id, park_name: p.n, park_lat: p.a, park_lon: p.o, stars: sit.draft.stars, tags: [...sit.draft.tags], comment: ((document.getElementById("st-comment") || {}).value || sit.draft.comment || "").trim().slice(0, 600) || null, updated_at: (/* @__PURE__ */ new Date()).toISOString() }, { onConflict: "user_id,park_id" }) : await sb.from("park_ratings").delete().eq("user_id", user.id).eq("park_id", p.id);
         if (r.error) throw r.error;
+        if (sit.reviews) delete sit.reviews[p.id];
+        comm.feed = null;
         if (a === "st_delrate") delete social.scores[p.id];
         await scoresAt(p.a, p.o, 5);
         toast(a === "st_saverate" ? "\xA1Gracias por puntuar! \u2B50" : "Puntuaci\xF3n quitada");
@@ -7284,6 +7728,7 @@ C\xF3digo: ${inviteCode.code}`;
     <button data-act="st_plan"><span>\u{1F4C5}</span>Quedar aqu\xED</button>
   </div>
   ${sc && sc.top.length ? `<div class="sec"><h2>Lo que dice la gente</h2><div class="tchips">${sc.top.map((t) => `<span class="tchip">${esc(TAGS[t.t] || "")} \xB7 ${t.c}</span>`).join("")}</div></div>` : ""}
+  <div class="sec"><h2>Opiniones <button class="btn soft small" data-act="st_rate">\u2B50 Opinar</button></h2>${reviewsHTML(p.id)}</div>
   <div class="sec"><h2>Fotos <button class="btn soft small" data-act="st_addphoto">\u{1F4F7} A\xF1adir</button></h2>
     ${l.length ? `<div class="ph-grid">${l.map((x, i) => `<button class="ph-th" data-act="st_view" data-i="${i}" aria-label="Ver foto ${i + 1}"><img src="${esc(x.url)}" alt="" loading="lazy"></button>`).join("")}</div>` : '<p class="sub" style="margin:0">A\xFAn no hay fotos. Si has estado, \xA1sube la primera!</p>'}
   </div>
@@ -7536,11 +7981,11 @@ C\xF3digo: ${inviteCode.code}`;
     ["home", "Inicio", '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>'],
     ["meetups", "Quedadas", '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'],
     ["goplaces", "Sitios", '<path d="M3 20l6-12 4 7 3-4 5 9z"/><circle cx="17" cy="6" r="2"/>'],
-    ["chat", "Chat", '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>'],
+    ["chat", "Comunidad", '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.4.1 4.3 1.7 4.9 4.8"/>'],
     ["ai_open", "Pregunta", '<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>'],
     ["avisos", "Avisos", '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/>']
   ];
-  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", settings: "home", social: "meetups", sitios: "goplaces", ask: "ai_open", avisos: "avisos", chat: "chat" };
+  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", settings: "home", social: "meetups", sitios: "goplaces", ask: "ai_open", avisos: "avisos", chat: "chat", profile: "chat", legal: "home" };
   function renderTabs() {
     let bar = document.getElementById("tabbar");
     const show = !!user && view.name !== "newpass" && !window.WILDY_LANDING;
@@ -7790,13 +8235,12 @@ C\xF3digo: ${inviteCode.code}`;
     }, 50);
   }
   const ROOMS = [["general", "\u{1F4AC} General"], ["consejos", "\u{1F4A1} Consejos"], ["perdidos", "\u{1F50E} Perdidos y encontrados"]];
-  const chat = { room: "general", msgs: [], loading: false, ch: null, chRoom: null, more: true, menu: null, blocked: null, sending: false };
+  const chat = { reveal: /* @__PURE__ */ new Set(), editing: null, room: "general", msgs: [], loading: false, ch: null, chRoom: null, more: true, menu: null, blocked: null, sending: false };
   async function chatBlocks() {
     if (chat.blocked) return;
     chat.blocked = /* @__PURE__ */ new Set();
     try {
-      const { data } = await sb.from("blocks").select("blocked_id").eq("user_id", user.id);
-      (data || []).forEach((r) => chat.blocked.add(r.blocked_id));
+      await loadBlocks();
     } catch (_) {
     }
   }
@@ -7838,6 +8282,14 @@ C\xF3digo: ${inviteCode.code}`;
         const near = !el || window.innerHeight + window.scrollY >= document.body.scrollHeight - 160;
         chat.msgs.push(m);
         renderChatList(near || m.user_id === user.id);
+      }).on("postgres_changes", { event: "UPDATE", schema: "public", table: "community_msgs", filter: "room=eq." + room }, (pl) => {
+        const m = pl.new;
+        if (!m) return;
+        const x = chat.msgs.find((y) => y.id === m.id);
+        if (x && chat.editing !== m.id) {
+          Object.assign(x, m);
+          renderChatList();
+        }
       }).on("postgres_changes", { event: "DELETE", schema: "public", table: "community_msgs" }, (pl) => {
         const id = pl.old && pl.old.id;
         if (id == null) return;
@@ -7859,7 +8311,7 @@ C\xF3digo: ${inviteCode.code}`;
     } catch (_) {
     }
     app.innerHTML = `
-  <h1 class="feed-title">Chat de Wildy</h1>
+  ${commHeader()}
   <div class="chips scroll st-cats" role="tablist">${ROOMS.map((r) => `<button role="tab" aria-selected="${chat.room === r[0]}" class="chip ${chat.room === r[0] ? "on" : ""}" data-act="chat_room" data-v="${r[0]}">${r[1]}</button>`).join("")}</div>
   ${rules ? `<div class="chat-rules"><span>\u{1F43E} S\xE9 amable y ayuda a los dem\xE1s. No compartas tu direcci\xF3n ni datos personales. Toca un mensaje para denunciarlo o bloquear a esa persona.</span><button class="lnk" data-act="chat_rules">Entendido</button></div>` : ""}
   <div id="chat-list" class="chat-list" aria-live="polite"></div>
@@ -7887,7 +8339,7 @@ C\xF3digo: ${inviteCode.code}`;
   function renderChatList(toBottom) {
     const el = document.getElementById("chat-list");
     if (!el) return;
-    const bl = chat.blocked || /* @__PURE__ */ new Set(), l = chat.msgs.filter((m) => !bl.has(m.user_id));
+    const bl = chat.blocked || /* @__PURE__ */ new Set(), l = chat.msgs;
     if (chat.loading && !l.length) {
       el.innerHTML = '<p class="sub" style="text-align:center">Cargando mensajes\u2026</p>';
       return;
@@ -7898,12 +8350,14 @@ C\xF3digo: ${inviteCode.code}`;
     }
     el.innerHTML = (chat.more ? `<button class="btn ghost small" style="justify-self:center" data-act="chat_more">Ver mensajes anteriores</button>` : "") + l.map((m) => {
       const mine = m.user_id === user.id, open = chat.menu === m.id;
+      if (!mine && bl.has(m.user_id) && !chat.reveal.has(m.id)) return `<div class="cm"><button class="cm-blocked" data-act="chat_reveal" data-id="${m.id}">\u{1F6AB} Mensaje de ${esc(m.name)} (bloqueado) \xB7 Ver</button></div>`;
+      if (mine && chat.editing === m.id) return `<div class="cm cm-mine"><form class="cm-edit" id="chat_editform" data-id="${m.id}"><textarea id="chat-edit" maxlength="500" rows="3">${esc(m.body)}</textarea><div class="pc-b"><button type="button" class="btn ghost small" data-act="chat_editcancel">Cancelar</button><button class="btn small" type="submit">Guardar</button></div></form></div>`;
       return `<div class="cm ${mine ? "cm-mine" : ""}">
       ${mine ? "" : `<span class="cm-av" aria-hidden="true">${m.pet_photo ? `<img src="${esc(m.pet_photo)}" alt="">` : esc((m.name || "?")[0].toUpperCase())}</span>`}
       <button class="cm-b" data-act="chat_menu" data-id="${m.id}" aria-expanded="${open}">
         ${mine ? "" : `<span class="cm-n">${esc(m.name)}${m.pet_name ? ` <i>con ${esc(m.pet_name)}</i>` : ""}</span>`}
-        <span class="cm-t">${esc(m.body)}</span><span class="cm-w">${chatWhen(m.created_at)}</span></button>
-      ${open ? `<div class="cm-menu">${mine ? `<button class="btn ghost small" data-act="chat_del" data-id="${m.id}">Borrar mensaje</button>` : `<button class="btn ghost small" data-act="chat_report" data-id="${m.id}" data-uid="${esc(m.user_id)}">Denunciar</button><button class="btn ghost small" data-act="chat_block" data-uid="${esc(m.user_id)}" data-name="${esc(m.name)}">Bloquear a ${esc(m.name)}</button>`}</div>` : ""}
+        <span class="cm-t">${esc(m.body)}</span><span class="cm-w">${chatWhen(m.created_at)}${m.edited_at ? " \xB7 editado" : ""}</span></button>
+      ${open ? `<div class="cm-menu">${mine ? `<button class="btn ghost small" data-act="chat_edit" data-id="${m.id}">Editar</button><button class="btn ghost small" data-act="chat_del" data-id="${m.id}">Borrar</button>` : `<button class="btn ghost small" data-act="comm_user" data-id="${esc(m.user_id)}">Ver perfil</button><button class="btn ghost small" data-act="chat_report" data-id="${m.id}" data-uid="${esc(m.user_id)}">Denunciar</button>${bl.has(m.user_id) ? `<button class="btn ghost small" data-act="chat_unblock" data-uid="${esc(m.user_id)}">Desbloquear</button>` : `<button class="btn ghost small" data-act="chat_block" data-uid="${esc(m.user_id)}" data-name="${esc(m.name)}">Bloquear a ${esc(m.name)}</button>`}`}</div>` : ""}
     </div>`;
     }).join("");
     if (toBottom) requestAnimationFrame(() => window.scrollTo(0, document.body.scrollHeight));
@@ -7930,6 +8384,11 @@ C\xF3digo: ${inviteCode.code}`;
       }
     } catch (e) {
       const m = String(e && e.message || "");
+      if (/normas/.test(m)) {
+        owner.community_at = null;
+        chat.sending = false;
+        return render();
+      }
       toast(/despacio/.test(m) ? "Espera unos segundos entre mensajes" : /limite/.test(m) ? "Has llegado al l\xEDmite de mensajes de hoy" : "No se ha podido enviar. Revisa tu conexi\xF3n.");
     }
     chat.sending = false;
@@ -7986,17 +8445,466 @@ C\xF3digo: ${inviteCode.code}`;
     }
     if (a === "chat_block") {
       try {
-        const { error } = await sb.from("blocks").upsert({ user_id: user.id, blocked_id: b.dataset.uid });
-        if (error) throw error;
-        (chat.blocked || (chat.blocked = /* @__PURE__ */ new Set())).add(b.dataset.uid);
+        await blockUser(b.dataset.uid, b.dataset.name);
         chat.menu = null;
         renderChatList();
-        toast("Has bloqueado a " + b.dataset.name + ". Ya no ver\xE1s sus mensajes");
       } catch (e) {
         fail(e);
       }
       return;
     }
+    if (a === "chat_unblock") {
+      try {
+        await unblockUser(b.dataset.uid);
+        chat.menu = null;
+        renderChatList();
+      } catch (e) {
+        fail(e);
+      }
+      return;
+    }
+    if (a === "chat_reveal") {
+      chat.reveal.add(+b.dataset.id);
+      return renderChatList();
+    }
+    if (a === "chat_edit") {
+      chat.editing = +b.dataset.id;
+      chat.menu = null;
+      renderChatList();
+      const t = document.getElementById("chat-edit");
+      if (t) {
+        t.focus();
+        t.setSelectionRange(t.value.length, t.value.length);
+      }
+      return;
+    }
+    if (a === "chat_editcancel") {
+      chat.editing = null;
+      return renderChatList();
+    }
+  }
+  const TERMS_V = 1;
+  const LEGAL_DATE = "9 de noviembre de 2026";
+  const LEGAL = {
+    privacy: `<h2>Pol\xEDtica de privacidad</h2>
+<p class="sub">\xDAltima actualizaci\xF3n: ${LEGAL_DATE}</p>
+<h3>Qui\xE9n es el responsable</h3>
+<p>Wildy es una app de <b>Wildyoyu</b>. Para cualquier cuesti\xF3n sobre tus datos puedes escribir a <b>wildyoyu@gmail.com</b>.</p>
+<h3>Qu\xE9 datos tratamos</h3>
+<ul>
+<li><b>Cuenta:</b> tu correo y una contrase\xF1a cifrada.</li>
+<li><b>Perfil:</b> tu nombre, foto, ciudad y, si los a\xF1ades, tel\xE9fonos y un mensaje para la placa QR de tu mascota.</li>
+<li><b>Mascotas:</b> nombre, fotos, raza, fechas, peso, vacunas, citas, gastos y seguros que t\xFA apuntes. Pueden incluir datos de salud de tus animales.</li>
+<li><b>Comunidad (solo si entras):</b> tu nombre de pila, la foto y el nombre de tu mascota, tus mensajes del chat, tus opiniones y fotos de sitios, a qui\xE9n sigues y qui\xE9n te sigue, y las personas que bloqueas o denuncias.</li>
+<li><b>Quedadas y sitios:</b> los planes, avisos de \xABEstoy aqu\xED\xBB y sitios que publicas. No guardamos tu ubicaci\xF3n en tiempo real; los avisos de \xABEstoy aqu\xED\xBB se borran a los 90 minutos.</li>
+<li><b>Notificaciones (solo si las activas):</b> un identificador t\xE9cnico de tu m\xF3vil para poder enviarte avisos.</li>
+<li><b>Asistente de IA:</b> las preguntas que escribes se env\xEDan para generar la respuesta y no se guardan; solo contamos cu\xE1ntas preguntas haces al d\xEDa.</li>
+<li><b>Datos t\xE9cnicos:</b> si la app falla, guardamos el error y el tipo de navegador, sin datos personales.</li>
+</ul>
+<h3>Para qu\xE9 y con qu\xE9 base</h3>
+<ul>
+<li>Darte el servicio que pides (guardar tus mascotas, recordatorios, compartir con tu familia): ejecuci\xF3n del servicio que aceptas al registrarte.</li>
+<li>Comunidad, chat, seguir a personas y opiniones p\xFAblicas: tu <b>consentimiento</b>, que das al entrar en la comunidad y puedes retirar en Ajustes.</li>
+<li>Notificaciones en el m\xF3vil: tu consentimiento, que retiras desactiv\xE1ndolas.</li>
+<li>Seguridad, prevenci\xF3n de abusos y moderaci\xF3n (l\xEDmites de mensajes, denuncias, bloqueos): inter\xE9s leg\xEDtimo en mantener una comunidad segura.</li>
+</ul>
+<h3>Qui\xE9n m\xE1s ve tus datos</h3>
+<ul>
+<li>Las personas con las que <b>compartes una mascota</b> ven esa mascota y tus datos de contacto.</li>
+<li>Quien escanee la <b>placa QR</b> ver\xE1 los datos que decidas mostrar en ella.</li>
+<li>En la <b>comunidad</b>, los dem\xE1s usuarios ven tu nombre de pila, tu mascota, tus mensajes, tus opiniones y tus fotos de sitios. Nunca mostramos tu correo, tu tel\xE9fono ni tu direcci\xF3n.</li>
+<li>Proveedores que nos ayudan a prestar el servicio, con los que tenemos contratos de tratamiento: Supabase (base de datos y archivos), Cloudflare (asistente de IA y env\xEDo de notificaciones), GitHub (alojamiento de la web), y Google o Apple (entrega de las notificaciones). Para mostrar mapas y fotos de sitios, tu navegador carga im\xE1genes de Esri, OpenStreetMap y Wikimedia, que reciben tu direcci\xF3n IP. Algunos de estos proveedores pueden tratar datos fuera de la UE con las garant\xEDas que exige la ley (cl\xE1usulas contractuales tipo o marcos de adecuaci\xF3n).</li>
+</ul>
+<p>No vendemos tus datos ni los usamos para publicidad.</p>
+<h3>Cu\xE1nto tiempo</h3>
+<p>Mientras tengas la cuenta. Si la borras, eliminamos tus datos y los de las mascotas que no compartas con nadie. Las copias de seguridad t\xE9cnicas pueden tardar unos d\xEDas en desaparecer.</p>
+<h3>Tus derechos</h3>
+<p>Puedes acceder, corregir, borrar, oponerte, limitar o llevarte tus datos, y retirar tu consentimiento cuando quieras. Casi todo lo puedes hacer desde la app (Ajustes \u2192 <b>Borrar mi cuenta</b>, salir de la comunidad, desactivar avisos). Para lo dem\xE1s, escribe a <b>wildyoyu@gmail.com</b>. Si crees que no hemos atendido bien tu solicitud, puedes reclamar ante la Agencia Espa\xF1ola de Protecci\xF3n de Datos (aepd.es).</p>
+<h3>Edad m\xEDnima</h3>
+<p>Para usar Wildy debes tener al menos <b>14 a\xF1os</b>.</p>`,
+    terms: `<h2>T\xE9rminos de uso y normas de la comunidad</h2>
+<p class="sub">\xDAltima actualizaci\xF3n: ${LEGAL_DATE}</p>
+<h3>El servicio</h3>
+<p>Wildy te ayuda a organizar el cuidado de tus mascotas, encontrar sitios y conocer a otros due\xF1os. Es gratuita y la ofrecemos tal cual: intentamos que funcione siempre, pero puede haber fallos o cambios.</p>
+<h3>Tu cuenta</h3>
+<p>Debes tener al menos 14 a\xF1os, dar datos reales y cuidar tu contrase\xF1a. Eres responsable de lo que hagas con tu cuenta.</p>
+<h3>Salud de tus mascotas</h3>
+<p>Los recordatorios y el asistente de IA son una ayuda, no un consejo veterinario. Ante cualquier duda de salud, acude a tu veterinario. Si es urgente, ve a urgencias veterinarias.</p>
+<h3>Normas de la comunidad</h3>
+<ul>
+<li>S\xE9 amable. Nada de insultos, acoso, amenazas ni discriminaci\xF3n.</li>
+<li>No publiques datos personales tuyos ni de otros (direcciones, tel\xE9fonos, matr\xEDculas\u2026), salvo lo imprescindible en \xABPerdidos y encontrados\xBB.</li>
+<li>Nada de spam, publicidad no pedida, estafas ni venta de animales.</li>
+<li>Nada de contenido sexual, violento o ilegal, ni de maltrato animal.</li>
+<li>Las opiniones de sitios deben ser sinceras y basadas en tu experiencia.</li>
+<li>En \xABQuedadas\xBB quedad siempre en sitios p\xFAblicos.</li>
+</ul>
+<h3>Mensajes de otras personas</h3>
+<p>Al entrar en la comunidad aceptas que otros usuarios puedan leer lo que publicas y enviarte mensajes en el chat. Puedes <b>bloquear</b> a cualquiera (dejar\xE1s de ver sus mensajes y opiniones) y <b>desbloquearlo</b> en Ajustes, y <b>denunciar</b> lo que incumpla estas normas.</p>
+<h3>Moderaci\xF3n</h3>
+<p>Podemos retirar contenido o suspender cuentas que incumplan estas normas o la ley.</p>
+<h3>Tu contenido</h3>
+<p>Lo que publicas sigue siendo tuyo. Nos das permiso para mostrarlo dentro de Wildy mientras no lo borres. Solo sube fotos que sean tuyas o que tengas derecho a compartir.</p>
+<h3>Cambios</h3>
+<p>Si cambiamos estos t\xE9rminos de forma importante, te lo avisaremos en la app y te pediremos que los aceptes de nuevo.</p>
+<h3>Contacto</h3>
+<p>Wildyoyu \xB7 wildyoyu@gmail.com</p>`
+  };
+  function renderLegal() {
+    const tab = view.tab || "privacy";
+    app.innerHTML = `
+  <button class="back" data-act="legal_back">\u2039 Volver</button>
+  <div class="chips st-cats" role="tablist"><button role="tab" aria-selected="${tab === "privacy"}" class="chip ${tab === "privacy" ? "on" : ""}" data-act="legal" data-v="privacy">Privacidad</button><button role="tab" aria-selected="${tab === "terms"}" class="chip ${tab === "terms" ? "on" : ""}" data-act="legal" data-v="terms">T\xE9rminos y normas</button></div>
+  <article class="legal">${LEGAL[tab]}</article>`;
+  }
+  let legalBack = null;
+  function openLegal(tab) {
+    if (view.name !== "legal") legalBack = view;
+    view = { name: "legal", tab: tab || "privacy" };
+    render();
+    window.scrollTo(0, 0);
+  }
+  const needTerms = () => !!user && !!owner && people && (owner.terms_v || 0) < TERMS_V;
+  async function acceptTerms() {
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const { error } = await sb.from("profiles").upsert({ id: user.id, terms_at: now, terms_v: TERMS_V }, { onConflict: "id" });
+    if (error) throw error;
+    owner.terms_at = now;
+    owner.terms_v = TERMS_V;
+    if (people[user.id]) Object.assign(people[user.id], { terms_at: now, terms_v: TERMS_V });
+    try {
+      localStorage.removeItem("wildy.termsOk");
+    } catch (_) {
+    }
+  }
+  let termsBusy = false;
+  function termsGate() {
+    if (!needTerms() || view.name === "legal") {
+      const g = document.getElementById("termsgate");
+      if (g) g.remove();
+      return;
+    }
+    let pre = false;
+    try {
+      pre = !!localStorage.getItem("wildy.termsOk");
+    } catch (_) {
+    }
+    if (pre && !termsBusy) {
+      termsBusy = true;
+      acceptTerms().catch(() => {
+      }).finally(() => {
+        termsBusy = false;
+      });
+      return;
+    }
+    if (document.getElementById("termsgate")) return;
+    const d = document.createElement("div");
+    d.id = "termsgate";
+    d.setAttribute("role", "dialog");
+    d.setAttribute("aria-modal", "true");
+    d.setAttribute("aria-labelledby", "tg-t");
+    d.innerHTML = `<div class="pm-back"></div><div class="pm" style="text-align:left;justify-items:stretch">
+    <div class="pa-bell" style="justify-self:center" aria-hidden="true">\u{1F4DC}</div>
+    <h2 id="tg-t" style="text-align:center">Hemos actualizado los t\xE9rminos</h2>
+    <p>Para seguir usando Wildy, revisa y acepta nuestra <button class="lnk" data-tg="privacy">Pol\xEDtica de privacidad</button> y los <button class="lnk" data-tg="terms">T\xE9rminos y normas</button>. Explican qu\xE9 datos guardamos, para qu\xE9, y c\xF3mo borrarlos.</p>
+    <label class="tg-check"><input type="checkbox" id="tg-ok"> <span>He le\xEDdo y acepto la pol\xEDtica de privacidad y los t\xE9rminos, y tengo al menos 14 a\xF1os.</span></label>
+    <button class="btn" data-tg="accept" disabled>Aceptar y continuar</button></div>`;
+    d.addEventListener("change", (e) => {
+      if (e.target.id === "tg-ok") d.querySelector("[data-tg=accept]").disabled = !e.target.checked;
+    });
+    d.addEventListener("click", async (e) => {
+      const b = e.target.closest("[data-tg]");
+      if (!b) return;
+      const v = b.dataset.tg;
+      if (v === "privacy" || v === "terms") {
+        d.remove();
+        openLegal(v);
+        return;
+      }
+      if (v === "accept") {
+        b.disabled = true;
+        try {
+          await acceptTerms();
+          d.remove();
+          toast("\xA1Gracias!");
+        } catch (err) {
+          b.disabled = false;
+          fail(err);
+        }
+      }
+    });
+    document.body.appendChild(d);
+  }
+  const inCommunity = () => !!(owner && owner.community_at);
+  function renderCommunityGate() {
+    app.innerHTML = `
+  <h1 class="feed-title">Comunidad de Wildy</h1>
+  <div class="gate">
+    <div class="gate-hero" aria-hidden="true">\u{1F43E}\u{1F4AC}\u2B50</div>
+    <p>Habla con otros due\xF1os, sigue a quien te interese y descubre sitios gracias a sus opiniones.</p>
+    <ul class="gate-list">
+      <li>\u{1F440} Los dem\xE1s ver\xE1n tu <b>nombre de pila</b>, el <b>nombre y la foto de tu mascota</b>, tus <b>mensajes</b>, tus <b>opiniones y fotos de sitios</b> y a qui\xE9n sigues.</li>
+      <li>\u{1F4AC} Otras personas podr\xE1n <b>escribirte y responderte</b> en el chat.</li>
+      <li>\u{1F512} Nunca mostramos tu correo, tu tel\xE9fono ni tu direcci\xF3n.</li>
+      <li>\u{1F6AB} Puedes bloquear, denunciar y salir de la comunidad cuando quieras desde Ajustes.</li>
+    </ul>
+    <label class="tg-check"><input type="checkbox" id="cg-ok"> <span>Acepto las <button class="lnk" data-act="legal" data-v="terms">normas de la comunidad</button> y que se muestre lo anterior seg\xFAn la <button class="lnk" data-act="legal" data-v="privacy">pol\xEDtica de privacidad</button>.</span></label>
+    <button class="btn block" data-act="comm_join" id="cg-go" disabled>Entrar en la comunidad</button>
+  </div>`;
+    document.getElementById("cg-ok").addEventListener("change", (e) => {
+      document.getElementById("cg-go").disabled = !e.target.checked;
+    });
+  }
+  async function setCommunity(on) {
+    const v = on ? (/* @__PURE__ */ new Date()).toISOString() : null;
+    const { error } = await sb.from("profiles").upsert({ id: user.id, community_at: v }, { onConflict: "id" });
+    if (error) throw error;
+    owner.community_at = v;
+    if (people[user.id]) people[user.id].community_at = v;
+  }
+  const comm = { sec: "chat", feedScope: "all", feed: null, feedBusy: false, peopleScope: "all", people: {}, prof: {}, blocks: null };
+  const starsTxt = (n) => "\u2605".repeat(n || 0) + "\u2606".repeat(5 - (n || 0));
+  const cAv = (photo, name, cls) => `<span class="${cls || "cm-av"}" aria-hidden="true">${photo ? `<img src="${esc(photo)}" alt="">` : esc((name || "?")[0].toUpperCase())}</span>`;
+  function commHeader() {
+    return `<h1 class="feed-title">Comunidad</h1>
+  <div class="seg" role="tablist">${[["chat", "\u{1F4AC} Chat"], ["feed", "\u2B50 Actividad"], ["people", "\u{1F465} Personas"]].map((s) => `<button role="tab" aria-selected="${comm.sec === s[0]}" class="${comm.sec === s[0] ? "on" : ""}" data-act="comm_sec" data-v="${s[0]}">${s[1]}</button>`).join("")}</div>`;
+  }
+  async function loadFeed() {
+    comm.feedBusy = true;
+    renderFeedComm();
+    const { data, error } = await sb.rpc("community_feed", { scope: comm.feedScope, lim: 40 });
+    comm.feedBusy = false;
+    comm.feed = error ? [] : data || [];
+    if (error) toast("No se ha podido cargar la actividad");
+    renderFeedComm();
+  }
+  function renderCommFeed() {
+    app.innerHTML = commHeader() + `
+  <div class="chips st-cats">${[["all", "Todos"], ["following", "Gente que sigo"]].map((s) => `<button class="chip ${comm.feedScope === s[0] ? "on" : ""}" data-act="comm_scope" data-v="${s[0]}">${s[1]}</button>`).join("")}</div>
+  <div id="comm-feed" class="comm-feed"></div>`;
+    if (comm.feed === null) loadFeed();
+    else renderFeedComm();
+  }
+  function renderFeedComm() {
+    const el = document.getElementById("comm-feed");
+    if (!el) return;
+    if (comm.feedBusy && !comm.feed) {
+      el.innerHTML = '<p class="sub" style="text-align:center">Cargando\u2026</p>';
+      return;
+    }
+    const l = comm.feed || [];
+    if (!l.length) {
+      el.innerHTML = `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u2B50</div><b>${comm.feedScope === "following" ? "A\xFAn no sigues a nadie con actividad" : "Todav\xEDa no hay actividad"}</b><p>${comm.feedScope === "following" ? "Busca personas en \xABPersonas\xBB y s\xEDguelas para ver sus opiniones aqu\xED." : "Punt\xFAa un sitio en \xABSitios\xBB y escribe tu opini\xF3n para ser el primero."}</p></div>`;
+      return;
+    }
+    el.innerHTML = l.map((x, i) => `<article class="act-card">
+    <button class="act-who" data-act="comm_user" data-id="${esc(x.user_id)}">${cAv(x.photo, x.name)}<span><b>${esc(x.name)}</b><span class="sub">${x.kind === "photo" ? "subi\xF3 una foto" : "opin\xF3"} \xB7 ${chatWhen(x.ts)}</span></span></button>
+    <button class="act-place" data-act="comm_place" data-i="${i}">${x.kind === "review" ? `<span class="act-stars" aria-label="${x.stars} de 5 estrellas">${starsTxt(x.stars)}</span>` : ""}<b>${esc(x.park_name)}</b> \u203A</button>
+    ${x.kind === "photo" && x.url ? `<button class="act-photo" data-act="comm_place" data-i="${i}"><img src="${esc(x.url)}" alt="Foto de ${esc(x.park_name)}" loading="lazy"></button>` : ""}
+    ${x.tags && x.tags.length ? `<div class="tchips sm">${x.tags.slice(0, 4).map((t) => `<span class="tchip">${esc(TAGS[t] || "")}</span>`).join("")}</div>` : ""}
+    ${x.comment ? `<p class="act-comment">${esc(x.comment)}</p>` : ""}
+  </article>`).join("");
+  }
+  async function loadPeople(scope) {
+    const { data, error } = await sb.rpc("people_list", { scope });
+    comm.people[scope] = error ? [] : data || [];
+    renderPeopleList();
+  }
+  function renderCommPeople() {
+    app.innerHTML = commHeader() + `
+  <div class="chips st-cats">${[["all", "Sugeridas"], ["following", "Sigo"], ["followers", "Me siguen"]].map((s) => `<button class="chip ${comm.peopleScope === s[0] ? "on" : ""}" data-act="comm_pscope" data-v="${s[0]}">${s[1]}</button>`).join("")}</div>
+  <button class="me-row" data-act="comm_user" data-id="${esc(user.id)}">${cAv(owner.photo_url, owner.name)}<span><b>Mi perfil</b><span class="sub">As\xED te ven los dem\xE1s</span></span><span aria-hidden="true">\u203A</span></button>
+  <div id="people-list" class="people-list"></div>`;
+    if (!comm.people[comm.peopleScope]) loadPeople(comm.peopleScope);
+    else renderPeopleList();
+  }
+  function renderPeopleList() {
+    const el = document.getElementById("people-list");
+    if (!el) return;
+    const l = comm.people[comm.peopleScope];
+    if (!l) {
+      el.innerHTML = '<p class="sub" style="text-align:center">Cargando\u2026</p>';
+      return;
+    }
+    if (!l.length) {
+      el.innerHTML = `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F465}</div><b>${comm.peopleScope === "following" ? "A\xFAn no sigues a nadie" : comm.peopleScope === "followers" ? "A\xFAn no te sigue nadie" : "Todav\xEDa no hay m\xE1s personas en la comunidad"}</b><p>Cuantas m\xE1s opiniones de sitios escribas, m\xE1s gente te encontrar\xE1.</p></div>`;
+      return;
+    }
+    el.innerHTML = l.map((p) => `<div class="person">
+    <button class="person-main" data-act="comm_user" data-id="${esc(p.user_id)}">${cAv(p.photo, p.name)}<span><b>${esc(p.name)}</b><span class="sub">${p.reviews} opinion${p.reviews == 1 ? "" : "es"} \xB7 ${p.followers} seguidor${p.followers == 1 ? "" : "es"}</span>${p.bio ? `<span class="person-bio">${esc(p.bio)}</span>` : ""}</span></button>
+    <button class="btn ${p.i_follow ? "ghost" : ""} small" data-act="comm_follow" data-id="${esc(p.user_id)}" data-on="${p.i_follow ? 1 : 0}">${p.i_follow ? "Siguiendo" : "Seguir"}</button></div>`).join("");
+  }
+  async function loadProfile(id) {
+    const { data, error } = await sb.rpc("public_profile", { uid: id });
+    comm.prof[id] = error || !data ? { missing: true } : data;
+    if (view.name === "profile" && view.id === id) render();
+  }
+  function renderProfile() {
+    const id = view.id, p = comm.prof[id], self = id === user.id;
+    if (!p) {
+      app.innerHTML = `<button class="back" data-act="prof_back">\u2039 Volver</button><p class="sub" style="text-align:center;margin-top:30vh">Cargando perfil\u2026</p>`;
+      loadProfile(id);
+      return;
+    }
+    if (p.missing) {
+      app.innerHTML = `<button class="back" data-act="prof_back">\u2039 Volver</button><div class="ai-empty"><div class="ai-hi">\u{1F648}</div><b>Este perfil no est\xE1 disponible</b><p>Puede que haya salido de la comunidad.</p></div>`;
+      return;
+    }
+    app.innerHTML = `
+  <button class="back" data-act="prof_back">\u2039 Volver</button>
+  <section class="prof-head">
+    ${cAv(p.photo, p.name, "prof-av")}
+    <div><h1>${esc(p.name)}</h1>
+    <div class="prof-counts"><span><b>${(p.reviews || []).length}</b> opini${(p.reviews || []).length === 1 ? "\xF3n" : "ones"}</span><span><b>${p.followers}</b> seguidor${p.followers == 1 ? "" : "es"}</span><span><b>${p.following}</b> siguiendo</span></div></div>
+  </section>
+  ${self ? `<form id="bioform" class="bio-form"><label for="bio-in" class="sh-lbl">Sobre ti (lo ven los dem\xE1s)</label><textarea id="bio-in" maxlength="200" rows="2" placeholder="Ej. Due\xF1o de un mast\xEDn muy bonach\xF3n. Paseamos por Madrid R\xEDo.">${esc(p.bio || "")}</textarea><button class="btn soft small" type="submit">Guardar</button></form>` : `${p.bio ? `<p class="prof-bio">${esc(p.bio)}</p>` : ""}
+    <div class="prof-acts">${p.blocked ? `<button class="btn" data-act="comm_unblock" data-id="${esc(id)}">Desbloquear</button>` : `<button class="btn ${p.i_follow ? "ghost" : ""}" data-act="comm_follow" data-id="${esc(id)}" data-on="${p.i_follow ? 1 : 0}">${p.i_follow ? "Siguiendo \u2713" : "Seguir"}</button><button class="btn ghost small" data-act="comm_block" data-id="${esc(id)}" data-name="${esc(p.name)}">Bloquear</button>`}</div>`}
+  ${(p.pets || []).length ? `<div class="sec"><h2>Sus mascotas</h2><div class="prof-pets">${p.pets.map((x) => `<span class="prof-pet">${cAv(x.photo, x.name, "pp-av")}<b>${esc(x.name)}</b><span class="sub">${esc(x.breed || x.species || "")}</span></span>`).join("")}</div></div>` : ""}
+  <div class="sec"><h2>Opiniones de sitios</h2>
+  ${(p.reviews || []).length ? p.reviews.map((r, i) => `<button class="rev" data-act="prof_place" data-i="${i}"><span class="rev-top"><b>${esc(r.park_name || "Sitio")}</b><span class="act-stars">${starsTxt(r.stars)}</span></span>${r.tags && r.tags.length ? `<span class="tchips sm">${r.tags.slice(0, 4).map((t) => `<span class="tchip">${esc(TAGS[t] || "")}</span>`).join("")}</span>` : ""}${r.comment ? `<span class="rev-c">${esc(r.comment)}</span>` : ""}</button>`).join("") : `<p class="sub">${self ? "A\xFAn no has puntuado ning\xFAn sitio. Hazlo desde \xABSitios\xBB." : "A\xFAn no ha puntuado ning\xFAn sitio."}</p>`}
+  </div>`;
+  }
+  function openPlaceRef(r) {
+    var _a, _b;
+    const id = r.park_id;
+    if (!id) return;
+    let p = placeCache.get(id);
+    if (!p) {
+      p = { id, n: r.park_name || "Sitio", a: +((_a = r.lat) != null ? _a : r.park_lat), o: +((_b = r.lon) != null ? _b : r.park_lon), k: r.place_kind || "other" };
+      if (!isFinite(p.a) || !isFinite(p.o)) return;
+      placeCache.set(id, p);
+    }
+    if (!sit.loc) sit.loc = { lat: p.a, lon: p.o, label: "Cerca de " + p.n };
+    view = { name: "sitios" };
+    sit.mode = "feed";
+    sit.detail = null;
+    sitOpen(id);
+  }
+  async function loadBlocks() {
+    const { data } = await sb.from("blocks").select("blocked_id,blocked_name,created_at").eq("user_id", user.id).order("created_at", { ascending: false });
+    comm.blocks = data || [];
+    chat.blocked = new Set(comm.blocks.map((b) => b.blocked_id));
+    if (view.name === "settings") render();
+  }
+  async function blockUser(id, name) {
+    const { error } = await sb.from("blocks").upsert({ user_id: user.id, blocked_id: id, blocked_name: name || null });
+    if (error) throw error;
+    await sb.from("follows").delete().eq("follower", user.id).eq("followee", id);
+    (chat.blocked || (chat.blocked = /* @__PURE__ */ new Set())).add(id);
+    comm.blocks = null;
+    comm.feed = null;
+    comm.people = {};
+    if (comm.prof[id]) Object.assign(comm.prof[id], { blocked: true, i_follow: false });
+    toast("Has bloqueado a " + (name || "esta persona") + ". Puedes desbloquearla en Ajustes.");
+  }
+  async function unblockUser(id) {
+    const { error } = await sb.from("blocks").delete().eq("user_id", user.id).eq("blocked_id", id);
+    if (error) throw error;
+    if (chat.blocked) chat.blocked.delete(id);
+    comm.blocks = (comm.blocks || []).filter((b) => b.blocked_id !== id);
+    comm.feed = null;
+    comm.people = {};
+    if (comm.prof[id]) comm.prof[id].blocked = false;
+    toast("Desbloqueado");
+  }
+  async function commClick(a, b) {
+    try {
+      if (a === "comm_join") {
+        b.disabled = true;
+        await setCommunity(true);
+        toast("\xA1Bienvenido a la comunidad! \u{1F43E}");
+        return render();
+      }
+      if (a === "comm_leave") {
+        await setCommunity(false);
+        comm.feed = null;
+        comm.people = {};
+        chat.msgs = [];
+        chatLeave();
+        toast("Has salido de la comunidad");
+        return render();
+      }
+      if (a === "comm_sec") {
+        comm.sec = b.dataset.v;
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "comm_scope") {
+        comm.feedScope = b.dataset.v;
+        comm.feed = null;
+        return render();
+      }
+      if (a === "comm_pscope") {
+        comm.peopleScope = b.dataset.v;
+        return render();
+      }
+      if (a === "comm_user") {
+        const id = b.dataset.id;
+        view = { name: "profile", id, back: view };
+        delete comm.prof[id];
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "comm_place") {
+        const x = (comm.feed || [])[+b.dataset.i];
+        if (x) openPlaceRef(x);
+        return;
+      }
+      if (a === "comm_follow") {
+        const id = b.dataset.id, on = b.dataset.on === "1";
+        b.disabled = true;
+        const r = on ? await sb.from("follows").delete().eq("follower", user.id).eq("followee", id) : await sb.from("follows").insert({ follower: user.id, followee: id });
+        if (r.error && !/duplicate/i.test(r.error.message || "")) throw r.error;
+        Object.values(comm.people).forEach((l) => l && l.forEach((p) => {
+          if (p.user_id === id) {
+            p.i_follow = !on;
+            p.followers = +p.followers + (on ? -1 : 1);
+          }
+        }));
+        if (comm.prof[id]) {
+          comm.prof[id].i_follow = !on;
+          comm.prof[id].followers = +comm.prof[id].followers + (on ? -1 : 1);
+        }
+        delete comm.people.following;
+        comm.feed = null;
+        if (sit.reviews) Object.values(sit.reviews).forEach((l) => l && l.forEach((x) => {
+          if (x.user_id === id) x.i_follow = !on;
+        }));
+        toast(on ? "Has dejado de seguir" : "\xA1Siguiendo! Ver\xE1s su actividad en \xABGente que sigo\xBB");
+        return render();
+      }
+      if (a === "comm_block") {
+        await blockUser(b.dataset.id, b.dataset.name);
+        return render();
+      }
+      if (a === "comm_unblock") {
+        await unblockUser(b.dataset.id);
+        return render();
+      }
+    } catch (e) {
+      fail(e);
+      if (b) b.disabled = false;
+    }
+  }
+  async function loadReviews(pid) {
+    if (!sit.reviews) sit.reviews = {};
+    const { data } = await sb.rpc("place_reviews", { pid });
+    sit.reviews[pid] = data || [];
+    if (view.name === "sitios" && sit.detail === pid) render();
+  }
+  function reviewsHTML(pid) {
+    if (!sit.reviews || !(pid in sit.reviews)) {
+      setTimeout(() => loadReviews(pid), 0);
+      return '<p class="sub">Cargando opiniones\u2026</p>';
+    }
+    const l = sit.reviews[pid].filter((r) => !(chat.blocked && chat.blocked.has(r.user_id)));
+    if (!l.length) return `<p class="sub" style="margin:0">A\xFAn no hay opiniones. \xBFHas estado? S\xE9 el primero en puntuarlo.</p>`;
+    return l.map((r) => `<div class="rev"><span class="rev-top">${r.mine ? `${cAv(owner.photo_url, owner.name)}<b>Tu opini\xF3n</b>` : `<button class="lnk rev-who" data-act="comm_user" data-id="${esc(r.user_id)}">${cAv(r.photo, r.name)}<b>${esc(r.name)}</b></button>`}<span class="act-stars" aria-label="${r.stars} de 5">${starsTxt(r.stars)}</span></span>
+    ${r.tags && r.tags.length ? `<span class="tchips sm">${r.tags.slice(0, 4).map((t) => `<span class="tchip">${esc(TAGS[t] || "")}</span>`).join("")}</span>` : ""}
+    ${r.comment ? `<span class="rev-c">${esc(r.comment)}</span>` : ""}
+    ${!r.mine && !r.i_follow && inCommunity() ? `<button class="btn ghost small" style="justify-self:start" data-act="comm_follow" data-id="${esc(r.user_id)}" data-on="0">Seguir a ${esc(r.name)}</button>` : ""}</div>`).join("");
   }
   app.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-act]");
@@ -8007,6 +8915,60 @@ C\xF3digo: ${inviteCode.code}`;
     if (a.startsWith("ai_")) return aiClick(a, b);
     if (a.startsWith("push_")) return pushClick(a);
     if (a.startsWith("chat_")) return chatClick(a, b);
+    if (a.startsWith("comm_")) return commClick(a, b);
+    if (a === "prof_back") {
+      view = view.back || { name: "chat" };
+      render();
+      return;
+    }
+    if (a === "prof_place") {
+      const pr = comm.prof[view.id];
+      const r = pr && (pr.reviews || [])[+b.dataset.i];
+      if (r) openPlaceRef(r);
+      return;
+    }
+    if (a === "set_unblock") {
+      try {
+        await unblockUser(b.dataset.id);
+      } catch (e2) {
+        fail(e2);
+      }
+      return render();
+    }
+    if (a === "del_account") {
+      settingsDel = !settingsDel;
+      return render();
+    }
+    if (a === "del_confirm") {
+      if ((val("del-word") || "").trim().toUpperCase() !== "BORRAR") {
+        toast("Escribe BORRAR para confirmar");
+        return;
+      }
+      b.disabled = true;
+      try {
+        const { error } = await sb.rpc("delete_my_account");
+        if (error) throw error;
+        try {
+          localStorage.clear();
+        } catch (_) {
+        }
+        await sb.auth.signOut();
+        toast("Tu cuenta y tus datos se han borrado");
+        location.replace(location.pathname + "?app=1");
+      } catch (e2) {
+        b.disabled = false;
+        fail(e2);
+      }
+      return;
+    }
+    if (a === "legal") return openLegal(b.dataset.v);
+    if (a === "legal_back") {
+      view = legalBack || { name: "home" };
+      legalBack = null;
+      render();
+      window.scrollTo(0, 0);
+      return;
+    }
     if (a === "mode") {
       authMode = b.dataset.mode;
       authMsg = "";
@@ -8229,6 +9191,38 @@ C\xF3digo: ${inviteCode.code}`;
     if (f.startsWith("st_")) return sitiosSubmit(f, e.target);
     if (f === "aihome" || f === "aiform") return aiSubmit(f, e.target);
     if (f === "chatform") return chatSubmit(e.target);
+    if (f === "chat_editform") {
+      const id = +e.target.dataset.id, t = (val("chat-edit") || "").trim();
+      if (!t) return;
+      try {
+        const { error } = await sb.rpc("edit_msg", { mid: id, txt: t });
+        if (error) throw error;
+        const m = chat.msgs.find((x) => x.id === id);
+        if (m) {
+          m.body = t;
+          m.edited_at = (/* @__PURE__ */ new Date()).toISOString();
+        }
+        chat.editing = null;
+        renderChatList();
+        toast("Mensaje editado");
+      } catch (err) {
+        fail(err);
+      }
+      return;
+    }
+    if (f === "bioform") {
+      const t = (val("bio-in") || "").trim().slice(0, 200);
+      try {
+        const { error } = await sb.from("profiles").upsert({ id: user.id, bio: t || null }, { onConflict: "id" });
+        if (error) throw error;
+        owner.bio = t;
+        if (comm.prof[user.id]) comm.prof[user.id].bio = t;
+        toast("Guardado");
+      } catch (err) {
+        fail(err);
+      }
+      return;
+    }
     if (f === "authform") {
       const email = val("a-email"), pass = val("a-pass");
       try {
@@ -8242,6 +9236,7 @@ C\xF3digo: ${inviteCode.code}`;
           if (error) throw error;
           try {
             localStorage.setItem("wildy.pendingName", val("a-name"));
+            localStorage.setItem("wildy.termsOk", "1");
           } catch (_) {
           }
           if (!data.session) {
