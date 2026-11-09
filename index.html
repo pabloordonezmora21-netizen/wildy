@@ -4270,6 +4270,260 @@ button.rev {
 .me.me-only {
   padding: 4px;
 }
+.ai-top-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+}
+.me-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+.me-card-t {
+  flex: 1;
+  display: grid;
+  min-width: 0;
+}
+.me-card-t b,
+.me-card-t .sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#commsheet {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 34;
+}
+.cs-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(20, 8, 10, .35);
+}
+.cs-panel {
+  position: absolute;
+  left: max(10px, env(safe-area-inset-left, 0px));
+  right: max(10px, env(safe-area-inset-right, 0px));
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--bg);
+  border-radius: 22px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  box-shadow: 0 12px 40px -12px rgba(40, 10, 15, .45);
+  animation: csUp .18s ease-out;
+}
+@keyframes csUp {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-panel {
+    animation: none;
+  }
+}
+.cs-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 62px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 10px 12px;
+  font: inherit;
+  font-weight: 800;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+}
+.cs-item.last {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+.cs-ic {
+  font-size: 22px;
+  line-height: 1;
+}
+.cs-l {
+  display: grid;
+  min-width: 0;
+}
+.cs-l small {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+}
+.cs-n {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+}
+.inbox-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.grp-av {
+  background: var(--red-soft);
+  color: var(--red);
+}
+.grp-ev {
+  align-self: center;
+  max-width: 90%;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+.grp-who {
+  border: 0;
+  background: none;
+  padding: 0 4px 2px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--red);
+  cursor: pointer;
+  align-self: flex-start;
+}
+.cm-hidden {
+  font-style: italic;
+  color: var(--muted);
+}
+.grp-new {
+  display: grid;
+  gap: 8px;
+}
+.grp-name-in {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg);
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  padding: 11px 12px;
+}
+.grp-name-in:focus {
+  outline: none;
+  border-color: var(--red);
+}
+.pick-sel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.pick-chip {
+  font-size: 13px;
+}
+.pick-row {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pick-row.on {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+.pick-t {
+  flex: 1;
+  display: grid;
+  min-width: 0;
+}
+.pick-box {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: var(--red-ink);
+  background: var(--bg);
+}
+.pick-row.on .pick-box {
+  background: var(--red);
+  border-color: var(--red);
+}
+.grp-go {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  margin-top: 8px;
+}
+.grp-hero {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 14px;
+}
+.grp-hero .dm-av {
+  width: 64px;
+  height: 64px;
+}
+.grp-ren-row {
+  display: flex;
+  gap: 8px;
+}
+.grp-ren-row input {
+  flex: 1;
+  min-width: 0;
+}
+.grp-add {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+.grp-out {
+  color: var(--red);
+}
 .brand-logo {
   margin: 0;
   line-height: 0;
@@ -5655,7 +5909,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   const num = (s) => parseFloat(String(s).replace(",", "."));
   let user = null, owner = {}, people = {}, pets = [];
   let settingsDel = false;
-  let view = ((v) => v === "avisos" ? { name: "avisos" } : v === "inbox" ? { name: "inbox" } : v === "dm" ? { name: "dm", id: new URLSearchParams(location.search).get("t"), back: { name: "inbox" } } : v === "privacy" || v === "terms" ? { name: "legal", tab: v } : { name: "home" })(new URLSearchParams(location.search).get("ver")), calMonth = null, pendingDelete = false, photoDraft = "", avatarDraft = null, photoTarget = "pet", authMode = "login", authMsg = "", inviteCode = null, busy = false, staleWhileTyping = false;
+  let view = ((v) => v === "avisos" ? { name: "avisos" } : v === "inbox" ? { name: "inbox" } : v === "grp" ? { name: "grp", id: new URLSearchParams(location.search).get("g"), back: { name: "inbox" } } : v === "dm" ? { name: "dm", id: new URLSearchParams(location.search).get("t"), back: { name: "inbox" } } : v === "privacy" || v === "terms" ? { name: "legal", tab: v } : { name: "home" })(new URLSearchParams(location.search).get("ver")), calMonth = null, pendingDelete = false, photoDraft = "", avatarDraft = null, photoTarget = "pet", authMode = "login", authMsg = "", inviteCode = null, busy = false, staleWhileTyping = false;
   function toast(msg) {
     const t = document.createElement("div");
     t.className = "toast";
@@ -5920,6 +6174,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     else if (view.name === "legal") renderLegal();
     else if (view.name === "newpass") renderNewPass();
     else if (view.name === "inbox") renderInbox();
+    else if (view.name === "grp") renderGrp();
+    else if (view.name === "grpnew") renderGrpNew();
+    else if (view.name === "grpinfo") renderGrpInfo();
     else if (view.name === "dm") renderDM();
     else renderPet();
     if (view.name !== "social" && social.sheet) {
@@ -5939,6 +6196,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
       dmLeave();
       dm.chId = null;
     }
+    if (view.name !== "grp") {
+      grpLeave();
+      grp.chId = null;
+    }
+    closeSheet();
     dmWatch();
     termsGate();
     if (view.name === "home") setTimeout(pushMaybeAsk, 1500);
@@ -5994,15 +6256,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   }
   function renderHome() {
     app.innerHTML = `
-  <header class="top"><h1 class="brand-logo"><img class="lg-l" src="wildy-logo.png" alt="Wildy by WildYoyu" width="663" height="200"><img class="lg-d" src="wildy-logo-dark.png" alt="Wildy by WildYoyu" width="663" height="200"></h1>
-    <div class="top-r">${dmBtn()}<button class="me me-only" data-act="settings" aria-label="Abrir ajustes${owner.name ? " de " + esc(owner.name) : ""}">${avatarHTML()}</button></div></header>
+  <header class="top"><h1 class="brand-logo"><img class="lg-l" src="wildy-logo.png" alt="Wildy by WildYoyu" width="658" height="200"><img class="lg-d" src="wildy-logo-dark.png" alt="Wildy by WildYoyu" width="658" height="200"></h1>
+    <div class="top-r"><button class="ai-top-btn" data-act="ai_top" aria-label="Chat con la IA de Wildy"><span aria-hidden="true">\u2728</span>IA</button>${dmBtn()}</div></header>
   ${!owner.phone && !(pets.length && pets.every(hasQR)) ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">Ir a ajustes</button></div>` : ""}
-  <form id="aihome" class="ai-bar" role="search">
-    <span class="ai-ic" aria-hidden="true">\u2728</span>
-    <label for="ai-home-q" class="sr">Preg\xFAntale a Wildy</label>
-    <input id="ai-home-q" name="q" autocomplete="off" enterkeyhint="send" maxlength="600" placeholder="Preg\xFAntale a Wildy lo que quieras\u2026">
-    <button type="submit" aria-label="Preguntar">\u279C</button>
-  </form>
   ${homeAlerts()}
   <div class="quick">
     <button class="add" data-act="new"><span class="plus">+</span>A\xF1adir mascota</button>
@@ -6288,8 +6544,8 @@ C\xF3digo: ${inviteCode.code}`;
   function renderSettings() {
     const o = owner;
     app.innerHTML = `
-  <button class="back" data-act="home">\u2039 Mis mascotas</button>
-  <h1 style="font-size:34px;margin-block:6px 16px">Ajustes</h1>
+  <h1 style="font-size:34px;margin-block:6px 12px">Perfil</h1>
+  <div class="me-card">${avatarHTML()}<div class="me-card-t"><b>${esc(o.name || "Tu perfil")}</b><span class="sub">${o.handle ? "@" + esc(o.handle) : esc(user.email || "")}</span></div>${inCommunity() ? `<button class="btn soft small" data-act="comm_user" data-id="${esc(user.id)}">Ver mi perfil</button>` : ""}</div>
   ${pushCard()}
   <form class="form" id="oform">
     <div class="photo-pick">${avatarHTML(true)}
@@ -6307,7 +6563,7 @@ C\xF3digo: ${inviteCode.code}`;
     <button class="btn block" type="submit">Guardar ajustes</button>
   </form>
   <div class="sec"><h2>Comunidad</h2>
-    ${inCommunity() ? `<p class="sub" style="margin:0 0 8px">Est\xE1s en la comunidad: otros ven tu nombre de pila, tu mascota, tus mensajes y tus opiniones.</p><div class="pc-b"><button class="btn soft small" data-act="comm_user" data-id="${esc(user.id)}">Ver mi perfil</button><button class="btn ghost small" data-act="comm_leave">Salir de la comunidad</button></div>` : `<p class="sub" style="margin:0 0 8px">No est\xE1s en la comunidad. Nadie ve tu perfil ni tus opiniones.</p><button class="btn soft small" data-act="comm_sec" data-v="chat" onclick="setTimeout(()=>document.querySelector('#tabbar [data-act=chat]').click(),0)">Unirme a la comunidad</button>`}
+    ${inCommunity() ? `<p class="sub" style="margin:0 0 8px">Est\xE1s en la comunidad: otros ven tu nombre de pila, tu mascota, tus mensajes y tus opiniones.</p><div class="pc-b"><button class="btn soft small" data-act="comm_user" data-id="${esc(user.id)}">Ver mi perfil</button><button class="btn ghost small" data-act="comm_leave">Salir de la comunidad</button></div>` : `<p class="sub" style="margin:0 0 8px">No est\xE1s en la comunidad. Nadie ve tu perfil ni tus opiniones.</p><button class="btn soft small" data-act="sheet_go" data-v="chat">Unirme a la comunidad</button>`}
   </div>
   <div class="sec"><h2>Personas bloqueadas</h2>
     ${comm.blocks === null ? (setTimeout(loadBlocks, 0), '<p class="sub">Cargando\u2026</p>') : comm.blocks.length ? `<div class="blk-list">${comm.blocks.map((x) => `<div class="blk"><span>\u{1F6AB} ${esc(x.blocked_name || "Persona bloqueada")}</span><button class="btn ghost small" data-act="set_unblock" data-id="${esc(x.blocked_id)}">Desbloquear</button></div>`).join("")}</div>` : '<p class="sub" style="margin:0">No has bloqueado a nadie.</p>'}
@@ -8368,13 +8624,70 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const TABS = [
     ["home", "Inicio", '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>'],
-    ["meetups", "Quedadas", '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'],
-    ["goplaces", "Sitios", '<path d="M3 20l6-12 4 7 3-4 5 9z"/><circle cx="17" cy="6" r="2"/>'],
-    ["chat", "Comunidad", '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.4.1 4.3 1.7 4.9 4.8"/>'],
-    ["ai_open", "Pregunta", '<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>'],
-    ["avisos", "Avisos", '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/>']
+    ["comm", "Comunidad", '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.4.1 4.3 1.7 4.9 4.8"/>'],
+    ["avisos", "Avisos", '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/>'],
+    ["perfil", "Perfil", '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.3 3.2-3.5 5.5-3.5s4.3 1.2 5.5 3.5"/>']
   ];
-  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", settings: "home", social: "meetups", sitios: "goplaces", ask: "ai_open", avisos: "avisos", chat: "chat", profile: "chat", legal: "home", inbox: "home", dm: "home" };
+  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", ask: "home", settings: "perfil", legal: "perfil", social: "comm", sitios: "comm", avisos: "avisos", chat: "comm", profile: "comm", inbox: "comm", dm: "comm", grp: "comm", grpnew: "comm", grpinfo: "comm" };
+  const COMM_ITEMS = [["social", "Quedadas", "\u{1F4CD}"], ["sitios", "Sitios", "\u{1F3DE}\uFE0F"], ["chat", "Chat com\xFAn", "\u{1F4AC}"], ["inbox", "Mensajes y grupos", "\u2709\uFE0F"], ["people", "Personas", "\u{1F465}"], ["feed", "Actividad", "\u2B50"]];
+  function commLast() {
+    try {
+      return localStorage.getItem("wildy.commLast") || "";
+    } catch (_) {
+      return "";
+    }
+  }
+  function commGo(v) {
+    try {
+      localStorage.setItem("wildy.commLast", v);
+    } catch (_) {
+    }
+    closeSheet();
+    if (v === "social") {
+      view = { name: "social" };
+      loadLeaflet();
+    } else if (v === "sitios") {
+      if (view.name === "sitios" && sit.detail) sit.detail = null;
+      view = { name: "sitios" };
+      loadLeaflet();
+    } else if (v === "inbox") {
+      view = { name: "inbox" };
+      if (inCommunity()) loadDM();
+    } else {
+      comm.sec = v;
+      view = { name: "chat" };
+    }
+    render();
+    if (!(view.name === "chat" && comm.sec === "chat")) window.scrollTo(0, 0);
+  }
+  function closeSheet() {
+    const s = document.getElementById("commsheet");
+    if (s) s.remove();
+    const t = document.querySelector("#tabbar [data-act=comm]");
+    if (t) t.setAttribute("aria-expanded", "false");
+  }
+  function openSheet() {
+    if (document.getElementById("commsheet")) return closeSheet();
+    const last = commLast(), nIn = dmUnread(), nP = (comm.reqs || []).length;
+    const d = document.createElement("div");
+    d.id = "commsheet";
+    d.innerHTML = `<div class="cs-bg" data-cs="close"></div><div class="cs-panel" role="menu" aria-label="Comunidad">${COMM_ITEMS.map(([v, l, ic]) => `<button role="menuitem" class="cs-item${last === v ? " last" : ""}" data-cs="${v}"><span class="cs-ic" aria-hidden="true">${ic}</span><span class="cs-l">${l}${last === v ? "<small>Lo \xFAltimo que abriste</small>" : ""}</span>${v === "inbox" && nIn ? `<i class="tb-n cs-n">${nIn}</i>` : v === "people" && nP ? `<i class="tb-n cs-n">${nP}</i>` : ""}</button>`).join("")}</div>`;
+    d.addEventListener("click", (e) => {
+      const t2 = e.target.closest("[data-cs]");
+      if (!t2) return;
+      const v = t2.dataset.cs;
+      if (v === "close") closeSheet();
+      else commGo(v);
+    });
+    document.body.appendChild(d);
+    const t = document.querySelector("#tabbar [data-act=comm]");
+    if (t) t.setAttribute("aria-expanded", "true");
+    const f = d.querySelector(".cs-item.last") || d.querySelector(".cs-item");
+    if (f) f.focus({ preventScroll: true });
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && document.getElementById("commsheet")) closeSheet();
+  });
   function renderTabs() {
     let bar = document.getElementById("tabbar");
     const show = !!user && view.name !== "newpass" && !window.WILDY_LANDING;
@@ -8392,34 +8705,25 @@ C\xF3digo: ${inviteCode.code}`;
         const b = e.target.closest("[data-act]");
         if (!b) return;
         const a = b.dataset.act;
-        if (a === "ai_open") {
-          view = { name: "ask" };
-        } else if (a === "home") {
+        if (a === "comm") return openSheet();
+        if (a === "home") {
           view = { name: "home" };
           pendingDelete = false;
           inviteCode = null;
-        } else if (a === "meetups") {
-          view = { name: "social" };
-          loadLeaflet();
-        } else if (a === "goplaces") {
-          if (view.name === "sitios" && sit.detail) {
-            sit.detail = null;
-          }
-          view = { name: "sitios" };
-          loadLeaflet();
         } else if (a === "avisos") {
           view = { name: "avisos" };
           markSeen();
-        } else if (a === "chat") {
-          view = { name: "chat" };
+        } else if (a === "perfil") {
+          view = { name: "settings" };
+          settingsDel = false;
         }
         render();
-        if (view.name !== "chat") window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
       });
     }
     bar.hidden = false;
-    const cur2 = TAB_OF[view.name] || "home", n = alertBadge();
-    bar.innerHTML = TABS.map(([a, l, ic]) => `<button data-act="${a}" class="${cur2 === a ? "on" : ""}" ${cur2 === a ? 'aria-current="page"' : ""}><span class="tb-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ic}</svg>${a === "avisos" && n ? `<i class="tb-n">${n}</i>` : a === "chat" && comm.reqs && comm.reqs.length ? `<i class="tb-n">${comm.reqs.length}</i>` : ""}</span><span>${l}</span></button>`).join("");
+    const cur2 = TAB_OF[view.name] || "home", n = alertBadge(), cn = (user && typeof dmUnread === "function" ? dmUnread() : 0) + (comm.reqs || []).length;
+    bar.innerHTML = TABS.map(([a, l, ic]) => `<button data-act="${a}" class="${cur2 === a ? "on" : ""}" ${cur2 === a ? 'aria-current="page"' : ""}${a === "comm" ? ' aria-haspopup="menu" aria-expanded="false"' : ""}><span class="tb-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ic}</svg>${a === "avisos" && n ? `<i class="tb-n">${n}</i>` : a === "comm" && cn ? `<i class="tb-n">${cn > 9 ? "9+" : cn}</i>` : ""}</span><span>${l}</span></button>`).join("");
   }
   let partyShown = false;
   function party() {
@@ -9082,8 +9386,7 @@ C\xF3digo: ${inviteCode.code}`;
   const starsTxt = (n) => "\u2605".repeat(n || 0) + "\u2606".repeat(5 - (n || 0));
   const cAv = (photo, name, cls) => `<span class="${cls || "cm-av"}" aria-hidden="true">${photo ? `<img src="${esc(photo)}" alt="">` : esc((name || "?")[0].toUpperCase())}</span>`;
   function commHeader() {
-    return `<h1 class="feed-title">Comunidad</h1>
-  <div class="seg" role="tablist">${[["chat", "\u{1F4AC} Chat"], ["feed", "\u2B50 Actividad"], ["people", "\u{1F465} Personas"]].map((s) => `<button role="tab" aria-selected="${comm.sec === s[0]}" class="${comm.sec === s[0] ? "on" : ""}" data-act="comm_sec" data-v="${s[0]}">${s[1]}</button>`).join("")}</div>`;
+    return `<h1 class="feed-title">${comm.sec === "feed" ? "Actividad" : comm.sec === "people" ? "Personas" : "Chat com\xFAn"}</h1>`;
   }
   async function loadFeed() {
     comm.feedBusy = true;
@@ -9442,7 +9745,7 @@ C\xF3digo: ${inviteCode.code}`;
   const DM_IC = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 10 14"/><path d="M22 3 15 21l-5-7-7-4z"/></svg>';
   const dmIncoming = (t) => t.status === "pending" && !t.mine_request;
   function dmUnread() {
-    return (dm.list || []).filter((t) => t.unread && !t.muted && !t.blocked).length;
+    return (dm.list || []).filter((t) => t.unread && !t.muted && !t.blocked).length + (typeof grpUnread === "function" ? grpUnread() : 0);
   }
   function dmTime(ts) {
     const d = new Date(ts);
@@ -9466,6 +9769,7 @@ C\xF3digo: ${inviteCode.code}`;
     const { data, error } = await sb.rpc("dm_list");
     if (!error) dm.list = data || [];
     else if (!dm.list) dm.list = [];
+    await loadGrp();
     dmRefreshUI();
     sb.rpc("people_list", { scope: "requests" }).then(({ data: r, error: e }) => {
       if (e) return;
@@ -9490,8 +9794,18 @@ C\xF3digo: ${inviteCode.code}`;
       } else if (i) i.remove();
       b.setAttribute("aria-label", n ? `Mensajes, ${n} sin leer` : "Mensajes");
     });
+    renderTabs();
     if (view.name === "inbox") render();
-    else if (view.name === "dm" && view.id) {
+    else if (view.name === "grp" && view.id) {
+      const g = (grp.list || []).find((x) => x.id === view.id), o = grp.cur;
+      if (g && g.unread && g.status === "member") {
+        g.unread = false;
+        sb.rpc("grp_read", { g: g.id }).then(() => {
+        }, () => {
+        });
+      }
+      if (!g || o && (g.status !== o.status || g.muted !== o.muted || g.name !== o.name)) render();
+    } else if (view.name === "dm" && view.id) {
       const t = (dm.list || []).find((x) => x.id === view.id), o = dm.cur;
       if (t && t.unread) {
         t.unread = false;
@@ -9510,7 +9824,7 @@ C\xF3digo: ${inviteCode.code}`;
       clearTimeout(k);
       k = setTimeout(loadDM, 400);
     };
-    dm.watch = sb.channel("dmt-" + user.id).on("postgres_changes", { event: "*", schema: "public", table: "dm_threads" }, kick).on("postgres_changes", { event: "*", schema: "public", table: "follows" }, kick).subscribe();
+    dm.watch = sb.channel("dmt-" + user.id).on("postgres_changes", { event: "*", schema: "public", table: "dm_threads" }, kick).on("postgres_changes", { event: "*", schema: "public", table: "follows" }, kick).on("postgres_changes", { event: "*", schema: "public", table: "grp_members" }, kick).on("postgres_changes", { event: "*", schema: "public", table: "grp" }, kick).subscribe();
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible" && dm.watch) kick();
     });
@@ -9549,9 +9863,8 @@ C\xF3digo: ${inviteCode.code}`;
       if (g) g.insertAdjacentHTML("beforebegin", '<div class="dm-note">\u2709\uFE0F Para enviar y recibir <b>mensajes directos</b> tienes que entrar en la comunidad.</div>');
       return;
     }
-    const reqs = (dm.list || []).filter(dmIncoming).length;
-    app.innerHTML = `<button class="back" data-act="home">\u2039 Inicio</button>
-  <h1 class="feed-title">Mensajes</h1>
+    const reqs = (dm.list || []).filter(dmIncoming).length + (grp.list || []).filter((g) => g.status === "invited").length;
+    app.innerHTML = `<div class="inbox-top"><h1 class="feed-title">Mensajes</h1><button class="btn soft small" data-act="grp_new">\uFF0B Nuevo grupo</button></div>
   <div class="seg seg2" role="tablist">
     <button role="tab" aria-selected="${dm.tab === "chats"}" class="${dm.tab === "chats" ? "on" : ""}" data-act="dm_tab" data-v="chats">\u{1F4AC} Chats</button>
     <button role="tab" aria-selected="${dm.tab === "reqs"}" class="${dm.tab === "reqs" ? "on" : ""}" data-act="dm_tab" data-v="reqs">\u{1F4E9} Solicitudes${reqs ? ` <b class="seg-n">${reqs}</b>` : ""}</button></div>
@@ -9564,8 +9877,9 @@ C\xF3digo: ${inviteCode.code}`;
       return;
     }
     const l = dm.list.filter((t) => dm.tab === "reqs" ? dmIncoming(t) : !dmIncoming(t));
-    if (!l.length) {
-      el.innerHTML = dm.tab === "reqs" ? `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F4E9}</div><b>No tienes solicitudes</b><p>Cuando alguien quiera escribirte, su mensaje aparecer\xE1 aqu\xED y t\xFA decides si aceptarlo.</p></div>` : `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F4AC}</div><b>A\xFAn no tienes conversaciones</b><p>Busca a alguien en Comunidad \u2192 Personas y env\xEDale un mensaje.</p><button class="btn small" data-act="dm_people">Buscar personas</button></div>`;
+    const gl = (grp.list || []).filter((g) => dm.tab === "reqs" ? g.status === "invited" : g.status === "member");
+    if (!l.length && !gl.length) {
+      el.innerHTML = dm.tab === "reqs" ? `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F4E9}</div><b>No tienes solicitudes</b><p>Cuando alguien quiera escribirte o invitarte a un grupo, aparecer\xE1 aqu\xED y t\xFA decides si aceptarlo.</p></div>` : `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F4AC}</div><b>A\xFAn no tienes conversaciones</b><p>Escribe a alguien desde su perfil o crea un grupo con varias personas.</p><div class="pc-b" style="justify-content:center"><button class="btn small" data-act="dm_people">Buscar personas</button><button class="btn soft small" data-act="grp_new">Crear grupo</button></div></div>`;
       return;
     }
     el.innerHTML = l.map((t) => {
@@ -9574,8 +9888,9 @@ C\xF3digo: ${inviteCode.code}`;
       return `<button class="dm-row${t.unread && !t.blocked ? " unread" : ""}" data-act="dm_open" data-id="${esc(t.id)}">${cAv(t.photo, t.name, "dm-av")}
       <span class="dm-mid"><b>${esc(t.name)}${t.muted ? ' <span class="dm-muted" title="Silenciada">\u{1F515}</span>' : ""}</b><span class="dm-last">${last}</span></span>
       <span class="dm-when">${dmWhen(t.last_at)}${t.unread && !t.blocked ? '<i class="dm-dot" aria-label="sin leer"></i>' : ""}</span></button>`;
-    }).join("");
+    }).map((h, i) => ({ h, at: l[i].last_at })).concat(gl.map((g) => ({ at: g.last_at, h: grpRow(g) }))).sort((a, b) => a.at < b.at ? 1 : a.at > b.at ? -1 : 0).map((x) => x.h).join("");
   }
+  const grpRow = (g) => `<button class="dm-row${g.unread ? " unread" : ""}" data-act="grp_open" data-id="${esc(g.id)}">${GRP_AV}<span class="dm-mid"><b>${esc(g.name)}${g.muted ? ' <span class="dm-muted" title="Silenciado">\u{1F515}</span>' : ""}</b><span class="dm-last">${g.status === "invited" ? "\u{1F465} " + esc(g.invited_by_name || "Alguien") + " te invita a unirte" : g.last_mine ? "T\xFA: " + esc(g.last_text || "") : (g.last_sender_name ? esc(g.last_sender_name) + ": " : "") + esc(g.last_text || "")}</span></span><span class="dm-when">${dmWhen(g.last_at)}${g.unread ? '<i class="dm-dot" aria-label="sin leer"></i>' : ""}</span></button>`;
   function dmOpen(id) {
     const t = (dm.list || []).find((x) => x.id === id);
     view = { name: "dm", id, other: t && t.other, pname: t && t.name, photo: t && t.photo, back: view.name === "dm" ? view.back : view };
@@ -9919,17 +10234,553 @@ C\xF3digo: ${inviteCode.code}`;
       if (b) b.disabled = false;
     }
   }
+  const grp = { list: null, msgs: [], loading: false, ch: null, chId: null, menu: null, editing: null, sending: false, people: null, pick: /* @__PURE__ */ new Map(), pq: "", pfound: null, pbase: null, cur: null };
+  const GRP_AV = '<span class="dm-av grp-av" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.4.1 4.3 1.7 4.9 4.8"/></svg></span>';
+  function grpUnread() {
+    return (grp.list || []).filter((g) => g.unread && !g.muted).length;
+  }
+  async function loadGrp() {
+    if (!user || !inCommunity()) {
+      grp.list = [];
+      return;
+    }
+    const { data, error } = await sb.rpc("grp_list");
+    if (!error) grp.list = data || [];
+    else if (!grp.list) grp.list = [];
+  }
+  function grpLeave() {
+    if (grp.ch) {
+      try {
+        sb.removeChannel(grp.ch);
+      } catch (_) {
+      }
+      grp.ch = null;
+    }
+  }
+  function grpOpen(id) {
+    view = { name: "grp", id, back: view.name === "grp" || view.name === "grpinfo" ? view.back : view };
+    grp.msgs = [];
+    grp.menu = null;
+    grp.editing = null;
+    grp.chId = null;
+    render();
+    window.scrollTo(0, 0);
+  }
+  function grpErr(m) {
+    return /normas/.test(m) ? "Entra en la comunidad para usar los grupos" : /nombre/.test(m) ? "Ponle un nombre de 1 a 40 letras" : /limite/.test(m) ? "Has creado muchos grupos hoy. Prueba ma\xF1ana." : /lleno/.test(m) ? "El grupo ya tiene el m\xE1ximo de 50 personas" : /despacio/.test(m) ? "Vas muy r\xE1pido, espera un momento" : "No se ha podido hacer. Revisa tu conexi\xF3n.";
+  }
+  async function grpPush(gid, invite) {
+    try {
+      const { data } = await sb.auth.getSession();
+      const tok = data && data.session && data.session.access_token;
+      if (!tok) return;
+      fetch(PUSH_URL + "/grp", { method: "POST", keepalive: true, headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" }, body: JSON.stringify({ gid, invite: !!invite }) }).catch(() => {
+      });
+    } catch (_) {
+    }
+  }
+  async function pickerBase() {
+    if (grp.pbase) return grp.pbase;
+    const [a, b] = await Promise.all([sb.rpc("people_list", { scope: "following" }), sb.rpc("people_list", { scope: "followers" })]);
+    const m = /* @__PURE__ */ new Map();
+    [...a.data || [], ...b.data || []].forEach((p) => m.set(p.user_id, p));
+    grp.pbase = [...m.values()];
+    return grp.pbase;
+  }
+  function pickerHTML() {
+    return `<div class="pick-sel" id="pick-sel"></div>
+  <div class="ps-form" role="search"><span class="ps-at" aria-hidden="true">@</span><label for="pick-q" class="sr">Buscar personas por su nombre de usuario</label>
+    <input id="pick-q" class="h-input" type="search" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Busca por nombre de usuario" value="${esc(grp.pq)}"></div>
+  <div id="pick-list" class="people-list"></div>`;
+  }
+  function pickerWire(exclude) {
+    const inp = document.getElementById("pick-q");
+    let t = null;
+    inp.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") e.preventDefault();
+    });
+    inp.addEventListener("input", () => {
+      clearTimeout(t);
+      t = setTimeout(async () => {
+        const q = inp.value.trim().replace(/^@/, "").toLowerCase();
+        grp.pq = q;
+        if (q.length < 2) {
+          grp.pfound = null;
+          return pickerList(exclude);
+        }
+        grp.pfound = "busy";
+        pickerList(exclude);
+        const { data } = await sb.rpc("people_search", { q });
+        if (grp.pq !== q) return;
+        grp.pfound = data || [];
+        pickerList(exclude);
+      }, 300);
+    });
+    pickerSel();
+    pickerList(exclude);
+    if (!grp.pbase) pickerBase().then(() => pickerList(exclude));
+  }
+  function pickerSel() {
+    const el = document.getElementById("pick-sel");
+    if (!el) return;
+    el.innerHTML = grp.pick.size ? [...grp.pick.values()].map((p) => `<button type="button" class="chip on pick-chip" data-act="grp_pick" data-id="${esc(p.user_id)}" aria-label="Quitar a ${esc(p.handle || p.name)}">${p.handle ? "@" + esc(p.handle) : esc(p.name)} \u2715</button>`).join("") : '<p class="sub" style="margin:0">A\xFAn no has elegido a nadie.</p>';
+  }
+  function pickerList(exclude) {
+    const el = document.getElementById("pick-list");
+    if (!el) return;
+    const ex = new Set(exclude || []);
+    let l, title;
+    if (grp.pq.length >= 2) {
+      if (grp.pfound === "busy" || grp.pfound == null) {
+        el.innerHTML = '<p class="sub" style="text-align:center">Buscando\u2026</p>';
+        return;
+      }
+      l = grp.pfound;
+      title = "Resultados";
+    } else {
+      if (!grp.pbase) {
+        el.innerHTML = '<p class="sub" style="text-align:center">Cargando\u2026</p>';
+        return;
+      }
+      l = grp.pbase;
+      title = "Gente que sigues o te sigue";
+    }
+    l = l.filter((p) => !ex.has(p.user_id));
+    el.innerHTML = `<p class="sh-lbl" style="margin:4px 0 0">${title}</p>` + (l.length ? l.map((p) => {
+      const on = grp.pick.has(p.user_id);
+      return `<button type="button" class="person pick-row${on ? " on" : ""}" data-act="grp_pick" data-id="${esc(p.user_id)}" aria-pressed="${on}">${cAv(p.photo, p.name)}<span class="pick-t"><b>${p.handle ? "@" + esc(p.handle) : esc(p.name)}</b><span class="sub">${esc(p.name)}</span></span><span class="pick-box" aria-hidden="true">${on ? "\u2713" : ""}</span></button>`;
+    }).join("") : `<p class="sub">${grp.pq.length >= 2 ? "No hay nadie con ese nombre de usuario." : "Busca a alguien por su @usuario."}</p>`);
+    grp.lastList = l;
+  }
+  function pickToggle(id) {
+    if (grp.pick.has(id)) grp.pick.delete(id);
+    else {
+      const p = (grp.lastList || []).find((x) => x.user_id === id) || (grp.pbase || []).find((x) => x.user_id === id);
+      if (p) {
+        if (grp.pick.size >= 49) {
+          toast("M\xE1ximo 50 personas por grupo");
+          return;
+        }
+        grp.pick.set(id, p);
+      }
+    }
+    pickerSel();
+    pickerList(view.name === "grpinfo" ? (grp.people || []).map((x) => x.user_id) : []);
+  }
+  function renderGrpNew() {
+    if (!inCommunity()) return renderInbox();
+    app.innerHTML = `<button class="back" data-act="dm_inbox">\u2039 Mensajes</button>
+  <h1 class="feed-title">Nuevo grupo</h1>
+  <form id="grpnewform" class="grp-new">
+    <label for="gn-name" class="sh-lbl">Nombre del grupo</label>
+    <input id="gn-name" class="grp-name-in" maxlength="40" placeholder="Paseos por el Retiro" value="${esc(grp.newName || "")}">
+    <p class="sh-lbl" style="margin:10px 0 0">Invita a personas</p>
+    <p class="sub" style="margin:0">Les llegar\xE1 una invitaci\xF3n. Solo entrar\xE1n en el grupo si la aceptan.</p>
+    ${pickerHTML()}
+    <button class="btn block grp-go" type="submit">Crear grupo</button>
+  </form>`;
+    document.getElementById("gn-name").addEventListener("input", (e) => {
+      grp.newName = e.target.value;
+    });
+    pickerWire([]);
+  }
+  async function grpCreate(f) {
+    const nm = (val("gn-name") || "").trim();
+    if (!nm) {
+      toast("Ponle un nombre al grupo");
+      document.getElementById("gn-name").focus();
+      return;
+    }
+    const btn = f.querySelector(".grp-go");
+    btn.disabled = true;
+    try {
+      const { data, error } = await sb.rpc("grp_create", { nm, users: [...grp.pick.keys()] });
+      if (error) throw error;
+      const n = grp.pick.size;
+      grp.pick.clear();
+      grp.newName = "";
+      grp.pq = "";
+      grp.pfound = null;
+      if (n) grpPush(data, true);
+      await loadGrp();
+      toast(n ? `Grupo creado. Hemos invitado a ${n} persona${n == 1 ? "" : "s"}` : "Grupo creado");
+      view = { name: "grp", id: data, back: { name: "inbox" } };
+      grp.chId = null;
+      render();
+    } catch (e) {
+      btn.disabled = false;
+      toast(grpErr(String(e && e.message || "")));
+    }
+  }
+  function renderGrp() {
+    if (!inCommunity()) return renderInbox();
+    const g = (grp.list || []).find((x) => x.id === view.id);
+    if (!g) {
+      if (grp.list === null) {
+        app.innerHTML = '<p class="sub" style="text-align:center;margin-top:30vh">Cargando\u2026</p>';
+        loadGrp().then(() => {
+          if (view.name === "grp") render();
+        });
+        return;
+      }
+      app.innerHTML = `<button class="back" data-act="dm_inbox">\u2039 Mensajes</button><div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F648}</div><b>Ya no est\xE1s en este grupo</b></div>`;
+      return;
+    }
+    grp.cur = { status: g.status, muted: g.muted, name: g.name };
+    const inv = g.status === "invited";
+    app.innerHTML = `
+  <header class="dm-head">
+    <button class="dm-back" data-act="grp_back" aria-label="Volver a mensajes">\u2039</button>
+    <button class="dm-who" data-act="grp_info">${GRP_AV.replace("dm-av", "dm-av sm")}<span><b>${esc(g.name)}</b><span class="sub">${g.members} miembro${g.members == 1 ? "" : "s"} \xB7 Ver grupo</span></span></button>
+    ${inv ? "" : `<button class="dm-mute${g.muted ? " on" : ""}" data-act="grp_mute" aria-pressed="${!!g.muted}">${g.muted ? "\u{1F514} Reactivar" : "\u{1F515} Silenciar"}</button>`}
+  </header>
+  ${inv ? `<div class="dm-req"><b>${esc(g.invited_by_name || "Alguien")} te ha invitado a \xAB${esc(g.name)}\xBB</b><p>Si aceptas, entrar\xE1s en el grupo, ver\xE1s sus mensajes y los dem\xE1s podr\xE1n leer los tuyos. Si no, no pasa nada.</p><div class="pc-b"><button class="btn small" data-act="grp_accept">Unirme</button><button class="btn ghost small" data-act="grp_decline">Rechazar</button><button class="btn ghost small" data-act="grp_info">Ver qui\xE9n est\xE1</button></div></div>` : ""}
+  <div id="grp-msgs" class="chat-list dm-msgs${inv ? " no-dock" : ""}" aria-live="polite"></div>
+  ${inv ? "" : `<form id="grpform" class="ai-bar ai-dock chat-dock">
+    <label for="grp-q" class="sr">Escribe al grupo</label>
+    <textarea id="grp-q" rows="1" maxlength="1000" enterkeyhint="send" placeholder="Escribe al grupo\u2026"></textarea>
+    <button type="submit" aria-label="Enviar">\u279C</button></form>`}`;
+    const ta = document.getElementById("grp-q");
+    if (ta) {
+      ta.addEventListener("input", () => {
+        ta.style.height = "auto";
+        ta.style.height = Math.min(ta.scrollHeight, 140) + "px";
+      });
+      ta.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+          e.preventDefault();
+          grpSubmit(ta.form);
+        }
+      });
+    }
+    renderGrpMsgs(true);
+    if (!inv && grp.chId !== g.id) grpLoad();
+    if (!inv && g.unread) {
+      g.unread = false;
+      sb.rpc("grp_read", { g: g.id }).then(() => {
+      }, () => {
+      });
+      dmRefreshUI();
+    }
+  }
+  async function grpLoad() {
+    const id = view.id;
+    if (!id) return;
+    grp.chId = id;
+    grp.loading = true;
+    renderGrpMsgs();
+    const { data, error } = await sb.from("grp_msgs").select("*").eq("group_id", id).order("created_at", { ascending: false }).limit(150);
+    if (view.name !== "grp" || view.id !== id) return;
+    grp.loading = false;
+    grp.msgs = error ? [] : (data || []).reverse();
+    renderGrpMsgs(true);
+    grpLeave();
+    grp.ch = sb.channel("grp-" + id).on("postgres_changes", { event: "INSERT", schema: "public", table: "grp_msgs", filter: "group_id=eq." + id }, (pl) => {
+      const m = pl.new;
+      if (!m || view.id !== id || grp.msgs.some((x) => x.id === m.id)) return;
+      grp.msgs.push(m);
+      renderGrpMsgs(true);
+      if (m.sender !== user.id) sb.rpc("grp_read", { g: id }).then(() => {
+      }, () => {
+      });
+    }).on("postgres_changes", { event: "UPDATE", schema: "public", table: "grp_msgs", filter: "group_id=eq." + id }, (pl) => {
+      const m = pl.new;
+      const x = m && grp.msgs.find((y) => y.id === m.id);
+      if (x && grp.editing !== m.id) {
+        Object.assign(x, m);
+        renderGrpMsgs();
+      }
+    }).on("postgres_changes", { event: "DELETE", schema: "public", table: "grp_msgs" }, (pl) => {
+      const i = pl.old && pl.old.id;
+      if (i == null || !grp.msgs.some((x) => x.id === i)) return;
+      grp.msgs = grp.msgs.filter((x) => x.id !== i);
+      renderGrpMsgs();
+    }).subscribe();
+  }
+  function renderGrpMsgs(toBottom) {
+    const el = document.getElementById("grp-msgs");
+    if (!el) return;
+    const g = (grp.list || []).find((x) => x.id === view.id);
+    if (g && g.status === "invited") {
+      el.innerHTML = "";
+      return;
+    }
+    if (grp.loading && !grp.msgs.length) {
+      el.innerHTML = '<p class="sub" style="text-align:center">Cargando\u2026</p>';
+      return;
+    }
+    if (!grp.msgs.length) {
+      el.innerHTML = "";
+      return;
+    }
+    let day = "", prev = null;
+    const blocked = new Set((comm.blocks || []).map((x) => x.blocked_id));
+    el.innerHTML = grp.msgs.map((m) => {
+      const d = dmDay(m.created_at);
+      const sep = d !== day ? `<div class="dm-day">${day = d}</div>` : "";
+      if (m.kind === "event") {
+        prev = null;
+        return sep + `<div class="grp-ev">${esc(m.body)}</div>`;
+      }
+      const mine = m.sender === user.id, open = grp.menu === m.id, showName = !mine && (prev !== m.sender || sep);
+      prev = m.sender;
+      if (!mine && blocked.has(m.sender)) return sep + `<div class="cm"><span class="cm-b cm-hidden">Mensaje de una persona bloqueada</span></div>`;
+      if (mine && grp.editing === m.id) return sep + `<div class="cm cm-mine"><form class="cm-edit" id="grp_editform" data-id="${m.id}"><textarea id="grp-edit" maxlength="1000" rows="3">${esc(m.body)}</textarea><div class="pc-b"><button type="button" class="btn ghost small" data-act="grp_editcancel">Cancelar</button><button class="btn small" type="submit">Guardar</button></div></form></div>`;
+      return sep + `<div class="cm ${mine ? "cm-mine" : ""}">${showName ? `<button class="grp-who" data-act="comm_user" data-id="${esc(m.sender)}">${esc(m.sender_name || "Alguien")}</button>` : ""}
+      <button class="cm-b" data-act="grp_menu" data-id="${m.id}" aria-expanded="${open}"><span class="cm-t">${esc(m.body)}</span><span class="cm-w">${dmTime(m.created_at)}${m.edited_at ? " \xB7 editado" : ""}</span></button>
+      ${open ? `<div class="cm-menu">${mine ? `<button class="btn ghost small" data-act="grp_edit" data-id="${m.id}">Editar</button><button class="btn ghost small" data-act="grp_del" data-id="${m.id}">Borrar</button>` : `<button class="btn ghost small" data-act="comm_user" data-id="${esc(m.sender)}">Ver perfil</button><button class="btn ghost small" data-act="grp_report" data-id="${m.id}" data-u="${esc(m.sender)}">Denunciar</button>`}</div>` : ""}
+    </div>`;
+    }).join("");
+    if (toBottom) requestAnimationFrame(() => window.scrollTo(0, document.body.scrollHeight));
+  }
+  async function grpSubmit(form) {
+    const ta = form.querySelector("textarea"), t = (ta.value || "").trim();
+    const btn = form.querySelector("button[type=submit]");
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = "";
+    }
+    if (!t || grp.sending) return;
+    grp.sending = true;
+    try {
+      const { data, error } = await sb.rpc("grp_send", { g: view.id, txt: t });
+      if (error) throw error;
+      ta.value = "";
+      ta.style.height = "auto";
+      if (typeof data === "number" && !grp.msgs.some((x) => x.id === data)) {
+        grp.msgs.push({ id: data, group_id: view.id, sender: user.id, sender_name: "", body: t, kind: "msg", created_at: (/* @__PURE__ */ new Date()).toISOString() });
+        renderGrpMsgs(true);
+      }
+      const g = (grp.list || []).find((x) => x.id === view.id);
+      if (g) {
+        g.last_text = t;
+        g.last_mine = true;
+        g.last_at = (/* @__PURE__ */ new Date()).toISOString();
+      }
+      grpPush(view.id, false);
+    } catch (e) {
+      toast(grpErr(String(e && e.message || "")));
+    }
+    grp.sending = false;
+  }
+  async function grpEditSubmit(f) {
+    const id = +f.dataset.id, t = (val("grp-edit") || "").trim();
+    if (!t) return;
+    try {
+      const { error } = await sb.rpc("grp_edit", { mid: id, txt: t });
+      if (error) throw error;
+      const m = grp.msgs.find((x) => x.id === id);
+      if (m) {
+        m.body = t;
+        m.edited_at = (/* @__PURE__ */ new Date()).toISOString();
+      }
+      grp.editing = null;
+      renderGrpMsgs();
+      toast("Mensaje editado");
+    } catch (e) {
+      fail(e);
+    }
+  }
+  function renderGrpInfo() {
+    const g = (grp.list || []).find((x) => x.id === view.id);
+    if (!g) {
+      view = { name: "inbox" };
+      return renderInbox();
+    }
+    const inv = g.status === "invited";
+    app.innerHTML = `<button class="back" data-act="grp_infoback">\u2039 Volver</button>
+  <div class="grp-hero">${GRP_AV}<div><h1 class="feed-title" style="margin:0">${esc(g.name)}</h1><p class="sub" style="margin:0">${g.members} miembro${g.members == 1 ? "" : "s"}</p></div></div>
+  ${inv ? "" : `<form id="grprenform" class="grp-ren"><label for="gr-name" class="sh-lbl">Nombre del grupo</label><div class="grp-ren-row"><input id="gr-name" class="grp-name-in" maxlength="40" value="${esc(g.name)}"><button class="btn small" type="submit">Cambiar</button></div></form>`}
+  <h2 class="sh-lbl" style="margin:16px 0 6px">Personas</h2>
+  <div id="grp-people" class="people-list"><p class="sub">Cargando\u2026</p></div>
+  ${inv ? "" : `<div class="sec grp-add"><h2 style="font-size:18px;margin:0">Invitar a m\xE1s gente</h2>${pickerHTML()}<button class="btn block" data-act="grp_invite">Enviar invitaciones</button></div>
+  <div class="pc-b" style="margin-top:14px"><button class="btn ghost small" data-act="grp_mute">${g.muted ? "\u{1F514} Reactivar avisos" : "\u{1F515} Silenciar grupo"}</button><button class="btn ghost small grp-out" data-act="grp_leave">Salir del grupo</button></div>`}`;
+    sb.rpc("grp_people", { g: g.id }).then(({ data }) => {
+      grp.people = data || [];
+      const el = document.getElementById("grp-people");
+      if (!el) return;
+      el.innerHTML = grp.people.map((p) => `<button class="person person-main" data-act="${p.me ? "" : "comm_user"}" data-id="${esc(p.user_id)}">${cAv(p.photo, p.name)}<span><b>${p.handle ? "@" + esc(p.handle) : esc(p.name)}${p.me ? " (t\xFA)" : ""}</b><span class="sub">${p.status === "invited" ? "\u23F3 Invitaci\xF3n pendiente" : esc(p.name)}</span></span></button>`).join("");
+      if (!inv) pickerList(grp.people.map((x) => x.user_id));
+    });
+    if (!inv) pickerWire([]);
+  }
+  async function grpClick(a, b) {
+    try {
+      if (a === "grp_new") {
+        grp.pick.clear();
+        grp.pq = "";
+        grp.pfound = null;
+        grp.newName = "";
+        view = { name: "grpnew" };
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "grp_open") return grpOpen(b.dataset.id);
+      if (a === "grp_back") {
+        view = view.back && !["grp", "grpinfo", "profile"].includes(view.back.name) ? view.back : { name: "inbox" };
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "grp_info") {
+        grp.pick.clear();
+        grp.pq = "";
+        grp.pfound = null;
+        view = { name: "grpinfo", id: view.id, back: view };
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "grp_infoback") {
+        view = view.back && view.back.name === "grp" ? view.back : { name: "grp", id: view.id, back: { name: "inbox" } };
+        grp.chId = null;
+        render();
+        return;
+      }
+      if (a === "grp_pick") return pickToggle(b.dataset.id);
+      const g = (grp.list || []).find((x) => x.id === view.id);
+      if (a === "grp_accept" || a === "grp_decline") {
+        const ok = a === "grp_accept";
+        b.disabled = true;
+        const { error } = await sb.rpc("grp_respond", { g: view.id, ok });
+        if (error) throw error;
+        if (ok) {
+          toast("\xA1Ya est\xE1s en el grupo!");
+          await loadGrp();
+          grp.chId = null;
+          view = { name: "grp", id: view.id, back: { name: "inbox" } };
+          return render();
+        }
+        grp.list = (grp.list || []).filter((x) => x !== g);
+        toast("Invitaci\xF3n rechazada");
+        dm.tab = "reqs";
+        view = { name: "inbox" };
+        return render();
+      }
+      if (a === "grp_mute") {
+        const m = !(g && g.muted);
+        b.disabled = true;
+        const { error } = await sb.rpc("grp_mute", { g: view.id, m });
+        if (error) throw error;
+        if (g) g.muted = m;
+        toast(m ? "Grupo silenciado: no te llegar\xE1n avisos" : "Avisos activados para este grupo");
+        dmRefreshUI();
+        return render();
+      }
+      if (a === "grp_leave") {
+        if (!b.dataset.sure) {
+          b.dataset.sure = "1";
+          b.textContent = "Toca otra vez para salir";
+          setTimeout(() => {
+            if (b.isConnected) {
+              delete b.dataset.sure;
+              b.textContent = "Salir del grupo";
+            }
+          }, 4e3);
+          return;
+        }
+        b.disabled = true;
+        const { error } = await sb.rpc("grp_leave", { g: view.id });
+        if (error) throw error;
+        grp.list = (grp.list || []).filter((x) => x !== g);
+        grpLeave();
+        grp.chId = null;
+        toast("Has salido del grupo");
+        view = { name: "inbox" };
+        return render();
+      }
+      if (a === "grp_invite") {
+        if (!grp.pick.size) {
+          toast("Elige al menos a una persona");
+          return;
+        }
+        b.disabled = true;
+        const { data, error } = await sb.rpc("grp_invite", { g: view.id, users: [...grp.pick.keys()] });
+        if (error) throw error;
+        grp.pick.clear();
+        grp.pq = "";
+        grp.pfound = null;
+        if (data) grpPush(view.id, true);
+        toast(data ? `Invitaci\xF3n enviada a ${data} persona${data == 1 ? "" : "s"}` : "Esas personas ya estaban invitadas");
+        return render();
+      }
+      if (a === "grp_menu") {
+        const id = +b.dataset.id;
+        grp.menu = grp.menu === id ? null : id;
+        return renderGrpMsgs();
+      }
+      if (a === "grp_del") {
+        const id = +b.dataset.id;
+        const { error } = await sb.from("grp_msgs").delete().eq("id", id).eq("sender", user.id);
+        if (error) throw error;
+        grp.msgs = grp.msgs.filter((x) => x.id !== id);
+        grp.menu = null;
+        renderGrpMsgs();
+        toast("Mensaje borrado");
+        return;
+      }
+      if (a === "grp_edit") {
+        grp.editing = +b.dataset.id;
+        grp.menu = null;
+        renderGrpMsgs();
+        const t = document.getElementById("grp-edit");
+        if (t) {
+          t.focus();
+          t.setSelectionRange(t.value.length, t.value.length);
+        }
+        return;
+      }
+      if (a === "grp_editcancel") {
+        grp.editing = null;
+        return renderGrpMsgs();
+      }
+      if (a === "grp_report") {
+        const { error } = await sb.from("reports").insert({ reported: b.dataset.u, grp_msg_id: +b.dataset.id, reason: "Mensaje en grupo" });
+        if (error) throw error;
+        grp.menu = null;
+        renderGrpMsgs();
+        toast("Denuncia enviada. Gracias por avisar");
+        return;
+      }
+    } catch (e) {
+      toast(grpErr(String(e && e.message || "")));
+      if (b) b.disabled = false;
+    }
+  }
+  async function grpRename(f) {
+    const nm = (val("gr-name") || "").trim();
+    if (!nm) return;
+    try {
+      const { error } = await sb.rpc("grp_rename", { g: view.id, nm });
+      if (error) throw error;
+      const g = (grp.list || []).find((x) => x.id === view.id);
+      if (g) g.name = nm;
+      toast("Nombre cambiado");
+      render();
+    } catch (e) {
+      toast(grpErr(String(e && e.message || "")));
+    }
+  }
   app.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-act]");
     if (!b) return;
     const a = b.dataset.act, p = cur();
     if (a.startsWith("soc")) return socialClick(a, b);
     if (a.startsWith("st_")) return sitiosClick(a, b);
+    if (a === "ai_top") {
+      view = { name: "ask" };
+      render();
+      window.scrollTo(0, 0);
+      return;
+    }
     if (a.startsWith("ai_")) return aiClick(a, b);
     if (a.startsWith("push_")) return pushClick(a);
     if (a.startsWith("chat_")) return chatClick(a, b);
     if (a.startsWith("comm_")) return commClick(a, b);
     if (a.startsWith("dm_")) return dmClick(a, b);
+    if (a.startsWith("grp_")) return grpClick(a, b);
+    if (a === "sheet_go") return commGo(b.dataset.v);
     if (a === "prof_back") {
       view = view.back || { name: "chat" };
       render();
@@ -10206,6 +11057,11 @@ C\xF3digo: ${inviteCode.code}`;
     if (f === "aihome" || f === "aiform") return aiSubmit(f, e.target);
     if (f === "chatform") return chatSubmit(e.target);
     if (f === "dmform") return dmSubmit(e.target);
+    if (f === "pickform") return;
+    if (f === "grpform") return grpSubmit(e.target);
+    if (f === "grp_editform") return grpEditSubmit(e.target);
+    if (f === "grpnewform") return grpCreate(e.target);
+    if (f === "grprenform") return grpRename(e.target);
     if (f === "dm_editform") return dmEditSubmit(e.target);
     if (f === "chat_editform") {
       const id = +e.target.dataset.id, t = (val("chat-edit") || "").trim();
