@@ -4637,6 +4637,62 @@ button.rev {
   margin: 8px 0 0;
   color: var(--muted);
 }
+.scanov {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 300;
+  background: #000;
+  display: grid;
+  place-items: center;
+}
+.scanov video {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.scan-frame {
+  position: relative;
+  width: min(70vw, 280px);
+  aspect-ratio: 1;
+  border: 3px solid #fff;
+  border-radius: 28px;
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+}
+.scan-msg {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 28px);
+  left: 20px;
+  right: 20px;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+.scan-acts {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 28px);
+  left: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.scanov .btn.ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .7);
+  background: rgba(0, 0, 0, .35);
+}
 .ws {
   display: grid;
   gap: 12px;
@@ -7155,6 +7211,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     }
     return false;
   }
+  window.addEventListener("popstate", scanStop);
   window.addEventListener("popstate", (e) => {
     const i = e.state && typeof e.state.wi === "number" ? e.state.wi : -1, sn = nav.stack[i];
     if (!sn || !user) return;
@@ -10803,7 +10860,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const dm = { list: null, tab: "chats", msgs: [], loading: false, ch: null, chId: null, watch: null, menu: null, editing: null, sending: false };
   const DM_IC = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 10 14"/><path d="M22 3 15 21l-5-7-7-4z"/></svg>';
-  const WILDY_VER = "39";
+  const WILDY_VER = "40";
   const BACK_IC = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>';
   const dmIncoming = (t) => t.status === "pending" && !t.mine_request;
   function dmUnread() {
@@ -12144,13 +12201,13 @@ Gracias.`;
     <ul class="ws-grid">${Object.keys(TAG_COL).map(card).join("")}</ul>
     <p class="ws-note">Al pulsar \xABComprar\xBB se prepara el pedido en tu correo para Wildyoyu. Te respondemos con el pago y el env\xEDo.</p>
     <div class="ws-perks">
-      <div><b>QR \xFAnico</b><span>Cada chapa tiene su propio c\xF3digo y su clave.</span></div>
+      <div><b>QR \xFAnico</b><span>Cada chapa tiene su propio c\xF3digo, distinto de todas las dem\xE1s.</span></div>
       <div><b>Sin pilas ni cuotas</b><span>Funciona siempre, sin bater\xEDa ni suscripci\xF3n.</span></div>
       <div><b>Cualquier m\xF3vil</b><span>Basta con abrir la c\xE1mara para escanearla.</span></div>
       <div><b>Modo perdida</b><span>Act\xEDvalo en la app y su ficha avisar\xE1 de que se ha perdido.</span></div>
     </div>
     <h2 class="ws-h2">C\xF3mo funciona</h2>
-    <ol class="ws-how"><li><b>Te llega a casa</b> con la huella Wildy delante, su QR detr\xE1s y una tarjeta con la clave de activaci\xF3n.</li><li><b>Vinc\xFAlala</b> en Carnet QR con el c\xF3digo de la chapa y la clave. Tardas un minuto.</li><li><b>Si se pierde</b>, activa el modo perdida. Quien la encuentre ver\xE1 tu tel\xE9fono y podr\xE1 llamarte.</li></ol>
+    <ol class="ws-how"><li><b>Te llega a casa</b> con la huella Wildy delante y su QR \xFAnico detr\xE1s.</li><li><b>Escan\xE9ala</b> desde Carnet QR con la c\xE1mara y elige tu mascota. Listo en segundos.</li><li><b>Si se pierde</b>, activa el modo perdida. Quien la encuentre ver\xE1 tu tel\xE9fono y podr\xE1 llamarte.</li></ol>
     <h2 class="ws-h2">Preguntas frecuentes</h2>
     <details class="ws-faq"><summary>\xBFQu\xE9 ve quien escanea la chapa?</summary><p>El nombre y la foto de tu mascota, y el tel\xE9fono y la zona que t\xFA pongas en Perfil \u2192 \xABSi se pierde tu mascota\xBB. Nada m\xE1s: ni tu direcci\xF3n ni tu correo.</p></details>
     <details class="ws-faq"><summary>\xBFY si cambio de mascota o la regalo?</summary><p>Puedes desvincularla y vincularla a otra mascota tuya cuando quieras desde Carnet QR.</p></details>
@@ -12162,11 +12219,166 @@ Gracias.`;
     return `<form id="tagform" class="tag-form" data-pet="${esc(petId || "")}">
     <b>Vincular una chapa</b>
     ${(!petId || petId === "pick") && many ? `<label>\xBFPara qu\xE9 mascota?<select id="tag-pet">${pets.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("")}</select></label>` : ""}
-    <label>C\xF3digo de la chapa<input id="tag-code" autocapitalize="characters" autocomplete="off" placeholder="WY\u2026" value="${esc(tagS.code)}"></label>
-    <label>Clave de activaci\xF3n<input id="tag-secret" autocapitalize="characters" autocomplete="off" placeholder="XXXX-XXXX"></label>
-    <span class="sub">El c\xF3digo est\xE1 detr\xE1s de la chapa (empieza por WY) y la clave viene en la tarjeta de la caja.</span>
-    <div class="pc-b"><button class="btn small" type="submit">Activar chapa</button><button class="btn ghost small" type="button" data-act="tag_linkcancel">Cancelar</button></div>
+    <button class="btn block" type="button" data-act="tag_scan" data-id="${esc(petId || "pick")}">\u{1F4F7} Escanear el QR de la chapa</button>
+    <label>O escribe el c\xF3digo<input id="tag-code" autocapitalize="characters" autocomplete="off" placeholder="WY\u2026" value="${esc(tagS.code)}"></label>
+    <span class="sub">El c\xF3digo est\xE1 impreso detr\xE1s de la chapa y empieza por WY.</span>
+    <div class="pc-b"><button class="btn small" type="submit">Vincular chapa</button><button class="btn ghost small" type="button" data-act="tag_linkcancel">Cancelar</button></div>
   </form>`;
+  }
+  const scan = { st: null, raf: 0 };
+  function loadJsQR() {
+    if (window.jsQR) return Promise.resolve();
+    const add = (src) => new Promise((res, rej) => {
+      const x = document.createElement("script");
+      x.src = src;
+      x.onload = res;
+      x.onerror = rej;
+      document.head.appendChild(x);
+    });
+    return add("https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js").catch(() => add("https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"));
+  }
+  function codeFromQR(t) {
+    t = String(t || "").trim();
+    let m = t.match(/[?&](?:chapa|activar)=([A-Za-z0-9]+)/);
+    if (m) return m[1].toUpperCase();
+    return /^WY[A-Z0-9]{4,12}$/i.test(t) ? t.toUpperCase() : "";
+  }
+  function scanStop() {
+    cancelAnimationFrame(scan.raf);
+    scan.raf = 0;
+    if (scan.st) {
+      scan.st.getTracks().forEach((t) => t.stop());
+      scan.st = null;
+    }
+    const o = document.getElementById("scanov");
+    if (o) o.remove();
+  }
+  async function scanStart(petId) {
+    scanStop();
+    tagS.link = petId && petId !== "pick" ? petId : pets.length === 1 ? pets[0].id : "pick";
+    const o = document.createElement("div");
+    o.id = "scanov";
+    o.className = "scanov";
+    o.setAttribute("role", "dialog");
+    o.setAttribute("aria-label", "Escanear chapa");
+    const pn = (pets.find((x) => x.id === tagS.link) || {}).name;
+    o.innerHTML = `<video playsinline muted autoplay></video><div class="scan-frame" aria-hidden="true"></div>
+    <p class="scan-msg">Apunta al QR de la chapa${pn ? ` de ${esc(pn)}` : ""}</p>
+    <div class="scan-acts"><button type="button" class="btn ghost small" data-sc="type">Escribir el c\xF3digo</button><button type="button" class="btn small" data-sc="close">Cerrar</button></div>`;
+    document.body.appendChild(o);
+    o.addEventListener("click", (e) => {
+      const x = e.target.closest("[data-sc]");
+      if (!x) return;
+      scanStop();
+      if (x.dataset.sc === "close") {
+        tagS.link = null;
+        tagS.code = "";
+      }
+      render();
+      if (x.dataset.sc === "type") {
+        const i = document.getElementById("tag-code");
+        if (i) i.focus();
+      }
+    });
+    const msg = o.querySelector(".scan-msg");
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      msg.textContent = "Este m\xF3vil no deja usar la c\xE1mara aqu\xED. Escribe el c\xF3digo que hay detr\xE1s de la chapa.";
+      return;
+    }
+    try {
+      scan.st = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
+    } catch (e) {
+      msg.textContent = "Wildy no tiene permiso para usar la c\xE1mara. Act\xEDvalo en los ajustes del m\xF3vil o escribe el c\xF3digo.";
+      return;
+    }
+    if (!document.getElementById("scanov")) {
+      scanStop();
+      return;
+    }
+    const v = o.querySelector("video");
+    v.srcObject = scan.st;
+    try {
+      await v.play();
+    } catch (_) {
+    }
+    let det = null;
+    if ("BarcodeDetector" in window) {
+      try {
+        const f = await BarcodeDetector.getSupportedFormats();
+        if (f.includes("qr_code")) det = new BarcodeDetector({ formats: ["qr_code"] });
+      } catch (_) {
+      }
+    }
+    if (!det) {
+      try {
+        await loadJsQR();
+      } catch (_) {
+        msg.textContent = "No se ha podido cargar el lector. Revisa tu conexi\xF3n o escribe el c\xF3digo.";
+        return;
+      }
+    }
+    const cv = document.createElement("canvas"), cx = cv.getContext("2d", { willReadFrequently: true });
+    let busy2 = false;
+    const tick = async () => {
+      if (!scan.st) return;
+      if (!busy2 && v.readyState >= 2 && v.videoWidth) {
+        busy2 = true;
+        let txt = "";
+        try {
+          if (det) {
+            const r = await det.detect(v);
+            txt = r[0] && r[0].rawValue || "";
+          } else {
+            const w = Math.min(640, v.videoWidth), h = Math.round(v.videoHeight * w / v.videoWidth);
+            cv.width = w;
+            cv.height = h;
+            cx.drawImage(v, 0, 0, w, h);
+            const r = window.jsQR(cx.getImageData(0, 0, w, h).data, w, h, { inversionAttempts: "dontInvert" });
+            txt = r && r.data || "";
+          }
+        } catch (_) {
+        }
+        busy2 = false;
+        if (txt) {
+          const c = codeFromQR(txt);
+          if (c) {
+            scanStop();
+            return scanGot(c);
+          }
+          msg.textContent = "Ese QR no es de una chapa Wildy. Prueba con el de la chapa.";
+        }
+      }
+      scan.raf = requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  async function scanGot(c) {
+    try {
+      navigator.vibrate && navigator.vibrate(60);
+    } catch (_) {
+    }
+    tagS.code = c;
+    if (tagS.link && tagS.link !== "pick") return tagClaim(c, tagS.link);
+    render();
+    toast("Chapa le\xEDda. Elige la mascota y pulsa \xABVincular chapa\xBB");
+  }
+  async function tagClaim(c, pet, btn) {
+    const { error } = await sb.rpc("tag_claim", { c, secret: "", p: pet });
+    if (error) {
+      toast(tagErr(String(error.message || "")));
+      tagS.code = c;
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = "";
+      }
+      return render();
+    }
+    const pn = (pets.find((x) => x.id === pet) || {}).name;
+    tagS.link = null;
+    tagS.code = "";
+    toast(pn ? `\xA1Chapa vinculada a ${pn}! \u{1F389}` : "\xA1Chapa vinculada! \u{1F389}");
+    await loadTags();
+    render();
   }
   function renderQRs() {
     if (tagS.list === null) loadTags();
@@ -12183,40 +12395,27 @@ Gracias.`;
     ${p.lost ? `<div class="lost-bar">\u{1F6A8} <b>Modo perdida activado.</b> Quien escanee su QR o su chapa ver\xE1 que se ha perdido y c\xF3mo avisarte.</div>` : ""}
     ${hasQR(p) ? `<div class="qrc-b"><div class="qrbox" data-qr="${p.id}" role="img" aria-label="C\xF3digo QR de ${esc(p.name)}"></div><p class="sub">Llamar\xE1n a ${esc(contactNames(p))}. Puedes hacer una captura e imprimirlo.</p></div>` : `<p class="sub">Sin QR todav\xEDa: nadie que la cuida ha puesto su tel\xE9fono.</p>`}
     ${ts.map((t) => `<div class="tagrow"><img src="chapa-${esc(t.color)}.jpg" alt=""><span><b>Chapa ${(TAG_COL[t.color] || { n: "" }).n.toLowerCase()} vinculada</b><span class="sub">${esc(t.code)}</span></span>${t.mine ? `<button class="btn ghost small" data-act="tag_unlink" data-code="${esc(t.code)}">Desvincular</button>` : ""}</div>`).join("")}
-    ${tagS.link === p.id ? linkForm(p.id) : `<div class="pc-b"><button class="btn soft small" data-act="tag_linkopen" data-id="${p.id}">\uFF0B Vincular una chapa</button>${ts.length ? "" : `<button class="btn ghost small" data-act="go" data-v="tienda">Conseguir su chapa</button>`}</div>`}
+    ${tagS.link === p.id ? linkForm(p.id) : `<div class="pc-b"><button class="btn small" data-act="tag_scan" data-id="${p.id}">\u{1F4F7} Escanear su chapa</button><button class="btn soft small" data-act="tag_linkopen" data-id="${p.id}">Escribir c\xF3digo</button>${ts.length ? "" : `<button class="btn ghost small" data-act="go" data-v="tienda">Conseguir su chapa</button>`}</div>`}
   </section>`;
     }).join("") : '<p class="empty">A\xF1ade una mascota para crear su QR.</p>'}
   ${shopBanner("qrs")}`;
   }
   function tagErr(m) {
-    return /codigo/.test(m) ? "No existe ninguna chapa con ese c\xF3digo. Rev\xEDsalo (empieza por WY)." : /clave/.test(m) ? "La clave de activaci\xF3n no es correcta." : /ocupada/.test(m) ? "Esa chapa ya est\xE1 vinculada a otra cuenta." : /intentos/.test(m) ? "Demasiados intentos. Espera una hora y vuelve a probar." : /mascota/.test(m) ? "Elige una de tus mascotas." : "No se ha podido activar. Revisa tu conexi\xF3n.";
+    return /clave/.test(m) ? "Esta chapa necesita activarse de nuevo. Escr\xEDbenos a wildyoyu@gmail.com." : /codigo/.test(m) ? "No existe ninguna chapa con ese c\xF3digo. Rev\xEDsalo (empieza por WY)." : /clave/.test(m) ? "La clave de activaci\xF3n no es correcta." : /ocupada/.test(m) ? "Esa chapa ya est\xE1 vinculada a otra cuenta." : /intentos/.test(m) ? "Demasiados intentos. Espera una hora y vuelve a probar." : /mascota/.test(m) ? "Elige una de tus mascotas." : "No se ha podido activar. Revisa tu conexi\xF3n.";
   }
   async function tagSubmit(f) {
     const btn = f.querySelector("button[type=submit]");
     const pet = (document.getElementById("tag-pet") || {}).value || f.dataset.pet || (pets[0] || {}).id;
-    const c = (val("tag-code") || "").trim().toUpperCase(), s = (val("tag-secret") || "").trim();
-    if (!c || !s) {
-      toast("Escribe el c\xF3digo de la chapa y la clave");
+    const c = codeFromQR((val("tag-code") || "").replace(/\s/g, ""));
+    if (!c) {
+      toast("Escribe el c\xF3digo de la chapa (empieza por WY) o escan\xE9ala");
       if (btn) {
         btn.disabled = false;
         btn.style.opacity = "";
       }
       return;
     }
-    const { data, error } = await sb.rpc("tag_claim", { c, secret: s, p: pet });
-    if (error) {
-      toast(tagErr(String(error.message || "")));
-      if (btn) {
-        btn.disabled = false;
-        btn.style.opacity = "";
-      }
-      return;
-    }
-    tagS.link = null;
-    tagS.code = "";
-    toast("\xA1Chapa activada! \u{1F389} Ya est\xE1 vinculada");
-    await loadTags();
-    render();
+    return tagClaim(c, pet, btn);
   }
   async function tagClick(a, b) {
     try {
@@ -12227,9 +12426,13 @@ Gracias.`;
       if (a === "tag_linkopen") {
         tagS.link = b.dataset.id;
         render();
-        const i = document.getElementById(tagS.code ? "tag-secret" : "tag-code");
+        const i = document.getElementById("tag-code");
         if (i) i.focus();
         return;
+      }
+      if (a === "tag_scan") {
+        const pk = document.getElementById("tag-pet");
+        return scanStart(b.dataset.id === "pick" && pk ? pk.value : b.dataset.id);
       }
       if (a === "tag_linkcancel") {
         tagS.link = null;
@@ -12283,7 +12486,7 @@ Gracias.`;
     <img src="chapa-${esc(data.color)}.jpg" alt="Chapa Wildy" style="width:180px;height:180px;border-radius:24px">
     <h1 style="margin:0">Chapa Wildy sin activar</h1>
     <p style="margin:0;font-size:17px">Esta chapa todav\xEDa no est\xE1 vinculada a ninguna mascota.</p>
-    <p class="sub" style="margin:0">\xBFEs tuya? Act\xEDvala en un minuto con la clave que ven\xEDa en la caja.</p>
+    <p class="sub" style="margin:0">\xBFEs tuya? Act\xEDvala en un minuto y elige a qu\xE9 mascota pertenece.</p>
     <a class="btn block" href="./?app=1&activar=${encodeURIComponent(data.code)}">Activar mi chapa</a>
   </div>`;
   }
