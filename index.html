@@ -4315,6 +4315,11 @@ button.rev {
 .dm-head {
   padding-top: 8px;
 }
+.app-ver {
+  text-align: center;
+  font-size: 12px;
+  margin: 18px 0 0;
+}
 @media (max-width: 400px) {
   .dm-head .mute-t {
     display: none;
@@ -6496,13 +6501,16 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   const standalone = () => navigator.standalone === true || window.matchMedia && matchMedia("(display-mode: standalone)").matches;
   document.addEventListener("touchstart", (e) => {
     const t = e.touches[0];
-    edge = standalone() && t && t.clientX < 24 && nav.idx > 0 ? { x: t.clientX, y: t.clientY } : null;
+    edge = t && t.clientX < 24 && nav.idx > 0 ? { x: t.clientX, y: t.clientY, t: Date.now(), i: nav.idx } : null;
   }, { passive: true });
   document.addEventListener("touchend", (e) => {
     if (!edge) return;
-    const t = e.changedTouches[0], dx = t.clientX - edge.x, dy = Math.abs(t.clientY - edge.y);
+    const t = e.changedTouches[0], dx = t.clientX - edge.x, dy = Math.abs(t.clientY - edge.y), st = edge;
     edge = null;
-    if (dx > 70 && dy < 60) navBack();
+    if (dx > 70 && dy < 60) setTimeout(() => {
+      if (navLast >= st.t || nav.idx !== st.i) return;
+      navBack();
+    }, 450);
   }, { passive: true });
   let lastEmail = "", resendAt = 0, resendTimer = null;
   function renderCheck() {
@@ -6906,7 +6914,8 @@ C\xF3digo: ${inviteCode.code}`;
       <button class="btn small" style="background:var(--warn);margin-top:8px" data-act="del_confirm">Borrar definitivamente</button>` : ""}
     </div>
   </div>
-  <div class="sec" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn ghost small" data-act="logout">Cerrar sesi\xF3n</button></div>`;
+  <div class="sec" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn ghost small" data-act="logout">Cerrar sesi\xF3n</button></div>
+  <p class="sub app-ver">Wildy \xB7 versi\xF3n ${WILDY_VER}</p>`;
   }
   async function renderLost(id) {
     app.innerHTML = '<p class="empty" style="padding-top:30vh;text-align:center">Buscando a su familia\u2026</p>';
@@ -10120,6 +10129,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const dm = { list: null, tab: "chats", msgs: [], loading: false, ch: null, chId: null, watch: null, menu: null, editing: null, sending: false };
   const DM_IC = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 10 14"/><path d="M22 3 15 21l-5-7-7-4z"/></svg>';
+  const WILDY_VER = "37";
   const BACK_IC = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>';
   const dmIncoming = (t) => t.status === "pending" && !t.mine_request;
   function dmUnread() {
