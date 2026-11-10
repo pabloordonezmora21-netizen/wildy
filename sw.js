@@ -1,6 +1,6 @@
 // Wildy: la app se guarda en el móvil para abrir al instante aunque la web no responda
 // (p. ej. bloqueos de IPs de Cloudflare durante el fútbol). Los datos van aparte, por Supabase.
-const C = "wildy-v43";
+const C = "wildy-v44";
 const SHELL = ["./", "index.html", "./?app=1", "manifest.json", "icon-192.png", "icon-512.png", "icon-180.png", "wildy-logo.png", "wildy-logo-dark.png", "chapa-rojo.jpg", "chapa-rosa.jpg", "chapa-azul.jpg", "splash-emblem.png", "splash-solid.png"];
 const LIBS = [
   "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js",
