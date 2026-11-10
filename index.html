@@ -4275,6 +4275,516 @@ button.rev {
 .me.me-only {
   padding: 4px;
 }
+.tabs {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 2px;
+}
+.tabs button {
+  font-size: 14px !important;
+  padding-inline: 2px !important;
+  white-space: nowrap;
+  min-width: 0;
+}
+.chat-wipe {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+.mem-list {
+  display: grid;
+  gap: 10px;
+}
+.mem-mon {
+  margin: 10px 0 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
+.mem-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 18px;
+  padding: 8px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mem-img {
+  position: relative;
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+}
+.mem-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mem-img i {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  background: rgba(0, 0, 0, .6);
+  color: #fff;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 8px;
+  padding: 2px 6px;
+}
+.mem-t {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.mem-d {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red);
+}
+.mem-n {
+  font-size: 14px;
+  color: var(--muted);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.mem-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 12px;
+  font: inherit;
+  background: var(--bg);
+  color: var(--ink);
+  resize: vertical;
+}
+.mem-ph {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+.mem-ph:empty {
+  display: none;
+}
+.mem-th {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.mem-th img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mem-th button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(0, 0, 0, .6);
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+.mem-add {
+  justify-self: start;
+  cursor: pointer;
+}
+.mem-one {
+  display: grid;
+  gap: 10px;
+}
+.mem-big {
+  width: 100%;
+  border-radius: 20px;
+  max-height: 70vh;
+  object-fit: cover;
+}
+.mem-note {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+.shop-ban {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 16px 0 4px;
+  padding: 12px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--red);
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+.sb-imgs {
+  position: relative;
+  flex: none;
+  width: 96px;
+  height: 72px;
+}
+.sb-imgs img {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  border: 2px solid #fff;
+}
+.sb-imgs img:nth-child(1) {
+  left: 0;
+  top: 5px;
+  z-index: 3;
+}
+.sb-imgs img:nth-child(2) {
+  left: 20px;
+  top: 0;
+  z-index: 2;
+}
+.sb-imgs img:nth-child(3) {
+  left: 38px;
+  top: 8px;
+  z-index: 1;
+}
+.sb-t {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.sb-t small {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  opacity: .9;
+}
+.sb-t b {
+  font-family: var(--display);
+  font-size: 19px;
+  line-height: 1.15;
+}
+.sb-t span {
+  font-size: 14px;
+  font-weight: 700;
+}
+.pets-acts .shop-ban {
+  margin: 0;
+}
+.shop-hero {
+  background: var(--red);
+  color: #fff;
+  border-radius: 26px;
+  padding: 22px 18px;
+  margin: 4px 0 14px;
+  display: grid;
+  gap: 6px;
+}
+.shop-hero h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 32px;
+  line-height: 1.05;
+  color: #fff;
+}
+.shop-hero p {
+  margin: 0;
+  font-size: 16px;
+}
+.shop-kicker {
+  font-size: 12px !important;
+  font-weight: 800;
+  letter-spacing: .08em;
+  opacity: .9;
+}
+.shop-prod {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  padding: 14px;
+}
+.shop-img {
+  background: #fff;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+.shop-img img {
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.shop-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.shop-name {
+  font-family: var(--display);
+  font-size: 22px;
+}
+.shop-price {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--red);
+  white-space: nowrap;
+}
+.shop-cols {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.shop-col {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 14px 8px 8px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.shop-col span {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.shop-col.on {
+  border-color: var(--ink);
+}
+.shop-buy {
+  font-size: 18px;
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+}
+.shop-note {
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+}
+.shop-perks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.shop-perks div {
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 12px;
+  display: grid;
+  gap: 4px;
+}
+.shop-perks span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.shop-h2 {
+  font-size: 20px;
+  margin: 20px 0 8px;
+}
+.shop-how {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+.shop-faq {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+.shop-faq summary {
+  font-weight: 800;
+  cursor: pointer;
+}
+.shop-faq p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+.qrc {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 14px;
+  margin-bottom: 12px;
+  display: grid;
+  gap: 10px;
+}
+.qrc.lost {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px var(--red-soft);
+}
+.qrc-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.qrc-h b {
+  font-family: var(--display);
+  font-size: 22px;
+}
+.qrc-b {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.qrc-b .qrbox {
+  flex: none;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  padding: 6px;
+}
+.qrc-b .qrbox img,
+.qrc-b .qrbox canvas {
+  width: 108px !important;
+  height: 108px !important;
+}
+.qrc-b .sub {
+  margin: 0;
+}
+.lost-tg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 12px 6px 6px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.lt-k {
+  width: 34px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--line);
+  position: relative;
+  transition: background .2s;
+}
+.lt-k::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left .2s;
+}
+.lost-tg.on {
+  border-color: var(--red);
+  color: var(--red);
+}
+.lost-tg.on .lt-k {
+  background: var(--red);
+}
+.lost-tg.on .lt-k::after {
+  left: 16px;
+}
+.lost-bar {
+  background: var(--red);
+  color: #fff;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.lost-hero {
+  background: #d42a3a;
+  color: #fff;
+  border-radius: 20px;
+  padding: 16px;
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+.lost-hero b {
+  font-size: 24px;
+}
+.tagrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 8px;
+}
+.tagrow img {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #fff;
+  object-fit: contain;
+}
+.tagrow > span {
+  flex: 1;
+  display: grid;
+  min-width: 0;
+}
+.tag-form {
+  display: grid;
+  gap: 8px;
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 12px;
+}
+.tag-form input,
+.tag-form select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 16px;
+  background: var(--bg);
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.tag-form select {
+  text-transform: none;
+}
 .new-grp {
   display: flex;
   align-items: center;
@@ -5950,7 +6460,7 @@ button.rev {
     skip = localStorage.getItem("wildy.skipLanding") === "1";
   } catch (e) {
   }
-  const show = !installed && !authReturn && !q.has("perdido") && !q.has("codigo") && !q.has("app") && !skip;
+  const show = !installed && !authReturn && !q.has("perdido") && !q.has("chapa") && !q.has("activar") && !q.has("codigo") && !q.has("app") && !skip;
   window.WILDY_LANDING = show;
   if (!show) return;
   const L = document.getElementById("landing");
@@ -6381,6 +6891,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     else if (view.name === "new") renderNew();
     else if (view.name === "settings") renderSettings();
     else if (view.name === "pets") renderPets();
+    else if (view.name === "mem") renderMem();
+    else if (view.name === "memnew") renderMemNew();
+    else if (view.name === "memone") renderMemOne();
+    else if (view.name === "tienda") renderTienda();
     else if (view.name === "qrs") renderQRs();
     else if (view.name === "join") renderJoin();
     else if (view.name === "share") renderShare();
@@ -6439,7 +6953,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     navTrack();
   }
   const nav = { stack: [], idx: -1, pop: false, key: "" };
-  const FORM_VIEWS = ["new", "grpnew", "share", "join", "newpass"];
+  const FORM_VIEWS = ["new", "grpnew", "share", "join", "newpass", "memnew"];
   function navKey() {
     const v = view;
     return [v.name, v.id || "", v.name === "chat" ? comm.sec : "", v.name === "sitios" && sit.detail ? sit.detail.id || sit.detail.name || "d" : ""].join("|");
@@ -6565,7 +7079,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     const nb = nextCele(p.birth);
     const up = (p.events || []).filter((e) => !e.done && parse(e.date) >= today()).sort((a, b) => a.date < b.date ? -1 : 1)[0];
     let badge = "";
-    if (nb && nb.days <= (nb.unit === "m" ? 7 : 30)) badge = nb.days === 0 ? `\u{1F382} \xA1Cumple ${nb.label}!` : `Cumple ${nb.label} en ${nb.days} d\xEDa${nb.days === 1 ? "" : "s"}`;
+    if (p.lost) badge = "\u{1F6A8} Perdida";
+    else if (nb && nb.days <= (nb.unit === "m" ? 7 : 30)) badge = nb.days === 0 ? `\u{1F382} \xA1Cumple ${nb.label}!` : `Cumple ${nb.label} en ${nb.days} d\xEDa${nb.days === 1 ? "" : "s"}`;
     else if (up) {
       const d = Math.round((parse(up.date) - today()) / 864e5);
       badge = d === 0 ? `${up.type} hoy` : `${up.type} en ${d} d\xEDa${d === 1 ? "" : "s"}`;
@@ -6588,7 +7103,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     const n = alertBadge();
     return `<button class="bell-btn" data-act="go" data-v="avisos" aria-label="${n ? `Avisos, ${n} pendiente${n == 1 ? "" : "s"}` : "Avisos"}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>${n ? `<i>${n > 9 ? "9+" : n}</i>` : ""}</button>`;
   }
-  const QA_IC = { cuid: '<path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/>', qr: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>', qd: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 15 2 2 4-4"/>', st: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>' };
+  const QA_IC = { cuid: '<path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/>', qr: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>', qd: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 15 2 2 4-4"/>', st: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>', rec: '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>' };
   const qaBtn = (act2, v, ic, l) => `<button class="qa-b" data-act="${act2}"${v ? ` data-v="${v}"` : ""}><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${QA_IC[ic]}</svg></span>${l}</button>`;
   function renderHome() {
     const nm = String(owner.name || "").trim().split(" ")[0];
@@ -6598,8 +7113,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   <p class="greet">${greet()}${nm ? `, <b>${esc(nm)}</b>` : ""}</p>
   ${!owner.phone && !(pets.length && pets.every(hasQR)) ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">Ir a ajustes</button></div>` : ""}
   ${pets.length ? `<div class="list pet-car${pets.length > 1 ? " multi" : ""}" aria-label="Tus mascotas">${pets.map(petCard).join("")}</div>${pets.length > 1 ? `<div class="car-dots" aria-hidden="true">${pets.map((_, i) => `<span${i ? "" : ' class="on"'}></span>`).join("")}</div>` : ""}` : petEmpty()}
-  <nav class="qa" aria-label="Accesos r\xE1pidos">${qaBtn("go", "avisos", "cuid", "Cuidados")}${qaBtn("qrs", "", "qr", "Carnet QR")}${qaBtn("go", "social", "qd", "Quedadas")}${qaBtn("go", "sitios", "st", "Sitios")}</nav>
-  ${homeAlerts()}`;
+  <nav class="qa" aria-label="Accesos r\xE1pidos">${qaBtn("go", "avisos", "cuid", "Cuidados")}${qaBtn("qrs", "", "qr", "Carnet QR")}${qaBtn("go", "social", "qd", "Quedadas")}${qaBtn("go", "mem", "rec", "Recuerdos")}</nav>
+  ${homeAlerts()}
+  ${pets.length && noTagPets().length ? shopBanner("home") : ""}`;
+    if (tagS.list === null) loadTags();
     const car = app.querySelector(".pet-car.multi");
     if (car) {
       const dots = [...app.querySelectorAll(".car-dots span")];
@@ -6616,6 +7133,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   <div class="pets-acts">
     <button class="pa" data-act="qrs"><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${QA_IC.qr}</svg></span><span><b>Carnet QR</b><span class="sub">Los c\xF3digos de emergencia de tus mascotas</span></span></button>
     ${pets.length ? `<button class="pa" data-act="share"><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span><span><b>Compartir mascotas</b><span class="sub">Invita a tu familia a cuidarlas contigo</span></span></button>` : ""}
+    ${shopBanner("pets")}
     <button class="pa" data-act="join"><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 9.2-9.2M17 6l3 3M15 8l2 2"/></svg></span><span><b>Tengo un c\xF3digo</b><span class="sub">\xDAnete a una mascota que alguien comparte contigo</span></span></button>
   </div>`;
   }
@@ -6705,9 +7223,9 @@ C\xF3digo: ${inviteCode.code}`;
     <button class="chg" data-act="edit" data-id="${p.id}">Editar</button>
     <div class="meta"><h1>${esc(p.name)}</h1><div>${esc(p.breed || p.species)} \xB7 ${esc(p.sex || "")}</div></div></div>
   <div class="tabs" role="tablist">
-    ${[["ficha", "Ficha"], ["cal", "Calendario"], ["papeles", "Papeles"]].map(([k, l]) => `<button role="tab" aria-selected="${tab === k}" data-act="tab" data-tab="${k}">${l}</button>`).join("")}
+    ${[["ficha", "Ficha"], ["cal", "Calendario"], ["recuerdos", "Recuerdos"], ["papeles", "Papeles"]].map(([k, l]) => `<button role="tab" aria-selected="${tab === k}" data-act="tab" data-tab="${k}">${l}</button>`).join("")}
   </div>
-  <div id="pane">${tab === "ficha" ? paneFicha(p) : tab === "cal" ? paneCal(p) : panePapeles(p)}</div>`;
+  <div id="pane">${tab === "ficha" ? paneFicha(p) : tab === "cal" ? paneCal(p) : tab === "recuerdos" ? paneRecuerdos(p) : panePapeles(p)}</div>`;
   }
   function paneFicha(p) {
     const nb = nextBday(p.birth);
@@ -6869,15 +7387,6 @@ C\xF3digo: ${inviteCode.code}`;
       <button class="btn soft block" type="submit">A\xF1adir factura</button></form>
   </div>`;
   }
-  function renderQRs() {
-    app.innerHTML = `
-  <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
-  <h1 style="font-size:34px;margin-block:6px 6px">C\xF3digos QR</h1>
-  <p class="sub" style="margin:0 0 16px">Quien escanee el QR del collar ver\xE1 a qui\xE9n llamar. Haz una captura para imprimirlo en una chapa.</p>
-  ${!owner.phone ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir t\xFA tambi\xE9n en los QR.</span><button class="btn small" data-act="settings">A\xF1adir tel\xE9fono</button></div>` : ""}
-  ${pets.length ? `<div class="items" style="gap:14px">${pets.map((p) => hasQR(p) ? `<div class="qrcard"><div class="qrbox" data-qr="${p.id}" role="img" aria-label="C\xF3digo QR de ${esc(p.name)}"></div>
-    <div class="t"><b>${esc(p.name)}</b><p>Llamar\xE1n a ${esc(contactNames(p))}</p></div></div>` : `<div class="item"><div class="t"><b>${esc(p.name)}</b><span>Sin QR todav\xEDa: nadie que la cuida ha puesto su tel\xE9fono.</span></div></div>`).join("")}</div>` : '<p class="empty">A\xF1ade una mascota para crear su QR.</p>'}`;
-  }
   function renderSettings() {
     const o = owner;
     app.innerHTML = `
@@ -6919,7 +7428,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   async function renderLost(id) {
     app.innerHTML = '<p class="empty" style="padding-top:30vh;text-align:center">Buscando a su familia\u2026</p>';
-    const [{ data, error }, { data: cs }] = await Promise.all([sb.rpc("lost_pet", { p: id }), sb.rpc("lost_pet_contacts", { p: id })]);
+    const [{ data, error }, { data: cs }, { data: isLost }] = await Promise.all([sb.rpc("lost_pet", { p: id }), sb.rpc("lost_pet_contacts", { p: id }), sb.rpc("pet_lost", { p: id })]);
     const d = data && data[0];
     const contacts = cs || [];
     if (error || !d) {
@@ -6929,6 +7438,7 @@ C\xF3digo: ${inviteCode.code}`;
     const tel = (s) => esc(String(s || "").replace(/[^\d+]/g, ""));
     app.innerHTML = `<div style="display:grid;gap:16px;padding-top:4vh">
     <div class="logo">${logo}Wildy</div>
+    ${isLost ? `<div class="lost-hero"><b>\u{1F6A8} \xA1ME HE PERDIDO!</b><span>Mi familia me est\xE1 buscando. Por favor, ll\xE1males ahora.</span></div>` : ""}
     <div class="hero" style="margin:0">${d.photo_url ? `<img src="${esc(d.photo_url)}" alt="">` : `<div class="ph">${esc((d.name || "?")[0])}</div>`}<div class="shade"></div>
       <div class="meta"><h1>\xA1Hola! Soy ${esc(d.name)}</h1><div>${esc(d.breed || "")}</div></div></div>
     <p style="font-size:19px;margin:0">${esc(d.message || "Me he perdido. Llama a mi familia, por favor.")}</p>
@@ -8968,7 +9478,7 @@ C\xF3digo: ${inviteCode.code}`;
     ["comm", "Comunidad", '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.4.1 4.3 1.7 4.9 4.8"/>'],
     ["perfil", "Perfil", '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.3 3.2-3.5 5.5-3.5s4.3 1.2 5.5 3.5"/>']
   ];
-  const TAB_OF = { home: "home", ask: "home", avisos: "home", pets: "mascotas", pet: "mascotas", new: "mascotas", qrs: "mascotas", share: "mascotas", join: "mascotas", social: "explorar", sitios: "explorar", chat: "comm", profile: "comm", inbox: "comm", dm: "comm", grp: "comm", grpnew: "comm", grpinfo: "comm", settings: "perfil", legal: "perfil" };
+  const TAB_OF = { home: "home", ask: "home", avisos: "home", pets: "mascotas", pet: "mascotas", new: "mascotas", qrs: "mascotas", share: "mascotas", join: "mascotas", mem: "mascotas", memnew: "mascotas", memone: "mascotas", tienda: "mascotas", social: "explorar", sitios: "explorar", chat: "comm", profile: "comm", inbox: "comm", dm: "comm", grp: "comm", grpnew: "comm", grpinfo: "comm", settings: "perfil", legal: "perfil" };
   function lsGet(k, d) {
     try {
       return localStorage.getItem(k) || d;
@@ -9008,6 +9518,12 @@ C\xF3digo: ${inviteCode.code}`;
       markSeen();
     } else if (v === "pets") {
       view = { name: "pets" };
+    } else if (v === "mem") {
+      view = { name: "mem" };
+    } else if (v === "tienda") {
+      view = { name: "tienda" };
+    } else if (v === "qrs") {
+      view = { name: "qrs" };
     } else if (v === "settings") {
       view = { name: "settings" };
       settingsDel = false;
@@ -9392,6 +9908,7 @@ C\xF3digo: ${inviteCode.code}`;
     app.innerHTML = `
   ${commHeader()}
   <div class="chips scroll st-cats" role="tablist">${ROOMS.map((r) => `<button role="tab" aria-selected="${chat.room === r[0]}" class="chip ${chat.room === r[0] ? "on" : ""}" data-act="chat_room" data-v="${r[0]}">${r[1]}</button>`).join("")}</div>
+  <p class="chat-wipe">\u{1F55B} Los mensajes del chat com\xFAn se borran cada d\xEDa a las 00:00.</p>
   ${rules ? `<div class="chat-rules"><span>\u{1F43E} S\xE9 amable y ayuda a los dem\xE1s. No compartas tu direcci\xF3n ni datos personales. Toca un mensaje para denunciarlo o bloquear a esa persona.</span><button class="lnk" data-act="chat_rules">Entendido</button></div>` : ""}
   <div id="chat-list" class="chat-list" aria-live="polite"></div>
   <form id="chatform" class="ai-bar ai-dock chat-dock">
@@ -9574,7 +10091,7 @@ C\xF3digo: ${inviteCode.code}`;
 <li><b>Cuenta:</b> tu correo y una contrase\xF1a cifrada.</li>
 <li><b>Perfil:</b> tu nombre, foto, ciudad y, si los a\xF1ades, tel\xE9fonos y un mensaje para la placa QR de tu mascota.</li>
 <li><b>Mascotas:</b> nombre, fotos, raza, fechas, peso, vacunas, citas, gastos y seguros que t\xFA apuntes. Pueden incluir datos de salud de tus animales.</li>
-<li><b>Comunidad (solo si entras):</b> tu nombre de usuario (@usuario), con el que otras personas pueden buscarte, tu nombre de pila, la foto y el nombre de tu mascota, tus mensajes del chat, tus mensajes directos y las solicitudes de mensaje que env\xEDas o aceptas, tus opiniones y fotos de sitios, a qui\xE9n sigues y qui\xE9n te sigue, las solicitudes para seguir que env\xEDas, aceptas o rechazas, y las personas que bloqueas o denuncias.</li>
+<li><b>Comunidad (solo si entras):</b> tu nombre de usuario (@usuario), con el que otras personas pueden buscarte, tu nombre de pila, la foto y el nombre de tu mascota, tus mensajes del chat com\xFAn (se borran autom\xE1ticamente cada d\xEDa a las 00:00), tus mensajes directos y las solicitudes de mensaje que env\xEDas o aceptas, tus opiniones y fotos de sitios, a qui\xE9n sigues y qui\xE9n te sigue, las solicitudes para seguir que env\xEDas, aceptas o rechazas, y las personas que bloqueas o denuncias.</li>
 <li><b>Quedadas y sitios:</b> los planes, avisos de \xABEstoy aqu\xED\xBB y sitios que publicas. No guardamos tu ubicaci\xF3n en tiempo real; los avisos de \xABEstoy aqu\xED\xBB se borran a los 90 minutos.</li>
 <li><b>Notificaciones (solo si las activas):</b> un identificador t\xE9cnico de tu m\xF3vil para poder enviarte avisos.</li>
 <li><b>Asistente de IA:</b> las preguntas que escribes se env\xEDan para generar la respuesta y no se guardan; solo contamos cu\xE1ntas preguntas haces al d\xEDa.</li>
@@ -10129,7 +10646,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const dm = { list: null, tab: "chats", msgs: [], loading: false, ch: null, chId: null, watch: null, menu: null, editing: null, sending: false };
   const DM_IC = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 10 14"/><path d="M22 3 15 21l-5-7-7-4z"/></svg>';
-  const WILDY_VER = "37";
+  const WILDY_VER = "38";
   const BACK_IC = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>';
   const dmIncoming = (t) => t.status === "pending" && !t.mine_request;
   function dmUnread() {
@@ -11154,6 +11671,465 @@ C\xF3digo: ${inviteCode.code}`;
       toast(grpErr(String(e && e.message || "")));
     }
   }
+  const mem = { all: null, urls: {}, busy: false, pet: "all", draft: null, saving: false };
+  async function loadMem() {
+    if (!pets.length) {
+      mem.all = [];
+      return;
+    }
+    if (mem.busy) return;
+    mem.busy = true;
+    const { data, error } = await sb.from("pet_memories").select("*").in("pet_id", pets.map((p) => p.id)).order("day", { ascending: false }).order("created_at", { ascending: false }).limit(400);
+    mem.all = error ? [] : data || [];
+    await memSign(mem.all.flatMap((m) => m.photos || []));
+    mem.busy = false;
+    if (["mem", "memone", "pet"].includes(view.name)) render();
+  }
+  async function memSign(paths) {
+    const need = [...new Set(paths)].filter((p) => p && !mem.urls[p]);
+    if (!need.length) return;
+    try {
+      const { data } = await sb.storage.from("memories").createSignedUrls(need, 60 * 60 * 6);
+      (data || []).forEach((x) => {
+        if (x.signedUrl) mem.urls[x.path] = x.signedUrl;
+      });
+    } catch (_) {
+    }
+  }
+  const memDate = (d) => {
+    const x = parse(d);
+    return x.getDate() + " " + MES[x.getMonth()] + " " + x.getFullYear();
+  };
+  const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  function memCard(m, showPet) {
+    const p = pets.find((x) => x.id === m.pet_id), ph = (m.photos || [])[0];
+    return `<button class="mem-card" data-act="mem_open" data-id="${m.id}">
+    ${ph ? `<span class="mem-img">${mem.urls[ph] ? `<img src="${esc(mem.urls[ph])}" alt="" loading="lazy">` : ""}${m.photos.length > 1 ? `<i>+${m.photos.length - 1}</i>` : ""}</span>` : `<span class="mem-img mem-noimg" aria-hidden="true">\u{1F4DD}</span>`}
+    <span class="mem-t"><span class="mem-d">${memDate(m.day)}${showPet && p ? " \xB7 " + esc(p.name) : ""}</span><b>${esc(m.title || "Un recuerdo")}</b>${m.note ? `<span class="mem-n">${esc(m.note)}</span>` : ""}</span></button>`;
+  }
+  function memList(list, showPet) {
+    let mk = "", h = "";
+    list.forEach((m) => {
+      const d = parse(m.day), k = d.getFullYear() + "-" + d.getMonth();
+      if (k !== mk) {
+        mk = k;
+        h += `<h3 class="mem-mon">${MESES[d.getMonth()]} ${d.getFullYear()}</h3>`;
+      }
+      h += memCard(m, showPet);
+    });
+    return `<div class="mem-list">${h}</div>`;
+  }
+  const memEmpty = (name) => `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">\u{1F4F8}</div><b>Guarda aqu\xED sus momentos</b><p>El primer d\xEDa en casa, su primer ba\xF1o, ese paseo que no quieres olvidar${name ? " con " + esc(name) : ""}\u2026 Solo lo veis t\xFA y quien la cuida contigo.</p><button class="btn small" data-act="mem_new"${name ? "" : ""}>A\xF1adir el primer recuerdo</button></div>`;
+  function renderMem() {
+    if (mem.all === null) loadMem();
+    const list = (mem.all || []).filter((m) => mem.pet === "all" || m.pet_id === mem.pet);
+    app.innerHTML = `<button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
+  <div class="pg-top"><h1 class="feed-title">Recuerdos</h1><button class="btn small" data-act="mem_new">\uFF0B Nuevo</button></div>
+  ${pets.length > 1 ? `<div class="chips st-cats">${[["all", "Todos"]].concat(pets.map((p) => [p.id, p.name])).map(([v, l]) => `<button class="chip ${mem.pet === v ? "on" : ""}" data-act="mem_pet" data-v="${esc(v)}">${esc(l)}</button>`).join("")}</div>` : ""}
+  ${mem.all === null ? '<p class="sub" style="text-align:center">Cargando\u2026</p>' : list.length ? memList(list, pets.length > 1 && mem.pet === "all") : memEmpty(mem.pet !== "all" ? (pets.find((p) => p.id === mem.pet) || {}).name : "")}`;
+  }
+  function paneRecuerdos(p) {
+    if (mem.all === null) {
+      loadMem();
+      return '<p class="sub" style="text-align:center">Cargando\u2026</p>';
+    }
+    const list = mem.all.filter((m) => m.pet_id === p.id);
+    return `<div class="pg-top" style="margin:4px 0 8px"><span class="sub">${list.length ? list.length + " recuerdo" + (list.length == 1 ? "" : "s") : "Su diario privado"}</span><button class="btn small" data-act="mem_new" data-pet="${p.id}">\uFF0B Nuevo recuerdo</button></div>
+  ${list.length ? memList(list, false) : memEmpty(p.name)}`;
+  }
+  function renderMemNew() {
+    const m = view.mid ? (mem.all || []).find((x) => x.id === view.mid) : null;
+    if (!mem.draft) mem.draft = { pet: m ? m.pet_id : view.pet || (mem.pet !== "all" ? mem.pet : (pets[0] || {}).id), photos: m ? (m.photos || []).map((path) => ({ path })) : [] };
+    const d = mem.draft;
+    app.innerHTML = `<button class="back" data-act="mem_cancel">\u2039 Cancelar</button>
+  <h1 class="feed-title">${m ? "Editar recuerdo" : "Nuevo recuerdo"}</h1>
+  <form id="memform" class="form mem-form">
+    ${pets.length > 1 ? `<label>Mascota<select id="mem-pet">${pets.map((p) => `<option value="${p.id}"${p.id === d.pet ? " selected" : ""}>${esc(p.name)}</option>`).join("")}</select></label>` : ""}
+    <div class="mem-ph" id="mem-ph"></div>
+    <label class="btn soft small mem-add">\uFF0B A\xF1adir fotos<input type="file" id="mem-files" accept="image/*" multiple hidden></label>
+    <label>Fecha<input id="mem-day" type="date" max="${iso(today())}" value="${esc(m ? m.day : iso(today()))}"></label>
+    <label>T\xEDtulo<input id="mem-title" maxlength="80" placeholder="Su primer d\xEDa en la playa" value="${esc(m ? m.title || "" : "")}"></label>
+    <label>Lo que pas\xF3<textarea id="mem-note" maxlength="1500" rows="4" placeholder="Cu\xE9ntalo para no olvidarlo\u2026">${esc(m ? m.note || "" : "")}</textarea></label>
+    <p class="sub" style="margin:0">\u{1F512} Privado: solo lo veis t\xFA y quien cuida a esta mascota contigo.</p>
+    <button class="btn block" type="submit">${m ? "Guardar cambios" : "Guardar recuerdo"}</button>
+  </form>`;
+    memPhotos();
+    document.getElementById("mem-files").addEventListener("change", async (e) => {
+      const files = [...e.target.files].slice(0, Math.max(0, 8 - d.photos.length));
+      e.target.value = "";
+      if (!files.length) {
+        toast("M\xE1ximo 8 fotos por recuerdo");
+        return;
+      }
+      for (const f of files) {
+        try {
+          d.photos.push({ data: await resizeFile(f, 1600) });
+          memPhotos();
+        } catch (_) {
+          toast("No se ha podido leer una foto");
+        }
+      }
+    });
+  }
+  function memPhotos() {
+    const el = document.getElementById("mem-ph");
+    if (!el) return;
+    el.innerHTML = mem.draft.photos.map((x, i) => `<span class="mem-th"><img src="${esc(x.data || mem.urls[x.path] || "")}" alt="Foto ${i + 1}"><button type="button" data-act="mem_rmph" data-i="${i}" aria-label="Quitar foto ${i + 1}">\u2715</button></span>`).join("");
+  }
+  async function memSubmit(f) {
+    const btn = f.querySelector("button[type=submit]");
+    if (mem.saving) return;
+    mem.saving = true;
+    const d = mem.draft, m = view.mid ? (mem.all || []).find((x) => x.id === view.mid) : null;
+    const pet = (document.getElementById("mem-pet") || {}).value || d.pet;
+    const title = (val("mem-title") || "").trim(), note = (val("mem-note") || "").trim(), day = val("mem-day") || iso(today());
+    if (!title && !note && !d.photos.length) {
+      toast("A\xF1ade una foto, un t\xEDtulo o una nota");
+      mem.saving = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = "";
+      }
+      return;
+    }
+    try {
+      const paths = [];
+      for (const x of d.photos) {
+        if (x.path) {
+          paths.push(x.path);
+          continue;
+        }
+        const path = `${pet}/${crypto.randomUUID()}.jpg`;
+        const { error } = await sb.storage.from("memories").upload(path, dataUrlToBlob(x.data), { contentType: "image/jpeg", upsert: false });
+        if (error) throw error;
+        mem.urls[path] = x.data;
+        paths.push(path);
+      }
+      const row = { pet_id: pet, day, title: title || null, note: note || null, photos: paths };
+      let id;
+      if (m) {
+        const { error } = await sb.from("pet_memories").update(row).eq("id", m.id);
+        if (error) throw error;
+        id = m.id;
+        const gone = (m.photos || []).filter((x) => !paths.includes(x));
+        if (gone.length) sb.storage.from("memories").remove(gone).then(() => {
+        }, () => {
+        });
+      } else {
+        const { data, error } = await sb.from("pet_memories").insert(row).select("id").single();
+        if (error) throw error;
+        id = data.id;
+      }
+      mem.draft = null;
+      mem.all = null;
+      mem.saving = false;
+      toast(m ? "Recuerdo guardado" : "\xA1Recuerdo guardado! \u{1F4F8}");
+      view = { name: "memone", id };
+      await loadMem();
+      render();
+      window.scrollTo(0, 0);
+    } catch (e) {
+      mem.saving = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = "";
+      }
+      fail(e);
+    }
+  }
+  function renderMemOne() {
+    const m = (mem.all || []).find((x) => x.id === view.id);
+    if (!m) {
+      if (mem.all === null) {
+        loadMem();
+        app.innerHTML = '<p class="sub" style="text-align:center;margin-top:30vh">Cargando\u2026</p>';
+        return;
+      }
+      view = { name: "mem" };
+      return renderMem();
+    }
+    const p = pets.find((x) => x.id === m.pet_id);
+    app.innerHTML = `<button class="back" data-act="go" data-v="mem">\u2039 Recuerdos</button>
+  <div class="mem-one">
+    ${(m.photos || []).map((x, i) => mem.urls[x] ? `<img class="mem-big" src="${esc(mem.urls[x])}" alt="Foto ${i + 1} del recuerdo">` : "").join("")}
+    <p class="mem-d">${memDate(m.day)}${p ? " \xB7 " + esc(p.name) : ""}</p>
+    <h1 class="feed-title" style="margin:0">${esc(m.title || "Un recuerdo")}</h1>
+    ${m.note ? `<p class="mem-note">${esc(m.note)}</p>` : ""}
+    <div class="pc-b"><button class="btn small" data-act="mem_share" data-id="${m.id}">Compartir</button><button class="btn ghost small" data-act="mem_edit" data-id="${m.id}">Editar</button><button class="btn ghost small" data-act="mem_del" data-id="${m.id}">Borrar</button></div>
+  </div>`;
+  }
+  async function memShare(m) {
+    const title = m.title || "Un recuerdo", text = `${title} \xB7 ${memDate(m.day)}${m.note ? "\n" + m.note : ""}`;
+    try {
+      let files = [];
+      if (m.photos && m.photos.length && navigator.canShare) {
+        const r = await fetch(mem.urls[m.photos[0]]);
+        const b = await r.blob();
+        const f = new File([b], "recuerdo.jpg", { type: b.type || "image/jpeg" });
+        if (navigator.canShare({ files: [f] })) files = [f];
+      }
+      if (navigator.share) await navigator.share(files.length ? { files, title, text } : { title, text });
+      else {
+        await navigator.clipboard.writeText(text);
+        toast("Texto copiado para que lo compartas");
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+      toast("No se ha podido compartir");
+    }
+  }
+  async function memClick(a, b) {
+    try {
+      if (a === "mem_new") {
+        mem.draft = null;
+        view = { name: "memnew", pet: b.dataset.pet || null };
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "mem_cancel") {
+        mem.draft = null;
+        if (navBack()) return;
+        view = { name: "mem" };
+        return render();
+      }
+      if (a === "mem_pet") {
+        mem.pet = b.dataset.v;
+        return render();
+      }
+      if (a === "mem_open") {
+        view = { name: "memone", id: b.dataset.id };
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "mem_edit") {
+        mem.draft = null;
+        view = { name: "memnew", mid: b.dataset.id };
+        render();
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (a === "mem_rmph") {
+        mem.draft.photos.splice(+b.dataset.i, 1);
+        return memPhotos();
+      }
+      const m = (mem.all || []).find((x) => x.id === b.dataset.id);
+      if (a === "mem_share" && m) return memShare(m);
+      if (a === "mem_del" && m) {
+        if (!b.dataset.sure) {
+          b.dataset.sure = "1";
+          b.textContent = "Toca otra vez para borrar";
+          setTimeout(() => {
+            if (b.isConnected) {
+              delete b.dataset.sure;
+              b.textContent = "Borrar";
+            }
+          }, 4e3);
+          return;
+        }
+        b.disabled = true;
+        const { error } = await sb.from("pet_memories").delete().eq("id", m.id);
+        if (error) throw error;
+        if (m.photos && m.photos.length) sb.storage.from("memories").remove(m.photos).then(() => {
+        }, () => {
+        });
+        mem.all = mem.all.filter((x) => x !== m);
+        toast("Recuerdo borrado");
+        view = { name: "mem" };
+        return render();
+      }
+    } catch (e) {
+      fail(e);
+      if (b) b.disabled = false;
+    }
+  }
+  const tagS = { list: null, link: null, code: "", color: "rojo" };
+  const TAG_COL = { rojo: { n: "Roja", c: "#d42a3a" }, rosa: { n: "Rosa", c: "#e0287a" }, azul: { n: "Azul", c: "#2b9be0" } };
+  const TAG_PRICE = "8,99 \u20AC";
+  async function loadTags() {
+    const { data, error } = await sb.rpc("pet_tags");
+    tagS.list = error ? [] : data || [];
+    if (["qrs", "home", "pets"].includes(view.name)) render();
+  }
+  const petTags = (id) => (tagS.list || []).filter((t) => t.pet_id === id);
+  const noTagPets = () => tagS.list ? pets.filter((p) => !petTags(p.id).length) : [];
+  function orderMail(color, petName) {
+    const n = TAG_COL[color].n.toLowerCase();
+    const body = `Hola, quiero la chapa Wildy ${n} (${TAG_PRICE})${petName ? " para " + petName : ""}.
+
+Nombre:
+Direcci\xF3n de env\xEDo:
+Tel\xE9fono:
+
+Gracias.`;
+    return `mailto:wildyoyu@gmail.com?subject=${encodeURIComponent("Pedido chapa Wildy " + n)}&body=${encodeURIComponent(body)}`;
+  }
+  function shopBanner(where) {
+    const np = noTagPets(), who = np.length === 1 ? np[0].name : "";
+    return `<button class="shop-ban" data-act="go" data-v="tienda">
+    <span class="sb-imgs" aria-hidden="true"><img src="chapa-rojo.jpg" alt=""><img src="chapa-rosa.jpg" alt=""><img src="chapa-azul.jpg" alt=""></span>
+    <span class="sb-t"><small>NUEVO \xB7 Chapa Wildy con QR</small><b>${who ? `${esc(who)} a\xFAn no tiene su chapa` : where === "qrs" ? "Hazte con la tuya" : "Que siempre vuelva a casa"}</b><span>Desde ${TAG_PRICE} \xB7 Ver colores \u203A</span></span></button>`;
+  }
+  function renderTienda() {
+    const k = tagS.color, np = noTagPets();
+    app.innerHTML = `<button class="back" data-act="go" data-v="qrs">\u2039 Carnet QR</button>
+  <section class="shop-hero">
+    <p class="shop-kicker">CHAPA WILDY CON QR</p>
+    <h1>Que siempre vuelva a casa</h1>
+    <p>Si alguien encuentra a tu mascota, escanea su chapa con el m\xF3vil y ve al momento c\xF3mo avisarte. Sin instalar nada.</p>
+  </section>
+  <div class="shop-prod">
+    <div class="shop-img"><img src="chapa-${k}.jpg" alt="Chapa Wildy ${TAG_COL[k].n.toLowerCase()}"></div>
+    <div class="shop-row"><b class="shop-name">Chapa Wildy ${TAG_COL[k].n.toLowerCase()}</b><span class="shop-price">${TAG_PRICE}</span></div>
+    <div class="shop-cols" role="radiogroup" aria-label="Color">${Object.keys(TAG_COL).map((c) => `<button role="radio" aria-checked="${c === k}" class="shop-col${c === k ? " on" : ""}" data-act="tag_color" data-v="${c}"><span style="background:${TAG_COL[c].c}" aria-hidden="true"></span>${TAG_COL[c].n}</button>`).join("")}</div>
+    <a class="btn block shop-buy" href="${orderMail(k, np.length === 1 ? np[0].name : "")}">Comprar por ${TAG_PRICE}</a>
+    <p class="sub shop-note">Al pulsar se prepara el pedido en tu correo para enviarlo a Wildyoyu. Te responderemos con el pago y el env\xEDo.</p>
+  </div>
+  <div class="shop-perks">
+    <div><b>\u{1F50E} QR \xFAnico</b><span>Cada chapa tiene su propio c\xF3digo. Nadie puede copiarla ni qued\xE1rsela.</span></div>
+    <div><b>\u{1F50B} Sin pilas ni cuotas</b><span>Funciona siempre, sin bater\xEDa y sin suscripci\xF3n.</span></div>
+    <div><b>\u{1F4F1} Cualquier m\xF3vil</b><span>Quien la encuentre solo tiene que abrir la c\xE1mara.</span></div>
+    <div><b>\u{1F6A8} Modo perdida</b><span>Act\xEDvalo en la app y su ficha avisar\xE1 de que se ha perdido.</span></div>
+  </div>
+  <h2 class="shop-h2">C\xF3mo funciona</h2>
+  <ol class="shop-how"><li><b>Te llega a casa</b> con la huella Wildy delante, su QR detr\xE1s y una tarjeta con la clave de activaci\xF3n.</li><li><b>Vinc\xFAlala</b> en Carnet QR con el c\xF3digo de la chapa y la clave. Tardas un minuto.</li><li><b>Si se pierde</b>, activa el modo perdida. Quien la encuentre ver\xE1 tu tel\xE9fono y podr\xE1 llamarte.</li></ol>
+  <h2 class="shop-h2">Preguntas frecuentes</h2>
+  <details class="shop-faq"><summary>\xBFQu\xE9 ve quien escanea la chapa?</summary><p>El nombre y la foto de tu mascota, y el tel\xE9fono y la zona que t\xFA pongas en Perfil \u2192 \xABSi se pierde tu mascota\xBB. Nada m\xE1s: ni tu direcci\xF3n ni tu correo.</p></details>
+  <details class="shop-faq"><summary>\xBFY si cambio de mascota o la regalo?</summary><p>Puedes desvincularla y vincularla a otra mascota tuya cuando quieras desde Carnet QR.</p></details>
+  <details class="shop-faq"><summary>\xBFNecesito tener la chapa para usar el QR?</summary><p>No. Cada mascota ya tiene su QR gratis en la app y puedes imprimirlo. La chapa es la forma m\xE1s c\xF3moda y resistente de llevarlo siempre puesto.</p></details>
+  <a class="btn block shop-buy" style="margin-top:16px" href="${orderMail(k, np.length === 1 ? np[0].name : "")}">Quiero la ${TAG_COL[k].n.toLowerCase()} \xB7 ${TAG_PRICE}</a>`;
+  }
+  function linkForm(petId) {
+    const many = pets.length > 1;
+    return `<form id="tagform" class="tag-form" data-pet="${esc(petId || "")}">
+    <b>Vincular una chapa</b>
+    ${(!petId || petId === "pick") && many ? `<label>\xBFPara qu\xE9 mascota?<select id="tag-pet">${pets.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("")}</select></label>` : ""}
+    <label>C\xF3digo de la chapa<input id="tag-code" autocapitalize="characters" autocomplete="off" placeholder="WY\u2026" value="${esc(tagS.code)}"></label>
+    <label>Clave de activaci\xF3n<input id="tag-secret" autocapitalize="characters" autocomplete="off" placeholder="XXXX-XXXX"></label>
+    <span class="sub">El c\xF3digo est\xE1 detr\xE1s de la chapa (empieza por WY) y la clave viene en la tarjeta de la caja.</span>
+    <div class="pc-b"><button class="btn small" type="submit">Activar chapa</button><button class="btn ghost small" type="button" data-act="tag_linkcancel">Cancelar</button></div>
+  </form>`;
+  }
+  function renderQRs() {
+    if (tagS.list === null) loadTags();
+    app.innerHTML = `
+  <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
+  <h1 class="feed-title">Carnet QR</h1>
+  <p class="sub" style="margin:0 0 14px">Quien escanee su QR ver\xE1 a qui\xE9n llamar. T\xFA decides qu\xE9 se muestra en Perfil \u2192 \xABSi se pierde tu mascota\xBB.</p>
+  ${!owner.phone ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir t\xFA tambi\xE9n en los QR.</span><button class="btn small" data-act="settings">A\xF1adir tel\xE9fono</button></div>` : ""}
+  ${tagS.link === "pick" ? linkForm("pick") : ""}
+  ${pets.length ? pets.map((p) => {
+      const ts = petTags(p.id);
+      return `<section class="qrc${p.lost ? " lost" : ""}">
+    <div class="qrc-h"><b>${esc(p.name)}</b><button class="lost-tg${p.lost ? " on" : ""}" role="switch" aria-checked="${!!p.lost}" data-act="tag_lost" data-id="${p.id}"><span class="lt-k" aria-hidden="true"></span>Modo perdida</button></div>
+    ${p.lost ? `<div class="lost-bar">\u{1F6A8} <b>Modo perdida activado.</b> Quien escanee su QR o su chapa ver\xE1 que se ha perdido y c\xF3mo avisarte.</div>` : ""}
+    ${hasQR(p) ? `<div class="qrc-b"><div class="qrbox" data-qr="${p.id}" role="img" aria-label="C\xF3digo QR de ${esc(p.name)}"></div><p class="sub">Llamar\xE1n a ${esc(contactNames(p))}. Puedes hacer una captura e imprimirlo.</p></div>` : `<p class="sub">Sin QR todav\xEDa: nadie que la cuida ha puesto su tel\xE9fono.</p>`}
+    ${ts.map((t) => `<div class="tagrow"><img src="chapa-${esc(t.color)}.jpg" alt=""><span><b>Chapa ${(TAG_COL[t.color] || { n: "" }).n.toLowerCase()} vinculada</b><span class="sub">${esc(t.code)}</span></span>${t.mine ? `<button class="btn ghost small" data-act="tag_unlink" data-code="${esc(t.code)}">Desvincular</button>` : ""}</div>`).join("")}
+    ${tagS.link === p.id ? linkForm(p.id) : `<div class="pc-b"><button class="btn soft small" data-act="tag_linkopen" data-id="${p.id}">\uFF0B Vincular una chapa</button>${ts.length ? "" : `<button class="btn ghost small" data-act="go" data-v="tienda">Conseguir su chapa</button>`}</div>`}
+  </section>`;
+    }).join("") : '<p class="empty">A\xF1ade una mascota para crear su QR.</p>'}
+  ${shopBanner("qrs")}`;
+  }
+  function tagErr(m) {
+    return /codigo/.test(m) ? "No existe ninguna chapa con ese c\xF3digo. Rev\xEDsalo (empieza por WY)." : /clave/.test(m) ? "La clave de activaci\xF3n no es correcta." : /ocupada/.test(m) ? "Esa chapa ya est\xE1 vinculada a otra cuenta." : /intentos/.test(m) ? "Demasiados intentos. Espera una hora y vuelve a probar." : /mascota/.test(m) ? "Elige una de tus mascotas." : "No se ha podido activar. Revisa tu conexi\xF3n.";
+  }
+  async function tagSubmit(f) {
+    const btn = f.querySelector("button[type=submit]");
+    const pet = (document.getElementById("tag-pet") || {}).value || f.dataset.pet || (pets[0] || {}).id;
+    const c = (val("tag-code") || "").trim().toUpperCase(), s = (val("tag-secret") || "").trim();
+    if (!c || !s) {
+      toast("Escribe el c\xF3digo de la chapa y la clave");
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = "";
+      }
+      return;
+    }
+    const { data, error } = await sb.rpc("tag_claim", { c, secret: s, p: pet });
+    if (error) {
+      toast(tagErr(String(error.message || "")));
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = "";
+      }
+      return;
+    }
+    tagS.link = null;
+    tagS.code = "";
+    toast("\xA1Chapa activada! \u{1F389} Ya est\xE1 vinculada");
+    await loadTags();
+    render();
+  }
+  async function tagClick(a, b) {
+    try {
+      if (a === "tag_color") {
+        tagS.color = b.dataset.v;
+        return render();
+      }
+      if (a === "tag_linkopen") {
+        tagS.link = b.dataset.id;
+        render();
+        const i = document.getElementById(tagS.code ? "tag-secret" : "tag-code");
+        if (i) i.focus();
+        return;
+      }
+      if (a === "tag_linkcancel") {
+        tagS.link = null;
+        tagS.code = "";
+        return render();
+      }
+      if (a === "tag_unlink") {
+        if (!b.dataset.sure) {
+          b.dataset.sure = "1";
+          b.textContent = "\xBFSeguro? Toca otra vez";
+          setTimeout(() => {
+            if (b.isConnected) {
+              delete b.dataset.sure;
+              b.textContent = "Desvincular";
+            }
+          }, 4e3);
+          return;
+        }
+        b.disabled = true;
+        const { error } = await sb.rpc("tag_unlink", { c: b.dataset.code });
+        if (error) throw error;
+        toast("Chapa desvinculada. Puedes vincularla a otra mascota.");
+        return loadTags();
+      }
+      if (a === "tag_lost") {
+        const p = pets.find((x) => x.id === b.dataset.id);
+        if (!p) return;
+        const on = !p.lost;
+        b.disabled = true;
+        const { error } = await sb.from("pets").update({ lost: on, lost_at: on ? (/* @__PURE__ */ new Date()).toISOString() : null }).eq("id", p.id);
+        if (error) throw error;
+        p.lost = on;
+        toast(on ? `Modo perdida activado para ${p.name}. \xA1Ojal\xE1 vuelva pronto! \u{1F43E}` : `\xA1Qu\xE9 bien! ${p.name} ya no est\xE1 en modo perdida`);
+        return render();
+      }
+    } catch (e) {
+      fail(e);
+      if (b) b.disabled = false;
+    }
+  }
+  async function renderChapa(c) {
+    app.innerHTML = '<p class="empty" style="padding-top:30vh;text-align:center">Leyendo la chapa\u2026</p>';
+    const { data, error } = await sb.rpc("tag_public", { c });
+    if (error || !data) {
+      app.innerHTML = '<div style="padding-top:20vh;text-align:center"><div class="logo" style="justify-content:center">' + logo + 'Wildy</div><p class="sub">No encontramos esta chapa.</p></div>';
+      return;
+    }
+    if (data.status === "linked") return renderLost(data.pet);
+    app.innerHTML = `<div style="display:grid;gap:16px;padding-top:4vh;text-align:center;justify-items:center">
+    <div class="logo">${logo}Wildy</div>
+    <img src="chapa-${esc(data.color)}.jpg" alt="Chapa Wildy" style="width:180px;height:180px;border-radius:24px">
+    <h1 style="margin:0">Chapa Wildy sin activar</h1>
+    <p style="margin:0;font-size:17px">Esta chapa todav\xEDa no est\xE1 vinculada a ninguna mascota.</p>
+    <p class="sub" style="margin:0">\xBFEs tuya? Act\xEDvala en un minuto con la clave que ven\xEDa en la caja.</p>
+    <a class="btn block" href="./?app=1&activar=${encodeURIComponent(data.code)}">Activar mi chapa</a>
+  </div>`;
+  }
   app.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-act]");
     if (!b) return;
@@ -11173,6 +12149,8 @@ C\xF3digo: ${inviteCode.code}`;
     if (a.startsWith("comm_")) return commClick(a, b);
     if (a.startsWith("dm_")) return dmClick(a, b);
     if (a.startsWith("grp_")) return grpClick(a, b);
+    if (a.startsWith("mem_")) return memClick(a, b);
+    if (a.startsWith("tag_")) return tagClick(a, b);
     if (a === "sheet_go") return goSec(b.dataset.v);
     if (a === "go") return goSec(b.dataset.v);
     if (a === "prof_back") {
@@ -11453,6 +12431,8 @@ C\xF3digo: ${inviteCode.code}`;
     if (f === "dmform") return dmSubmit(e.target);
     if (f === "pickform") return;
     if (f === "grpform") return grpSubmit(e.target);
+    if (f === "memform") return memSubmit(e.target);
+    if (f === "tagform") return tagSubmit(e.target);
     if (f === "grp_editform") return grpEditSubmit(e.target);
     if (f === "grpnewform") return grpCreate(e.target);
     if (f === "grprenform") return grpRename(e.target);
@@ -11707,6 +12687,17 @@ C\xF3digo: ${inviteCode.code}`;
     renderLost(lostId);
     return;
   }
+  const chapaCode = params.get("chapa");
+  if (chapaCode) {
+    renderChapa(chapaCode);
+    return;
+  }
+  if (params.get("activar")) {
+    try {
+      localStorage.setItem("wildy.pendingChapa", params.get("activar").toUpperCase());
+    } catch (_) {
+    }
+  }
   const joinCode = params.get("codigo");
   if (joinCode) {
     try {
@@ -11768,6 +12759,19 @@ C\xF3digo: ${inviteCode.code}`;
     }
     listen();
     if (joinCode) history.replaceState(null, "", location.pathname + "?app=1");
+    {
+      const pc = lsGet("wildy.pendingChapa", "");
+      if (pc) {
+        try {
+          localStorage.removeItem("wildy.pendingChapa");
+        } catch (_) {
+        }
+        tagS.code = pc;
+        tagS.link = pets.length === 1 ? pets[0].id : "pick";
+        view = { name: "qrs" };
+        history.replaceState(null, "", location.pathname + "?app=1");
+      }
+    }
     const code = pendingCode();
     if (code) {
       try {
