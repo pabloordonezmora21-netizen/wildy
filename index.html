@@ -1445,6 +1445,44 @@ button.ws-name {
     border-color: var(--line);
   }
 }
+.pk-t .dg {
+  display: inline-block;
+  margin-top: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 8px;
+  width: max-content;
+  max-width: 100%;
+}
+.dt-dog {
+  display: grid;
+  gap: 4px;
+  margin: 4px 0 8px;
+}
+.dg-ok {
+  background: #e4f5ec;
+  color: #1f6f49;
+}
+.dg-no {
+  background: #fde6e8;
+  color: #a3192a;
+}
+.dg-unk {
+  background: var(--surface);
+  color: var(--muted);
+  font-weight: 600;
+}
+@media (prefers-color-scheme: dark) {
+  .dg-ok {
+    background: #173a2a;
+    color: #7fdcac;
+  }
+  .dg-no {
+    background: #3b1d21;
+    color: #ff9aa5;
+  }
+}
 </style>
 <style>
 :root {
@@ -9172,8 +9210,8 @@ C\xF3digo: ${inviteCode.code}`;
     }
   }, 3e4);
   const KINDS = { dog_park: ["\u{1F43E}", "Pipic\xE1n"], picnic: ["\u{1F9FA}", "\xC1rea recreativa"], lake: ["\u{1F3DE}\uFE0F", "Lago o embalse"], nature: ["\u{1F332}", "Espacio natural"], viewpoint: ["\u26F0\uFE0F", "Mirador"], beach: ["\u{1F3D6}\uFE0F", "Playa canina"], vet: ["\u{1FA7A}", "Veterinario"], food: ["\u2615", "Bar o restaurante"], stay: ["\u{1F3E8}", "Alojamiento"], other: ["\u{1F4CD}", "Otro sitio"] };
-  const CATS = [["all", "\u2728 Todo", ["picnic", "lake", "nature", "viewpoint", "beach", "food", "stay"]], ["lake", "\u{1F3DE}\uFE0F Lagos", ["lake"]], ["picnic", "\u{1F9FA} \xC1reas recreativas", ["picnic"]], ["nature", "\u{1F332} Naturaleza", ["nature", "viewpoint"]], ["beach", "\u{1F3D6}\uFE0F Playas", ["beach"]], ["food", "\u2615 Bares", ["food"]], ["stay", "\u{1F3E8} Alojamientos", ["stay"]], ["dogs", "\u{1F43E} Pipicanes", ["dog_park"]], ["vet", "\u{1FA7A} Veterinarios", ["vet"]]];
-  const OSMQ = { dog_park: "[leisure=dog_park]", picnic: "[tourism=picnic_site]", lake: "[natural=water]", nature: ["[leisure=nature_reserve]", "[boundary=protected_area]"], viewpoint: "[tourism=viewpoint]", beach: ["playa canina", "playa para perros", "playa de perros"], vet: "[amenity=veterinary]" };
+  const CATS = [["all", "\u2728 Todo", ["dog_park", "beach", "picnic", "lake", "nature", "viewpoint", "food", "stay"]], ["lake", "\u{1F3DE}\uFE0F Lagos", ["lake"]], ["picnic", "\u{1F9FA} \xC1reas recreativas", ["picnic"]], ["nature", "\u{1F332} Naturaleza", ["nature", "viewpoint"]], ["beach", "\u{1F3D6}\uFE0F Playas", ["beach"]], ["food", "\u2615 Bares", ["food"]], ["stay", "\u{1F3E8} Alojamientos", ["stay"]], ["dogs", "\u{1F43E} Pipicanes", ["dog_park"]], ["vet", "\u{1FA7A} Veterinarios", ["vet"]]];
+  const OSMQ = { dog_park: "[leisure=dog_park]", picnic: "[tourism=picnic_site]", lake: "[natural=water]", nature: ["[leisure=nature_reserve]", "[boundary=protected_area]"], viewpoint: "[tourism=viewpoint]", beach: ["playa canina", "playa para perros", "playa de perros", "[natural=beach]"], vet: "[amenity=veterinary]" };
   const placeCache = /* @__PURE__ */ new Map(), areaDone = /* @__PURE__ */ new Set();
   let nomiChain = Promise.resolve(), nomiLast = 0;
   function nomiQueued(url) {
@@ -9209,11 +9247,12 @@ C\xF3digo: ${inviteCode.code}`;
     (res || []).forEach((x) => {
       if (kind === "lake" && (!x.name || !/water|reservoir|lake/.test(x.type || "") || /^(fuente|piscina|lámina|estanque ornamental|filtro|decantador|dep[oó]sito|depuradora|aljibe|balsa de (riego|decantaci)|tanque|clarificador)/i.test(x.name))) return;
       if ((kind === "nature" || kind === "viewpoint") && !x.name) return;
+      const xt = x.extratags || {}, dg = String(xt.dog || "").toLowerCase();
+      if (kind === "beach" && !/can(in|ina)|perr|dog|gos|txakur/i.test(x.name || "") && !/^(yes|designated|leashed)$/.test(dg)) return;
       const id = `${x.osm_type}/${x.osm_id}`, old = placeCache.get(id);
       if (old && old.src === "db") return;
       if (!old) n++;
-      const xt = x.extratags || {};
-      placeCache.set(id, { id, k: kind, n: placeName(x, kind), a: +x.lat, o: +x.lon, src: "osm", wd: xt.wikidata || "", img: xt.image || "", wc: xt.wikimedia_commons || "" });
+      placeCache.set(id, { id, k: kind, n: placeName(x, kind), a: +x.lat, o: +x.lon, src: "osm", dg: kind === "dog_park" ? "designated" : dg, wd: xt.wikidata || "", img: xt.image || "", wc: xt.wikimedia_commons || "" });
     });
     return n;
   }
@@ -9373,16 +9412,28 @@ C\xF3digo: ${inviteCode.code}`;
     if (st) st.textContent = sitStatusText();
     if (!sit.busy) renderSitList();
   }
+  const dogNo = (p) => p.dg === "no";
+  const dogOk = (p) => p.k === "dog_park" || p.k === "vet" || p.community || /^(yes|designated|leashed)$/.test(p.dg || "");
+  function dogTag(p) {
+    if (dogNo(p)) return '<span class="dg dg-no">\u{1F6AB} No admite perros, seg\xFAn el mapa</span>';
+    if (p.k === "dog_park" || p.dg === "designated") return '<span class="dg dg-ok">\u{1F43E} Para perros</span>';
+    if (p.dg === "leashed") return '<span class="dg dg-ok">\u{1F43E} Perros con correa</span>';
+    if (p.dg === "yes") return '<span class="dg dg-ok">\u{1F43E} Admite perros</span>';
+    if (p.community) return '<span class="dg dg-ok">\u{1F43E} Recomendado por la comunidad</span>';
+    if (p.k === "vet") return "";
+    return '<span class="dg dg-unk">Sin confirmar si admite perros</span>';
+  }
   function renderSitList() {
     const el = document.getElementById("st-list");
     if (!el) return;
     const ref = sit.center ? { lat: sit.center[0], lon: sit.center[1] } : sit.loc, ks = sitKinds();
-    const l = [...placeCache.values()].filter((p) => ks.includes(p.k)).map((p) => ({ p, d: km(ref, { lat: p.a, lon: p.o }) })).sort((a, b) => a.d - b.d).slice(0, 30);
+    const rank = (p) => dogNo(p) ? 2 : dogOk(p) ? 0 : 1;
+    const l = [...placeCache.values()].filter((p) => ks.includes(p.k)).map((p) => ({ p, d: km(ref, { lat: p.a, lon: p.o }) })).sort((a, b) => rank(a.p) - rank(b.p) || a.d - b.d).slice(0, 30);
     const cat = CATS.find((c) => c[0] === sit.cat) || CATS[0];
     el.innerHTML = l.map(({ p, d }) => {
       const sc = social.scores[p.id];
       return `<div class="pk"><button class="pk-open" data-act="st_open" data-id="${esc(p.id)}"><span class="pk-ic ${p.k === "dog_park" ? "dog" : ""}">${(KINDS[p.k] || KINDS.other)[0]}</span>
-    <span class="pk-t"><b>${esc(p.n)}</b><span>${(KINDS[p.k] || KINDS.other)[1]} \xB7 ${distTxt(d)}${sc ? ` \xB7 <i class="st">\u2605 ${fmt1(sc.avg)}</i> (${sc.n})` : ""}${p.community ? " \xB7 \u{1F465}" : ""}</span></span></button></div>`;
+    <span class="pk-t"><b>${esc(p.n)}</b><span>${(KINDS[p.k] || KINDS.other)[1]} \xB7 ${distTxt(d)}${sc ? ` \xB7 <i class="st">\u2605 ${fmt1(sc.avg)}</i> (${sc.n})` : ""}${p.community ? " \xB7 \u{1F465}" : ""}</span>${dogTag(p)}</span></button></div>`;
     }).join("") || `<div class="soc-empty"><div>${cat[1].split(" ")[0]}</div><b>${sit.busy ? "Buscando sitios\u2026" : "A\xFAn no hay sitios aqu\xED"}</b><p>${["food", "stay"].includes(sit.cat) ? "Los sitios que admiten perros los a\xF1ade la comunidad. \xBFConoces alguno? Toca \u201C\uFF0B A\xF1adir sitio\u201D." : "Mueve o aleja el mapa para buscar en otra zona, o a\xF1ade uno que conozcas."}</p></div>`;
   }
   const commonsUrl = (f) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(String(f).replace(/^File:/i, ""))}?width=800`;
@@ -9927,7 +9978,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   function feedItems() {
     const ks = sitKinds();
-    return [...placeCache.values()].filter((p) => ks.includes(p.k)).map((p) => ({ p, d: km(sit.loc, { lat: p.a, lon: p.o }), ph: sit.thumbs[p.id] })).sort((a, b) => a.d * (a.ph ? 0.5 : 1) - b.d * (b.ph ? 0.5 : 1));
+    return [...placeCache.values()].filter((p) => ks.includes(p.k)).map((p) => ({ p, d: km(sit.loc, { lat: p.a, lon: p.o }), ph: sit.thumbs[p.id] })).sort((a, b) => dogNo(a.p) - dogNo(b.p) || (dogOk(b.p) ? 1 : 0) - (dogOk(a.p) ? 1 : 0) || a.d * (a.ph ? 0.5 : 1) - b.d * (b.ph ? 0.5 : 1));
   }
   function renderSitFeed() {
     const key = sit.loc.lat + "," + sit.loc.lon + "|" + sit.cat;
@@ -9957,7 +10008,7 @@ C\xF3digo: ${inviteCode.code}`;
       <span class="fc-img" style="background:linear-gradient(135deg,${c[0]},${c[1]})"><span class="fc-emo" aria-hidden="true">${K[0]}</span><img src="${esc(src)}" alt="" loading="lazy" onerror="this.remove()">
         <span class="fc-kind">${K[0]} ${K[1]}</span>${ph ? n ? `<span class="fc-n">\u{1F4F7} ${n}</span>` : "" : '<span class="fc-n">\u{1F6F0}\uFE0F Vista a\xE9rea</span>'}
         <span class="fc-over"><span class="fc-t">${esc(p.n)}</span>
-          <span class="fc-meta">\u{1F4CD} a ${distTxt(d)}${sc ? ` \xB7 \u2605 ${fmt1(sc.avg)} (${sc.n})` : ""}${p.community ? " \xB7 \u{1F465} Comunidad" : ""}</span></span></span>
+          <span class="fc-meta">\u{1F4CD} a ${distTxt(d)}${sc ? ` \xB7 \u2605 ${fmt1(sc.avg)} (${sc.n})` : ""}${p.community ? " \xB7 \u{1F465} Comunidad" : ""}</span><span class="pk-t">${dogTag(p)}</span></span></span>
       ${sc && sc.top.length ? `<span class="fc-body"><span class="tchips sm">${sc.top.slice(0, 3).map((t) => `<span class="tchip">${esc(TAGS[t.t] || "")}</span>`).join("")}</span></span>` : ""}</button>`;
     }).join("") + (sit.busy ? '<span class="feed-skel" aria-hidden="true"></span><span class="feed-skel" aria-hidden="true"></span>' : "") + (items.length > sit.feedN ? '<button class="btn ghost block" data-act="st_more">Ver m\xE1s sitios</button>' : "") || `<div class="soc-empty"><div>${cat[1].split(" ")[0]}</div><b>A\xFAn no hay sitios por aqu\xED</b><p>${["food", "stay"].includes(sit.cat) ? "Los bares y alojamientos que admiten perros los a\xF1ade la comunidad. \xBFConoces alguno? A\xF1\xE1delo abajo." : "Prueba con otra zona o con otra etiqueta."}</p></div>`;
   }
@@ -10043,6 +10094,7 @@ C\xF3digo: ${inviteCode.code}`;
   </div>
   <h1 class="dt-title">${esc(p.n)}</h1>
   <div class="tchips"><span class="tchip on">${K[0]} ${K[1]}</span><span class="tchip">\u{1F4CD} a ${distTxt(d)}</span>${sc ? `<span class="tchip">\u2605 ${fmt1(sc.avg)} \xB7 ${sc.n} opini${sc.n === 1 ? "\xF3n" : "ones"}</span>` : ""}${p.community ? '<span class="tchip">\u{1F465} Comunidad</span>' : ""}</div>
+  <div class="pk-t dt-dog">${dogTag(p)}${!dogOk(p) && !dogNo(p) ? '<span class="sub" style="font-size:13px">Antes de ir, comprueba en el ayuntamiento o en el propio sitio si dejan entrar perros.</span>' : ""}</div>
   <div class="pk-acts four">
     <a href="https://www.google.com/maps/search/?api=1&query=${p.a},${p.o}" target="_blank" rel="noopener"><span>\u{1F4CD}</span>Google Maps</a>
     <a href="https://www.google.com/search?q=${encodeURIComponent(p.n + where)}" target="_blank" rel="noopener"><span>\u{1F50E}</span>Buscar en Google</a>
@@ -11475,7 +11527,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const dm = { list: null, tab: "chats", msgs: [], loading: false, ch: null, chId: null, watch: null, menu: null, editing: null, sending: false };
   const DM_IC = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 10 14"/><path d="M22 3 15 21l-5-7-7-4z"/></svg>';
-  const WILDY_VER = "41";
+  const WILDY_VER = "42";
   const BACK_IC = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>';
   const dmIncoming = (t) => t.status === "pending" && !t.mine_request;
   function dmUnread() {
