@@ -1,11 +1,11 @@
 {
   "name": "Wildy",
   "short_name": "Wildy",
-  "description": "Tus mascotas, sus citas y sus papeles, todo a mano.",
+  "description": "Wildy by WildYoyu: la salud de tu mascota, su chapa QR, sitios para perros, comunidad y recuerdos.",
   "start_url": "./?app=1",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#D00101",
   "theme_color": "#d42a3a",
   "lang": "es",
   "icons": [
