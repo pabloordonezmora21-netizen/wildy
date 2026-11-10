@@ -4270,6 +4270,168 @@ button.rev {
 .me.me-only {
   padding: 4px;
 }
+.greet {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--muted);
+}
+.greet b {
+  color: var(--ink);
+}
+.bell-btn {
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--surface);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.bell-btn i {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--red-ink);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--bg);
+}
+.pet-car.multi {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-inline: calc(-1*max(16px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+  scroll-padding-inline: max(16px, env(safe-area-inset-left, 0px));
+  scrollbar-width: none;
+}
+.pet-car.multi::-webkit-scrollbar {
+  display: none;
+}
+.pet-car.multi > .pet {
+  flex: 0 0 86%;
+  scroll-snap-align: start;
+}
+.car-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 10px 0 2px;
+}
+.car-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  transition: width .2s;
+}
+.car-dots span.on {
+  width: 18px;
+  background: var(--red);
+}
+.qa {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0;
+}
+.qa-b {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+}
+.qa-ic {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--red);
+  flex: none;
+}
+.pg-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.pets-acts {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+.pa {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 18px;
+  padding: 10px 12px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.pa > span:last-child {
+  display: grid;
+  gap: 1px;
+}
+.pa .qa-ic {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+}
+.seg.seg4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.seg.seg4 button {
+  font-size: 13px;
+  padding-inline: 2px;
+}
+.seg.seg4 button {
+  position: relative;
+  white-space: nowrap;
+}
+.seg.seg4 .seg-n {
+  position: absolute;
+  top: -4px;
+  right: 2px;
+  min-width: 17px;
+  height: 17px;
+  font-size: 10px;
+  padding: 0 4px;
+  border: 2px solid var(--bg);
+}
+.xp-seg {
+  margin-bottom: 12px;
+}
 .ai-top-btn {
   flex: none;
   display: inline-flex;
@@ -6151,14 +6313,17 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     if (view.name === "home") renderHome();
     else if (view.name === "new") renderNew();
     else if (view.name === "settings") renderSettings();
+    else if (view.name === "pets") renderPets();
     else if (view.name === "qrs") renderQRs();
     else if (view.name === "join") renderJoin();
     else if (view.name === "share") renderShare();
     else if (view.name === "social") {
       renderSocial();
+      xpHead("social");
       setTimeout(drawMap, 0);
     } else if (view.name === "sitios") {
       renderSitios();
+      if (!sit.detail) xpHead("sitios");
       setTimeout(() => {
         drawSitMap();
         drawDetailMap();
@@ -6254,33 +6419,63 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   <form class="form" id="passform"><label>Contrase\xF1a nueva<input id="np" type="password" minlength="6" required autocomplete="new-password"></label>
   <button class="btn block" type="submit">Guardar contrase\xF1a</button></form>`;
   }
-  function renderHome() {
-    app.innerHTML = `
-  <header class="top"><h1 class="brand-logo"><img class="lg-l" src="wildy-logo.png" alt="Wildy by WildYoyu" width="658" height="200"><img class="lg-d" src="wildy-logo-dark.png" alt="Wildy by WildYoyu" width="658" height="200"></h1>
-    <div class="top-r"><button class="ai-top-btn" data-act="ai_top" aria-label="Chat con la IA de Wildy"><span aria-hidden="true">\u2728</span>IA</button>${dmBtn()}</div></header>
-  ${!owner.phone && !(pets.length && pets.every(hasQR)) ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">Ir a ajustes</button></div>` : ""}
-  ${homeAlerts()}
-  <div class="quick">
-    <button class="add" data-act="new"><span class="plus">+</span>A\xF1adir mascota</button>
-    <button class="add qrbtn" data-act="qrs" aria-label="Ver los c\xF3digos QR de las mascotas"><span class="plus"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M3 3h8v8H3zm2 2v4h4V5zm8-2h8v8h-8zm2 2v4h4V5zM3 13h8v8H3zm2 2v4h4v-4zm8-2h2v2h-2zm2 2h2v2h-2zm2-2h2v2h-2zm2 2h2v2h-2zm-6 2h2v2h-2zm2 2h2v2h-2zm2-2h2v2h-2zm2 2h2v2h-2z"/></svg></span>QR</button>
-  </div>
-  <div class="list">${pets.map((p) => {
-      const nb = nextCele(p.birth);
-      const up = (p.events || []).filter((e) => !e.done && parse(e.date) >= today()).sort((a, b) => a.date < b.date ? -1 : 1)[0];
-      let badge = "";
-      if (nb && nb.days <= (nb.unit === "m" ? 7 : 30)) badge = nb.days === 0 ? `\u{1F382} \xA1Cumple ${nb.label}!` : `Cumple ${nb.label} en ${nb.days} d\xEDa${nb.days === 1 ? "" : "s"}`;
-      else if (up) {
-        const d = Math.round((parse(up.date) - today()) / 864e5);
-        badge = d === 0 ? `${up.type} hoy` : `${up.type} en ${d} d\xEDa${d === 1 ? "" : "s"}`;
-      }
-      const shared = (p.pet_members || []).length > 1;
-      const party2 = nb && nb.days === 0;
-      return `<button class="pet${party2 ? " party" : ""}" data-act="open" data-id="${p.id}" aria-label="Abrir la ficha de ${esc(p.name)}">
+  function petCard(p) {
+    const nb = nextCele(p.birth);
+    const up = (p.events || []).filter((e) => !e.done && parse(e.date) >= today()).sort((a, b) => a.date < b.date ? -1 : 1)[0];
+    let badge = "";
+    if (nb && nb.days <= (nb.unit === "m" ? 7 : 30)) badge = nb.days === 0 ? `\u{1F382} \xA1Cumple ${nb.label}!` : `Cumple ${nb.label} en ${nb.days} d\xEDa${nb.days === 1 ? "" : "s"}`;
+    else if (up) {
+      const d = Math.round((parse(up.date) - today()) / 864e5);
+      badge = d === 0 ? `${up.type} hoy` : `${up.type} en ${d} d\xEDa${d === 1 ? "" : "s"}`;
+    }
+    const shared = (p.pet_members || []).length > 1;
+    const party2 = nb && nb.days === 0;
+    return `<button class="pet${party2 ? " party" : ""}" data-act="open" data-id="${p.id}" aria-label="Abrir la ficha de ${esc(p.name)}">
       ${mediaHTML(p)}<div class="shade"></div>${party2 ? '<span class="balloons" aria-hidden="true">\u{1F388}\u{1F389}\u{1F388}</span>' : ""}${shared ? '<span class="tag ex">Compartida</span>' : ""}
       <div class="meta"><div><div class="name">${esc(p.name)}</div><div class="info">${esc(p.breed || p.species)} \xB7 ${age(p.birth)}</div></div>${badge ? `<span class="tag">${badge}</span>` : ""}</div>
     </button>`;
-    }).join("") || `<div class="card" style="padding:22px;text-align:center"><b style="font-family:var(--display);font-size:22px">A\xFAn no hay mascotas</b><p class="sub">A\xF1ade la primera con el bot\xF3n de arriba, o usa un c\xF3digo si alguien te ha invitado.</p></div>`}</div>
-  <div class="note" style="justify-content:center;gap:10px">${pets.length ? '<button class="btn small" data-act="share">Compartir mascotas</button>' : ""}<button class="btn ghost small" data-act="join">Tengo un c\xF3digo</button></div>`;
+  }
+  function petEmpty() {
+    return `<div class="card" style="padding:22px;text-align:center"><b style="font-family:var(--display);font-size:22px">A\xFAn no hay mascotas</b><p class="sub">A\xF1ade la primera con \xAB\uFF0B A\xF1adir\xBB en Mascotas, o usa un c\xF3digo si alguien te ha invitado.</p></div>`;
+  }
+  function greet() {
+    const h = (/* @__PURE__ */ new Date()).getHours();
+    return h < 6 ? "Buenas noches" : h < 13 ? "Buenos d\xEDas" : h < 21 ? "Buenas tardes" : "Buenas noches";
+  }
+  function bellBtn() {
+    const n = alertBadge();
+    return `<button class="bell-btn" data-act="go" data-v="avisos" aria-label="${n ? `Avisos, ${n} pendiente${n == 1 ? "" : "s"}` : "Avisos"}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>${n ? `<i>${n > 9 ? "9+" : n}</i>` : ""}</button>`;
+  }
+  const QA_IC = { cuid: '<path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/>', qr: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>', qd: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 15 2 2 4-4"/>', st: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>' };
+  const qaBtn = (act2, v, ic, l) => `<button class="qa-b" data-act="${act2}"${v ? ` data-v="${v}"` : ""}><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${QA_IC[ic]}</svg></span>${l}</button>`;
+  function renderHome() {
+    const nm = String(owner.name || "").trim().split(" ")[0];
+    app.innerHTML = `
+  <header class="top"><h1 class="brand-logo"><img class="lg-l" src="wildy-logo.png" alt="Wildy by WildYoyu" width="658" height="200"><img class="lg-d" src="wildy-logo-dark.png" alt="Wildy by WildYoyu" width="658" height="200"></h1>
+    <div class="top-r"><button class="ai-top-btn" data-act="ai_top" aria-label="Chat con la IA de Wildy"><span aria-hidden="true">\u2728</span>IA</button>${bellBtn()}</div></header>
+  <p class="greet">${greet()}${nm ? `, <b>${esc(nm)}</b>` : ""}</p>
+  ${!owner.phone && !(pets.length && pets.every(hasQR)) ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">Ir a ajustes</button></div>` : ""}
+  ${pets.length ? `<div class="list pet-car${pets.length > 1 ? " multi" : ""}" aria-label="Tus mascotas">${pets.map(petCard).join("")}</div>${pets.length > 1 ? `<div class="car-dots" aria-hidden="true">${pets.map((_, i) => `<span${i ? "" : ' class="on"'}></span>`).join("")}</div>` : ""}` : petEmpty()}
+  <nav class="qa" aria-label="Accesos r\xE1pidos">${qaBtn("go", "avisos", "cuid", "Cuidados")}${qaBtn("qrs", "", "qr", "Carnet QR")}${qaBtn("go", "social", "qd", "Quedadas")}${qaBtn("go", "sitios", "st", "Sitios")}</nav>
+  ${homeAlerts()}`;
+    const car = app.querySelector(".pet-car.multi");
+    if (car) {
+      const dots = [...app.querySelectorAll(".car-dots span")];
+      car.addEventListener("scroll", () => {
+        const i = Math.round(car.scrollLeft / (car.firstElementChild.offsetWidth + 12));
+        dots.forEach((d, k) => d.classList.toggle("on", k === i));
+      }, { passive: true });
+    }
+  }
+  function renderPets() {
+    app.innerHTML = `
+  <div class="pg-top"><h1 class="feed-title">Mascotas</h1><button class="btn soft small" data-act="new">\uFF0B A\xF1adir</button></div>
+  <div class="list">${pets.map(petCard).join("") || petEmpty()}</div>
+  <div class="pets-acts">
+    <button class="pa" data-act="qrs"><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${QA_IC.qr}</svg></span><span><b>Carnet QR</b><span class="sub">Los c\xF3digos de emergencia de tus mascotas</span></span></button>
+    ${pets.length ? `<button class="pa" data-act="share"><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span><span><b>Compartir mascotas</b><span class="sub">Invita a tu familia a cuidarlas contigo</span></span></button>` : ""}
+    <button class="pa" data-act="join"><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 9.2-9.2M17 6l3 3M15 8l2 2"/></svg></span><span><b>Tengo un c\xF3digo</b><span class="sub">\xDAnete a una mascota que alguien comparte contigo</span></span></button>
+  </div>`;
   }
   function renderShare() {
     const sel = view.sel || (view.sel = /* @__PURE__ */ new Set());
@@ -6292,7 +6487,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 2. Entra o crea tu cuenta
 C\xF3digo: ${inviteCode.code}`;
       app.innerHTML = `
-    <button class="back" data-act="home">\u2039 Mis mascotas</button>
+    <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
     <h1 style="font-size:34px;margin-block:6px 8px">Invitaci\xF3n lista</h1>
     <p class="sub" style="margin:0 0 16px">Con este c\xF3digo podr\xE1 ver y cuidar de ${esc(list)}.</p>
     <div class="qrcard" style="grid-template-columns:1fr;text-align:center">
@@ -6306,7 +6501,7 @@ C\xF3digo: ${inviteCode.code}`;
     }
     const all = pets.length > 0 && pets.every((p) => sel.has(p.id));
     app.innerHTML = `
-  <button class="back" data-act="home">\u2039 Mis mascotas</button>
+  <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
   <h1 style="font-size:34px;margin-block:6px 8px">Compartir mascotas</h1>
   <p class="sub" style="margin:0 0 16px">Elige qu\xE9 mascotas quieres compartir. Con un solo c\xF3digo la otra persona las ver\xE1 todas.</p>
   <button class="linkbtn" data-act="selall" style="margin-bottom:8px">${all ? "Quitar todas" : "Elegir todas"}</button>
@@ -6318,7 +6513,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   function renderJoin() {
     app.innerHTML = `
-  <button class="back" data-act="home">\u2039 Mis mascotas</button>
+  <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
   <h1 style="font-size:34px;margin-block:6px 8px">Unirme a una mascota</h1>
   <p class="sub" style="margin:0 0 16px">Escribe el c\xF3digo de 8 letras que te han mandado.</p>
   <form class="form" id="joinform">
@@ -6363,7 +6558,7 @@ C\xF3digo: ${inviteCode.code}`;
     }
     const tab = view.tab || "ficha";
     app.innerHTML = `
-  <button class="back" data-act="home">\u2039 Mis mascotas</button>
+  <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
   <div class="hero">${mediaHTML(p)}<div class="shade"></div>
     <button class="chg" data-act="edit" data-id="${p.id}">Editar</button>
     <div class="meta"><h1>${esc(p.name)}</h1><div>${esc(p.breed || p.species)} \xB7 ${esc(p.sex || "")}</div></div></div>
@@ -6534,7 +6729,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   function renderQRs() {
     app.innerHTML = `
-  <button class="back" data-act="home">\u2039 Mis mascotas</button>
+  <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
   <h1 style="font-size:34px;margin-block:6px 6px">C\xF3digos QR</h1>
   <p class="sub" style="margin:0 0 16px">Quien escanee el QR del collar ver\xE1 a qui\xE9n llamar. Haz una captura para imprimirlo en una chapa.</p>
   ${!owner.phone ? `<div class="warnbox" style="margin-bottom:14px"><span>A\xF1ade tu tel\xE9fono para salir t\xFA tambi\xE9n en los QR.</span><button class="btn small" data-act="settings">A\xF1adir tel\xE9fono</button></div>` : ""}
@@ -7159,7 +7354,7 @@ C\xF3digo: ${inviteCode.code}`;
   function renderSocial() {
     if (!owner.social_on) {
       app.innerHTML = `
-    <button class="back" data-act="home">\u2039 Mis mascotas</button>
+    <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
     <div class="soc-hero"><div class="soc-hero-emo">\u{1F415}\u{1F43E}\u{1F415}\u200D\u{1F9BA}</div><h1>Quedadas en el parque</h1><p>Queda con perros de tu zona para que jueguen y socialicen.</p></div>
     <div class="soc-steps">
       <div><span>\u{1F4CD}</span><b>Publica un plan</b><p>\u201CVoy con Bruno al pipic\xE1n a las 19:00\u201D</p></div>
@@ -7175,7 +7370,7 @@ C\xF3digo: ${inviteCode.code}`;
     const L2 = social.loc;
     if (!L2) {
       app.innerHTML = `
-    <button class="back" data-act="home">\u2039 Mis mascotas</button>
+    <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
     <div class="soc-hero"><div class="soc-hero-emo">\u{1F4CD}</div><h1>\xBFPor d\xF3nde paseas?</h1><p>Te ense\xF1amos los pipicanes y planes de alrededor. Tu ubicaci\xF3n no se guarda ni se ense\xF1a a nadie.</p></div>
     <button class="btn block" data-act="socgeo" style="font-size:17px;padding:15px">\u{1F4CD} Usar mi ubicaci\xF3n</button>
     <form class="soc-search" id="socplaceform"><span aria-hidden="true">\u{1F50E}</span><input id="sp-q" required placeholder="O escribe tu barrio o ciudad" autocomplete="address-level2"><button type="submit" aria-label="Buscar">Buscar</button></form>
@@ -7799,7 +7994,7 @@ C\xF3digo: ${inviteCode.code}`;
     if (!sit.loc && social.loc) sit.loc = social.loc;
     if (!sit.loc) {
       app.innerHTML = `
-    <button class="back" data-act="home">\u2039 Mis mascotas</button>
+    <button class="back" data-act="go" data-v="pets">\u2039 Mascotas</button>
     <div class="soc-hero"><div class="soc-hero-emo">\u{1F3DE}\uFE0F\u{1F415}\u{1F9FA}</div><h1>Sitios para ir con tu perro</h1><p>Lagos, campos, \xE1reas recreativas, playas caninas, bares y alojamientos que admiten perros, y veterinarios.</p></div>
     <button class="btn block" data-act="st_geo" style="font-size:17px;padding:15px">\u{1F4CD} Usar mi ubicaci\xF3n</button>
     <form class="soc-search" id="st_placeform"><span aria-hidden="true">\u{1F50E}</span><input id="st-q" required placeholder="O escribe un pueblo, ciudad o zona" autocomplete="address-level2"><button type="submit">Buscar</button></form>
@@ -8617,6 +8812,7 @@ C\xF3digo: ${inviteCode.code}`;
     const l = collectAlerts(), late = l.filter((x) => x.days < 0), now = l.filter((x) => x.days === 0), soon = l.filter((x) => x.days > 0);
     const sec = (h, arr) => arr.length ? `<div class="sec"><h2>${h}</h2><div class="av-list">${arr.map(alertRow).join("")}</div></div>` : "";
     app.innerHTML = `
+  <button class="back" data-act="go" data-v="home">\u2039 Inicio</button>
   <h1 class="feed-title">Avisos</h1>
   <p class="sub" style="margin-top:-4px">Vacunas, citas y cumplea\xF1os de tus mascotas. Los recordatorios se a\xF1aden en el calendario de cada ficha.</p>
   ${pushCard()}
@@ -8624,11 +8820,67 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const TABS = [
     ["home", "Inicio", '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>'],
+    ["mascotas", "Mascotas", '<circle cx="5.5" cy="10" r="2"/><circle cx="9.5" cy="5.5" r="2"/><circle cx="14.5" cy="5.5" r="2"/><circle cx="18.5" cy="10" r="2"/><path d="M12 12c-3 0-6 3.5-6 6a2.5 2.5 0 0 0 3.5 2.3c1.6-.7 3.4-.7 5 0A2.5 2.5 0 0 0 18 18c0-2.5-3-6-6-6z"/>'],
+    ["explorar", "Explorar", '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>'],
     ["comm", "Comunidad", '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.4.1 4.3 1.7 4.9 4.8"/>'],
-    ["avisos", "Avisos", '<path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/>'],
     ["perfil", "Perfil", '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.3 3.2-3.5 5.5-3.5s4.3 1.2 5.5 3.5"/>']
   ];
-  const TAB_OF = { home: "home", pet: "home", new: "home", qrs: "home", share: "home", join: "home", ask: "home", settings: "perfil", legal: "perfil", social: "comm", sitios: "comm", avisos: "avisos", chat: "comm", profile: "comm", inbox: "comm", dm: "comm", grp: "comm", grpnew: "comm", grpinfo: "comm" };
+  const TAB_OF = { home: "home", ask: "home", avisos: "home", pets: "mascotas", pet: "mascotas", new: "mascotas", qrs: "mascotas", share: "mascotas", join: "mascotas", social: "explorar", sitios: "explorar", chat: "comm", profile: "comm", inbox: "comm", dm: "comm", grp: "comm", grpnew: "comm", grpinfo: "comm", settings: "perfil", legal: "perfil" };
+  function lsGet(k, d) {
+    try {
+      return localStorage.getItem(k) || d;
+    } catch (_) {
+      return d;
+    }
+  }
+  function lsSet(k, v) {
+    try {
+      localStorage.setItem(k, v);
+    } catch (_) {
+    }
+  }
+  function xpHead(on) {
+    const b = app.querySelector('.back[data-v="pets"],.back[data-act="home"]');
+    if (b && b.parentElement === app) b.remove();
+    if (!app.querySelector(".xp-seg")) app.insertAdjacentHTML("afterbegin", xpTop(on));
+  }
+  function goSec(v) {
+    if (v === "sitios" || v === "social") lsSet("wildy.xpLast", v);
+    if (["inbox", "chat", "people", "feed"].includes(v)) lsSet("wildy.commLast", v);
+    if (v === "social") {
+      view = { name: "social" };
+      loadLeaflet();
+    } else if (v === "sitios") {
+      if (view.name === "sitios" && sit.detail) sit.detail = null;
+      view = { name: "sitios" };
+      loadLeaflet();
+    } else if (v === "inbox") {
+      view = { name: "inbox" };
+      if (inCommunity()) loadDM();
+    } else if (["chat", "people", "feed"].includes(v)) {
+      comm.sec = v;
+      view = { name: "chat" };
+    } else if (v === "avisos") {
+      view = { name: "avisos" };
+      markSeen();
+    } else if (v === "pets") {
+      view = { name: "pets" };
+    } else if (v === "settings") {
+      view = { name: "settings" };
+      settingsDel = false;
+    } else {
+      view = { name: "home" };
+      pendingDelete = false;
+      inviteCode = null;
+    }
+    render();
+    if (!(view.name === "chat" && comm.sec === "chat")) window.scrollTo(0, 0);
+  }
+  const xpTop = (on) => `<h1 class="feed-title">Explorar</h1><div class="seg seg2 xp-seg" role="tablist" aria-label="Qu\xE9 buscas">${[["sitios", "Sitios"], ["social", "Quedadas"]].map(([v, l]) => `<button role="tab" aria-selected="${on === v}" class="${on === v ? "on" : ""}" data-act="go" data-v="${v}">${l}</button>`).join("")}</div>`;
+  function commTop(on) {
+    const nIn = typeof dmUnread === "function" ? dmUnread() : 0, nP = (comm.reqs || []).length;
+    return `<h1 class="feed-title">Comunidad</h1><div class="seg seg4" role="tablist" aria-label="Partes de la comunidad">${[["inbox", "Mensajes", nIn], ["chat", "Chat", 0], ["feed", "Actividad", 0], ["people", "Personas", nP]].map(([v, l, n]) => `<button role="tab" aria-selected="${on === v}" class="${on === v ? "on" : ""}" data-act="go" data-v="${v}">${l}${n ? ` <b class="seg-n">${n > 9 ? "9+" : n}</b>` : ""}</button>`).join("")}</div>`;
+  }
   const COMM_ITEMS = [["social", "Quedadas", "\u{1F4CD}"], ["sitios", "Sitios", "\u{1F3DE}\uFE0F"], ["chat", "Chat com\xFAn", "\u{1F4AC}"], ["inbox", "Mensajes y grupos", "\u2709\uFE0F"], ["people", "Personas", "\u{1F465}"], ["feed", "Actividad", "\u2B50"]];
   function commLast() {
     try {
@@ -8705,25 +8957,16 @@ C\xF3digo: ${inviteCode.code}`;
         const b = e.target.closest("[data-act]");
         if (!b) return;
         const a = b.dataset.act;
-        if (a === "comm") return openSheet();
-        if (a === "home") {
-          view = { name: "home" };
-          pendingDelete = false;
-          inviteCode = null;
-        } else if (a === "avisos") {
-          view = { name: "avisos" };
-          markSeen();
-        } else if (a === "perfil") {
-          view = { name: "settings" };
-          settingsDel = false;
-        }
-        render();
-        window.scrollTo(0, 0);
+        if (a === "home") return goSec("home");
+        if (a === "mascotas") return goSec("pets");
+        if (a === "explorar") return goSec(lsGet("wildy.xpLast", "sitios"));
+        if (a === "comm") return goSec(lsGet("wildy.commLast", "inbox"));
+        if (a === "perfil") return goSec("settings");
       });
     }
     bar.hidden = false;
     const cur2 = TAB_OF[view.name] || "home", n = alertBadge(), cn = (user && typeof dmUnread === "function" ? dmUnread() : 0) + (comm.reqs || []).length;
-    bar.innerHTML = TABS.map(([a, l, ic]) => `<button data-act="${a}" class="${cur2 === a ? "on" : ""}" ${cur2 === a ? 'aria-current="page"' : ""}${a === "comm" ? ' aria-haspopup="menu" aria-expanded="false"' : ""}><span class="tb-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ic}</svg>${a === "avisos" && n ? `<i class="tb-n">${n}</i>` : a === "comm" && cn ? `<i class="tb-n">${cn > 9 ? "9+" : cn}</i>` : ""}</span><span>${l}</span></button>`).join("");
+    bar.innerHTML = TABS.map(([a, l, ic]) => `<button data-act="${a}" class="${cur2 === a ? "on" : ""}" ${cur2 === a ? 'aria-current="page"' : ""}><span class="tb-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ic}</svg>${a === "comm" && cn ? `<i class="tb-n">${cn > 9 ? "9+" : cn}</i>` : ""}</span><span>${l}</span></button>`).join("");
   }
   let partyShown = false;
   function party() {
@@ -9386,7 +9629,7 @@ C\xF3digo: ${inviteCode.code}`;
   const starsTxt = (n) => "\u2605".repeat(n || 0) + "\u2606".repeat(5 - (n || 0));
   const cAv = (photo, name, cls) => `<span class="${cls || "cm-av"}" aria-hidden="true">${photo ? `<img src="${esc(photo)}" alt="">` : esc((name || "?")[0].toUpperCase())}</span>`;
   function commHeader() {
-    return `<h1 class="feed-title">${comm.sec === "feed" ? "Actividad" : comm.sec === "people" ? "Personas" : "Chat com\xFAn"}</h1>`;
+    return commTop(comm.sec === "feed" ? "feed" : comm.sec === "people" ? "people" : "chat");
   }
   async function loadFeed() {
     comm.feedBusy = true;
@@ -9864,7 +10107,7 @@ C\xF3digo: ${inviteCode.code}`;
       return;
     }
     const reqs = (dm.list || []).filter(dmIncoming).length + (grp.list || []).filter((g) => g.status === "invited").length;
-    app.innerHTML = `<div class="inbox-top"><h1 class="feed-title">Mensajes</h1><button class="btn soft small" data-act="grp_new">\uFF0B Nuevo grupo</button></div>
+    app.innerHTML = `${commTop("inbox")}<div class="inbox-top"><span class="sub">Tus conversaciones y grupos</span><button class="btn soft small" data-act="grp_new">\uFF0B Nuevo grupo</button></div>
   <div class="seg seg2" role="tablist">
     <button role="tab" aria-selected="${dm.tab === "chats"}" class="${dm.tab === "chats" ? "on" : ""}" data-act="dm_tab" data-v="chats">\u{1F4AC} Chats</button>
     <button role="tab" aria-selected="${dm.tab === "reqs"}" class="${dm.tab === "reqs" ? "on" : ""}" data-act="dm_tab" data-v="reqs">\u{1F4E9} Solicitudes${reqs ? ` <b class="seg-n">${reqs}</b>` : ""}</button></div>
@@ -10780,7 +11023,8 @@ C\xF3digo: ${inviteCode.code}`;
     if (a.startsWith("comm_")) return commClick(a, b);
     if (a.startsWith("dm_")) return dmClick(a, b);
     if (a.startsWith("grp_")) return grpClick(a, b);
-    if (a === "sheet_go") return commGo(b.dataset.v);
+    if (a === "sheet_go") return goSec(b.dataset.v);
+    if (a === "go") return goSec(b.dataset.v);
     if (a === "prof_back") {
       view = view.back || { name: "chat" };
       render();
