@@ -6469,8 +6469,11 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     }
     nav.key = k;
   }
+  let navLast = 0;
   function navBack() {
     if (nav.idx > 0) {
+      if (Date.now() - navLast < 700) return true;
+      navLast = Date.now();
       history.back();
       return true;
     }
@@ -6479,6 +6482,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   window.addEventListener("popstate", (e) => {
     const i = e.state && typeof e.state.wi === "number" ? e.state.wi : -1, sn = nav.stack[i];
     if (!sn || !user) return;
+    navLast = Date.now();
     nav.idx = i;
     nav.pop = true;
     view = sn.v;
@@ -6489,9 +6493,10 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     window.scrollTo(0, 0);
   });
   let edge = null;
+  const standalone = () => navigator.standalone === true || window.matchMedia && matchMedia("(display-mode: standalone)").matches;
   document.addEventListener("touchstart", (e) => {
     const t = e.touches[0];
-    edge = t && t.clientX < 24 && nav.idx > 0 ? { x: t.clientX, y: t.clientY } : null;
+    edge = standalone() && t && t.clientX < 24 && nav.idx > 0 ? { x: t.clientX, y: t.clientY } : null;
   }, { passive: true });
   document.addEventListener("touchend", (e) => {
     if (!edge) return;
