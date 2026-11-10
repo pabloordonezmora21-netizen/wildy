@@ -178,7 +178,7 @@
 #splash.s1 .sp-paw {
   opacity: 1;
   transform: scale(1);
-  transition: opacity .25s ease-out, transform .35s cubic-bezier(.2, .9, .3, 1.25);
+  transition: opacity .3s ease-out, transform .45s cubic-bezier(.2, .9, .3, 1.25);
 }
 #splash.s1.wait .sp-paw {
   animation: sp-beat 1.1s ease-in-out infinite;
@@ -191,7 +191,7 @@
 #splash.s2 .sp-paw {
   animation: none;
   transform: scale(40);
-  transition: transform .7s cubic-bezier(.65, 0, .85, .2);
+  transition: transform .9s cubic-bezier(.65, 0, .85, .2);
 }
 #splash.s2 .sp-paw .sp-solid {
   opacity: 1;
@@ -6614,7 +6614,7 @@ button.rev {
       return setTimeout(zoom, 120);
     }
     cls("s1 s2");
-    setTimeout(end, 700);
+    setTimeout(end, 900);
   }
   setTimeout(function() {
     cls("s1");
@@ -6627,13 +6627,13 @@ button.rev {
       setTimeout(function() {
         L[k2].className = "on";
         W.insertBefore(C, L[k2].nextSibling);
-      }, k2 * 140);
+      }, k2 * 220);
     })(k);
     setTimeout(function() {
       cls("s1");
-      setTimeout(zoom, 200);
-    }, L.length * 140 + 80);
-  }, 850);
+      setTimeout(zoom, 300);
+    }, L.length * 220 + 80);
+  }, 1150);
   setTimeout(end, 16e3);
 })();
 </script>
@@ -11719,7 +11719,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const dm = { list: null, tab: "chats", msgs: [], loading: false, ch: null, chId: null, watch: null, menu: null, editing: null, sending: false };
   const DM_IC = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 10 14"/><path d="M22 3 15 21l-5-7-7-4z"/></svg>';
-  const WILDY_VER = "44";
+  const WILDY_VER = "45";
   const BACK_IC = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>';
   const dmIncoming = (t) => t.status === "pending" && !t.mine_request;
   function dmUnread() {
