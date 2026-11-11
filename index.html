@@ -7950,7 +7950,9 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     else if (view.name === "new") renderNew();
     else if (view.name === "settings") renderSettings();
     else if (view.name === "pets") renderPets();
-    else if (view.name === "explore") renderExplore();
+    else if (view.name === "explore") renderExploreSimple();
+    else if (view.name === "chats") renderChats();
+    else if (view.name === "wall") renderWallPage();
     else if (view.name === "postnew") renderPostNew();
     else if (view.name === "mem") renderMem();
     else if (view.name === "memnew") renderMemNew();
@@ -7999,6 +8001,7 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
     drawQR();
     renderTabs();
     bruceBtn();
+    chatFab();
     party();
     if (view.name !== "home") wgClose();
     if (!(view.name === "chat" && comm.sec === "chat" && inCommunity())) chatLeave();
@@ -8173,17 +8176,6 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   }
   const QA_IC = { cuid: '<path d="m18 2 4 4"/><path d="m17 7 3-3"/><path d="M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5"/><path d="m9 11 4 4"/><path d="m5 19-3 3"/>', qr: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>', qd: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 15 2 2 4-4"/>', st: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>', rec: '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>' };
   const qaBtn = (act2, v, ic2, l) => `<button class="qa-b" data-act="${act2}"${v ? ` data-v="${v}"` : ""}><span class="qa-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${QA_IC[ic2]}</svg></span>${l}</button>`;
-  function renderHome() {
-    const nm = String(owner.name || "").trim().split(" ")[0], lost = pets.filter((p) => p.lost);
-    app.innerHTML = `
-  <header class="hm-top"><div><p class="hm-greet">${greet()}${nm ? `, <b>${esc(nm)}</b>` : ""}</p><p class="hm-date">${fechaLarga()}</p></div>
-    <div class="top-r">${bellBtn()}<button class="gear-btn" data-act="settings" aria-label="Ajustes y perfil">${ic("gear", 22)}</button></div></header>
-  ${lost.map((p) => `<button class="hm-lost" data-act="open" data-id="${p.id}">${ic("alerta", 22, 2)}<span><b>${esc(p.name)} est\xE1 en modo perdida</b><span>Toca para ver su ficha</span></span></button>`).join("")}
-  ${pets.length && !owner.phone && !pets.every(hasQR) ? `<div class="warnbox" style="margin-bottom:12px"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">A\xF1adir</button></div>` : ""}
-  ${homeImportant()}
-  ${widgetsHTML()}`;
-    if (tagS.list === null) loadTags();
-  }
   function renderPets() {
     if (mem.all === null && pets.length) loadMem();
     const ml = mem.all || [], thumbs = ml.filter((m) => (m.photos || []).length).slice(0, 3).map((m) => mem.urls[m.photos[0]]).filter(Boolean);
@@ -8466,6 +8458,7 @@ C\xF3digo: ${inviteCode.code}`;
   <button class="back" data-act="go" data-v="home">\u2039 Inicio</button>
   <h1 style="font-size:34px;margin-block:6px 12px">Ajustes y perfil</h1>
   <div class="me-card">${avatarHTML()}<div class="me-card-t"><b>${esc(o.name || "Tu perfil")}</b><span class="sub">${o.handle ? "@" + esc(o.handle) : esc(user.email || "")}</span></div>${inCommunity() ? `<button class="btn soft small" data-act="comm_user" data-id="${esc(user.id)}">Ver mi perfil</button>` : ""}</div>
+  ${folRow()}
   ${pushCard()}
   <form class="form" id="oform">
     <div class="photo-pick">${avatarHTML(true)}
@@ -10565,7 +10558,7 @@ C\xF3digo: ${inviteCode.code}`;
   ${l.length ? sec("Atrasados", late) + sec("Hoy", now) + sec("Pr\xF3ximos d\xEDas", soon) : `<div class="soc-empty"><div>${ic("check", 30)}</div><b>Todo al d\xEDa</b><p>No hay nada pendiente en las pr\xF3ximas dos semanas.</p></div>`}`;
   }
   const TABS = [["explorar", "Explorar"], ["home", "Inicio"], ["mascotas", "Tus mascotas"]];
-  const TAB_OF = { home: "home", avisos: "home", settings: "home", legal: "home", pets: "mascotas", pet: "mascotas", new: "mascotas", qrs: "mascotas", share: "mascotas", join: "mascotas", mem: "mascotas", memnew: "mascotas", memone: "mascotas", tienda: "mascotas", producto: "mascotas", explore: "explorar", postnew: "explorar", social: "explorar", sitios: "explorar", chat: "explorar", profile: "explorar", inbox: "explorar", dm: "explorar", grp: "explorar", grpnew: "explorar", grpinfo: "explorar" };
+  const TAB_OF = { chats: "", wall: "explorar", home: "home", avisos: "home", settings: "home", legal: "home", pets: "mascotas", pet: "mascotas", new: "mascotas", qrs: "mascotas", share: "mascotas", join: "mascotas", mem: "mascotas", memnew: "mascotas", memone: "mascotas", tienda: "mascotas", producto: "mascotas", explore: "explorar", postnew: "explorar", social: "explorar", sitios: "explorar", chat: "", profile: "", inbox: "", dm: "", grp: "", grpnew: "", grpinfo: "" };
   function lsGet(k, d) {
     try {
       return localStorage.getItem(k) || d;
@@ -10607,6 +10600,12 @@ C\xF3digo: ${inviteCode.code}`;
       view = { name: "pets" };
     } else if (v === "explore") {
       view = { name: "explore" };
+    } else if (v === "chats") {
+      view = { name: "chats" };
+      CH.last = null;
+      if (inCommunity()) loadDM();
+    } else if (v === "wall") {
+      view = { name: "wall" };
     } else if (v === "mem") {
       view = { name: "mem" };
     } else if (v === "tienda") {
@@ -10626,8 +10625,8 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const xpTop = (on) => `<button class="back" data-act="go" data-v="explore">\u2039 Explorar</button><div class="seg seg2 xp-seg" role="tablist" aria-label="Qu\xE9 buscas">${[["sitios", "Sitios"], ["social", "Quedadas"]].map(([v, l]) => `<button role="tab" aria-selected="${on === v}" class="${on === v ? "on" : ""}" data-act="go" data-v="${v}">${l}</button>`).join("")}</div>`;
   function commTop(on) {
-    const nIn = typeof dmUnread === "function" ? dmUnread() : 0, nP = (comm.reqs || []).length;
-    return `<button class="back" data-act="go" data-v="explore">\u2039 Explorar</button><div class="seg seg4" role="tablist" aria-label="Partes de la comunidad">${[["inbox", "Mensajes", nIn], ["chat", "Chat", 0], ["feed", "Actividad", 0], ["people", "Personas", nP]].map(([v, l, n]) => `<button role="tab" aria-selected="${on === v}" class="${on === v ? "on" : ""}" data-act="go" data-v="${v}">${l}${n ? ` <b class="seg-n">${n > 9 ? "9+" : n}</b>` : ""}</button>`).join("")}</div>`;
+    const T = { inbox: "Solicitudes", chat: "Chat com\xFAn", feed: "Opiniones de sitios", people: "Personas" }, back = on === "feed" ? ["wall", "Lo que comparte la gente"] : ["chats", "Chats"];
+    return `<button class="back" data-act="go" data-v="${back[0]}">\u2039 ${back[1]}</button><h1 class="feed-title">${T[on] || ""}</h1>`;
   }
   const COMM_ITEMS = [["social", "Quedadas", "\u{1F4CD}"], ["sitios", "Sitios", "\u{1F3DE}\uFE0F"], ["chat", "Chat com\xFAn", "\u{1F4AC}"], ["inbox", "Mensajes y grupos", "\u2709\uFE0F"], ["people", "Personas", "\u{1F465}"], ["feed", "Actividad", "\u2B50"]];
   function commLast() {
@@ -10712,7 +10711,7 @@ C\xF3digo: ${inviteCode.code}`;
     }
     bar.hidden = false;
     const cur2 = TAB_OF[view.name] || "", cn = (user && typeof dmUnread === "function" && inCommunity() ? dmUnread() : 0) + (comm.reqs || []).length;
-    bar.innerHTML = TABS.map(([a, l]) => `<button data-act="${a}" class="tb-${a}${cur2 === a ? " on" : ""}" aria-label="${l}" ${cur2 === a ? 'aria-current="page"' : ""}>${a === "home" ? '<span class="tb-logo"><img src="wildy-paw.png" alt="" width="40" height="40"></span>' : `<span class="tb-ic">${SVG(IC[a], 27, 1.7)}${a === "explorar" && cn ? `<i class="tb-n">${cn > 9 ? "9+" : cn}</i>` : ""}</span>`}</button>`).join("");
+    bar.innerHTML = TABS.map(([a, l]) => `<button data-act="${a}" class="tb-${a}${cur2 === a ? " on" : ""}" aria-label="${l}" ${cur2 === a ? 'aria-current="page"' : ""}>${a === "home" ? '<span class="tb-logo"><img src="wildy-paw.png" alt="" width="40" height="40"></span>' : `<span class="tb-ic">${SVG(IC[a], 27, 1.7)}</span>`}</button>`).join("");
   }
   let partyShown = false;
   function party() {
@@ -11621,6 +11620,7 @@ C\xF3digo: ${inviteCode.code}`;
         return render();
       }
       if (a === "comm_pscope") {
+        FOL.n = null;
         comm.peopleScope = b.dataset.v;
         if (view.name !== "chat" || comm.sec !== "people") {
           comm.sec = "people";
@@ -11738,7 +11738,7 @@ C\xF3digo: ${inviteCode.code}`;
   }
   const dm = { list: null, tab: "chats", msgs: [], loading: false, ch: null, chId: null, watch: null, menu: null, editing: null, sending: false };
   const DM_IC = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3 10 14"/><path d="M22 3 15 21l-5-7-7-4z"/></svg>';
-  const WILDY_VER = "46";
+  const WILDY_VER = "47";
   const BACK_IC = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>';
   const dmIncoming = (t) => t.status === "pending" && !t.mine_request;
   function dmUnread() {
@@ -11779,6 +11779,8 @@ C\xF3digo: ${inviteCode.code}`;
     });
   }
   function dmRefreshUI() {
+    if (typeof chatFab === "function") chatFab();
+    if (view.name === "chats") renderChats();
     const n = dmUnread();
     document.querySelectorAll(".dm-btn").forEach((b) => {
       let i = b.querySelector("i");
@@ -13065,7 +13067,7 @@ C\xF3digo: ${inviteCode.code}`;
     const p = pets.find((x) => x.id === m.pet_id), ph = (m.photos || [])[0];
     return `<button class="mem-card" data-act="mem_open" data-id="${m.id}">
     ${ph ? `<span class="mem-img">${mem.urls[ph] ? `<img src="${esc(mem.urls[ph])}" alt="" loading="lazy">` : ""}${m.photos.length > 1 ? `<i>+${m.photos.length - 1}</i>` : ""}</span>` : `<span class="mem-img mem-noimg" aria-hidden="true">${ic("libro", 26)}</span>`}
-    <span class="mem-t"><span class="mem-d">${memDate(m.day)}${showPet || (m.tagged || []).length ? " \xB7 " + esc(memWho(m).join(", ")) : ""}</span><b>${esc(m.title || "Un recuerdo")}</b>${m.note ? `<span class="mem-n">${esc(m.note)}</span>` : ""}</span></button>`;
+    <span class="mem-t"><span class="mem-d">${memDate(m.day)}${showPet || (m.tagged || []).length ? " \xB7 " + esc(memWho(m).join(", ")) : ""}</span><b>${esc(m.title || (m.note || "").split("\n")[0].slice(0, 70) || "Un recuerdo")}</b>${m.title && m.note ? `<span class="mem-n">${esc(m.note)}</span>` : ""}</span></button>`;
   }
   function memList(list, showPet) {
     let mk = "", h = "";
@@ -13107,16 +13109,16 @@ C\xF3digo: ${inviteCode.code}`;
     const d = mem.draft;
     app.innerHTML = `<button class="back" data-act="mem_cancel">\u2039 Cancelar</button>
   <h1 class="feed-title">${m ? "Editar recuerdo" : "Nuevo recuerdo"}</h1>
-  <form id="memform" class="form mem-form">
+  <form id="memform" class="form mem-form mem-simple">
+    <div class="mem-ph" id="mem-ph"></div>
+    <label class="mem-pick" id="mem-pick">${ic("foto", 40, 1.8)}<b>Sube una foto</b><span>o varias, hasta 8</span><input type="file" id="mem-files" accept="image/*" multiple hidden></label>
     <div class="sh-lbl2">\xBFQui\xE9n sale?</div>
     <div id="mem-tags"></div>
-    <div class="mem-ph" id="mem-ph"></div>
-    <label class="btn soft small mem-add">\uFF0B A\xF1adir fotos<input type="file" id="mem-files" accept="image/*" multiple hidden></label>
-    <label>Fecha<input id="mem-day" type="date" max="${iso(today())}" value="${esc(m ? m.day : iso(today()))}"></label>
-    <label>T\xEDtulo<input id="mem-title" maxlength="80" placeholder="Su primer d\xEDa en la playa" value="${esc(m ? m.title || "" : "")}"></label>
-    <label>Lo que pas\xF3<textarea id="mem-note" maxlength="1500" rows="4" placeholder="Cu\xE9ntalo para no olvidarlo\u2026">${esc(m ? m.note || "" : "")}</textarea></label>
-    <p class="sub" style="margin:0">Privado: solo lo veis quienes cuid\xE1is a las mascotas que salen. Si etiquetas a la mascota de un amigo, tambi\xE9n le aparecer\xE1 en sus recuerdos.</p>
+    <label class="sh-lbl2" for="mem-note">Escribe algo</label>
+    <textarea id="mem-note" maxlength="1500" rows="3" placeholder="Su primer d\xEDa en la playa\u2026">${esc(m ? m.note || m.title || "" : "")}</textarea>
+    <input id="mem-day" type="hidden" value="${esc(m ? m.day : iso(today()))}">
     <button class="btn block" type="submit">${m ? "Guardar cambios" : "Guardar recuerdo"}</button>
+    <p class="sub" style="margin:0;font-size:13px">Solo lo veis quienes cuid\xE1is a las mascotas que salen.</p>
   </form>`;
     memPhotos();
     memTagsDraw();
@@ -13148,6 +13150,13 @@ C\xF3digo: ${inviteCode.code}`;
   function memPhotos() {
     const el = document.getElementById("mem-ph");
     if (!el) return;
+    const pk = document.getElementById("mem-pick");
+    if (pk) {
+      const n = mem.draft.photos.length;
+      pk.classList.toggle("small", n > 0);
+      pk.querySelector("b").textContent = n ? "A\xF1adir m\xE1s fotos" : "Sube una foto";
+      pk.querySelector("span").textContent = n ? `${n} de 8` : "o varias, hasta 8";
+    }
     el.innerHTML = mem.draft.photos.map((x, i) => `<span class="mem-th"><img src="${esc(x.data || mem.urls[x.path] || "")}" alt="Foto ${i + 1}"><button type="button" data-act="mem_rmph" data-i="${i}" aria-label="Quitar foto ${i + 1}">\u2715</button></span>`).join("");
   }
   async function memSubmit(f) {
@@ -13171,9 +13180,9 @@ C\xF3digo: ${inviteCode.code}`;
       const p = pets.find((x) => x.id === id), c = (mem.cands || []).find((x) => x.id === id);
       names[id] = p ? p.name : c ? c.name : d.names[id] || "";
     });
-    const title = (val("mem-title") || "").trim(), note = (val("mem-note") || "").trim(), day = val("mem-day") || iso(today());
-    if (!title && !note && !d.photos.length) {
-      toast("A\xF1ade una foto, un t\xEDtulo o una nota");
+    const title = m && m.title && !m.note ? null : m ? m.title : null, note = (val("mem-note") || "").trim(), day = val("mem-day") || iso(today());
+    if (!note && !d.photos.length) {
+      toast("Sube una foto o escribe algo");
       mem.saving = false;
       if (btn) {
         btn.disabled = false;
@@ -13243,7 +13252,7 @@ C\xF3digo: ${inviteCode.code}`;
     ${(m.photos || []).map((x, i) => mem.urls[x] ? `<img class="mem-big" src="${esc(mem.urls[x])}" alt="Foto ${i + 1} del recuerdo">` : "").join("")}
     <p class="mem-d">${memDate(m.day)}</p>
     <div class="mem-who">${memWho(m).map((n) => `<span>${ic("etiqueta", 13, 2.2)} ${esc(n)}</span>`).join("")}</div>
-    <h1 class="feed-title" style="margin:0">${esc(m.title || "Un recuerdo")}</h1>
+    ${m.title ? `<h1 class="feed-title" style="margin:0">${esc(m.title)}</h1>` : ""}
     ${m.note ? `<p class="mem-note">${esc(m.note)}</p>` : ""}
     <div class="pc-b"><button class="btn small" data-act="mem_share" data-id="${m.id}">Compartir</button>${memMine(m) ? `<button class="btn ghost small" data-act="mem_edit" data-id="${m.id}">Editar</button><button class="btn ghost small" data-act="mem_del" data-id="${m.id}">Borrar</button>` : `<button class="btn ghost small" data-act="mem_untag" data-id="${m.id}">Quitar a mis mascotas</button>`}</div>
     ${memMine(m) ? "" : `<p class="sub" style="margin-top:10px">Lo ha subido quien cuida a ${esc(memName(m, m.pet_id) || "otra mascota")}.</p>`}
@@ -13375,7 +13384,7 @@ Gracias.`;
     const np = noTagPets(), who = np.length === 1 ? np[0].name : "";
     return `<button class="shop-ban" data-act="go" data-v="tienda">
     <span class="sb-imgs" aria-hidden="true"><img src="chapa-rojo.jpg" alt=""><img src="chapa-rosa.jpg" alt=""><img src="chapa-azul.jpg" alt=""></span>
-    <span class="sb-t"><small>NUEVO \xB7 Chapa Wildy con QR</small><b>${who ? `${esc(who)} a\xFAn no tiene su chapa` : where === "qrs" ? "Hazte con la tuya" : "Que siempre vuelva a casa"}</b><span>Desde ${TAG_PRICE} \xB7 Ver colores \u203A</span></span></button>`;
+    <span class="sb-t"><small>NUEVO \xB7 Chapa Wildy con QR</small><b>${where === "home" ? "Que siempre vuelva a casa" : who ? `${esc(who)} a\xFAn no tiene su chapa` : where === "qrs" ? "Hazte con la tuya" : "Que siempre vuelva a casa"}</b><span>Desde ${TAG_PRICE} \xB7 Ver colores \u203A</span></span></button>`;
   }
   const SHOP = { front: { rojo: "chapa-rojo.jpg", rosa: "chapa-rosa.jpg", azul: "chapa-azul.jpg" }, back: null, dogs: { rojo: [], rosa: [], azul: [] } };
   const shopPics = (c) => [{ src: SHOP.front[c], alt: `Chapa Wildy ${TAG_COL[c].n.toLowerCase()}, por delante: huella con el s\xEDmbolo de Wildyoyu` }, ...SHOP.back ? [{ src: SHOP.back, alt: "Parte de atr\xE1s de la chapa, con su c\xF3digo QR \xFAnico" }] : [], ...(SHOP.dogs[c] || []).map((src, i) => ({ src, alt: `Perro llevando la chapa Wildy ${TAG_COL[c].n.toLowerCase()} (${i + 1})` }))];
@@ -13785,6 +13794,17 @@ Gracias.`;
     if (a.startsWith("grp_")) return grpClick(a, b);
     if (a.startsWith("mem_")) return memClick(a, b);
     if (a.startsWith("wg_")) return wgClick(a, b);
+    if (a === "ch_back") {
+      if (navBack()) return;
+      return goSec("home");
+    }
+    if (a === "ch_reqs") {
+      dm.tab = "reqs";
+      view = { name: "inbox" };
+      render();
+      window.scrollTo(0, 0);
+      return;
+    }
     if (a.startsWith("post_")) return postClick(a, b);
     if (a.startsWith("tag_")) return tagClick(a, b);
     if (a === "sheet_go") return goSec(b.dataset.v);
@@ -14520,36 +14540,48 @@ Gracias.`;
     const d = /* @__PURE__ */ new Date();
     return ["Domingo", "Lunes", "Martes", "Mi\xE9rcoles", "Jueves", "Viernes", "S\xE1bado"][d.getDay()] + ", " + d.getDate() + " de " + MESES[d.getMonth()];
   }
+  const whenTx = (d) => d < 0 ? `hace ${-d} d\xEDa${d === -1 ? "" : "s"}` : d === 0 ? "hoy" : d === 1 ? "ma\xF1ana" : `en ${d} d\xEDas`;
+  function petSays(type, d, title) {
+    const w = whenTx(d), past = d < 0;
+    const M = {
+      Vacuna: past ? `Me tocaba vacunarme ${w}` : `Me vacuno ${w}`,
+      "Desparasitaci\xF3n": past ? `Me tocaba desparasitarme ${w}` : `Me toca desparasitarme ${w}`,
+      Veterinario: past ? `Ten\xEDa veterinario ${w}` : `Voy al veterinario ${w}`,
+      "Peluquer\xEDa": past ? `Ten\xEDa peluquer\xEDa ${w}` : `Voy a la peluquer\xEDa ${w}`,
+      Medicina: past ? `Me tocaba la medicina ${w}` : `Me toca la medicina ${w}`
+    };
+    return M[type] || `${title || type} ${w}`;
+  }
   function homeItems() {
     const t = today(), out = [];
     pets.forEach((p) => {
       (p.events || []).forEach((e) => {
         if (e.done) return;
         const days = Math.round((parse(e.date) - t) / 864e5);
-        if (days <= 30 && days >= -60) out.push({ pet: p, days, ev: e.id, ic: e.type === "Vacuna" || e.type === "Desparasitaci\xF3n" || e.type === "Medicina" ? "vacuna" : "cita", title: e.title && e.title !== e.type ? e.type + " \xB7 " + e.title : e.type });
+        if (days <= 30 && days >= -60) out.push({ pet: p, days, ev: e.id, ic: e.type === "Vacuna" || e.type === "Desparasitaci\xF3n" || e.type === "Medicina" ? "vacuna" : "cita", say: petSays(e.type, days, e.title), extra: e.title && e.title !== e.type ? e.title : "" });
       });
       const c = nextCele(p.birth);
-      if (c && c.days <= (c.unit === "m" ? 7 : 30)) out.push({ pet: p, days: c.days, ic: "tarta", title: `Cumple ${c.label}` });
+      if (c && c.days <= (c.unit === "m" ? 7 : 30)) out.push({ pet: p, days: c.days, ic: "tarta", say: c.days === 0 ? `\xA1Hoy cumplo ${c.label}!` : `Cumplo ${c.label} ${whenTx(c.days)}`, extra: "" });
     });
     return out.sort((a, b) => a.days - b.days);
   }
   function homeImportant() {
     const l = homeItems();
-    if (!pets.length) return `<section class="hm-card hm-empty"><b>Empieza por tu mascota</b><p class="sub">A\xF1\xE1dela y aqu\xED ver\xE1s sus vacunas, citas y cumplea\xF1os.</p><button class="btn small" data-act="new">A\xF1adir mascota</button></section>`;
-    if (!l.length) return `<section class="hm-card hm-ok"><span class="hm-okic">${ic("check", 26)}</span><span><b>Todo al d\xEDa</b><span class="sub">Nada pendiente en los pr\xF3ximos 30 d\xEDas.</span></span></section>`;
-    return `<section class="hm-card" aria-label="Lo importante"><div class="hm-hd"><b>Lo importante</b>${l.length > 4 ? `<button class="lnk" data-act="avisos">Ver todo</button>` : ""}</div>
+    if (!pets.length) return `<section class="hm-card hm-empty"><b>Empieza por tu mascota</b><p class="sub">A\xF1\xE1dela y aqu\xED te recordar\xE1 sus vacunas, citas y cumplea\xF1os.</p><button class="btn small" data-act="new">A\xF1adir mascota</button></section>`;
+    if (!l.length) return `<section class="hm-card hm-ok"><span class="hm-okic">${ic("check", 26)}</span><span><b>No lo olvides\u2026 \xA1no hay nada!</b><span class="sub">Estamos al d\xEDa. Hoy toca solo jugar.</span></span></section>`;
+    return `<section class="hm-card" aria-label="No lo olvides"><div class="hm-hd"><b>No lo olvides</b>${l.length > 4 ? `<button class="lnk" data-act="avisos">Ver todo</button>` : ""}</div>
     ${l.slice(0, 4).map((x) => {
       const ph = photosOf(x.pet)[0];
       return `<div class="hm-row ${x.days < 0 ? "late" : x.days === 0 ? "now" : ""}">
       <button class="hm-pet" data-act="open" data-id="${x.pet.id}" aria-label="Abrir la ficha de ${esc(x.pet.name)}">${ph ? `<img src="${esc(ph)}" alt="">` : `<span>${esc(x.pet.name[0] || "?")}</span>`}<i>${ic(x.ic, 13, 2.2)}</i></button>
-      <button class="hm-t" data-act="open" data-id="${x.pet.id}"><b>${esc(x.title)}</b><span>${esc(x.pet.name)}</span></button>
-      <span class="hm-when">${dayTxt(x.days)}</span>
-      ${x.ev ? `<button class="hm-ok-b" data-act="avdone" data-id="${x.ev}" aria-label="Marcar como hecho">${ic("check", 22)}</button>` : ""}</div>`;
+      <button class="hm-t hm-say" data-act="open" data-id="${x.pet.id}"><b>\xAB${esc(x.say)}\xBB</b><span>${esc(x.pet.name)}${x.extra ? " \xB7 " + esc(x.extra) : ""}</span></button>
+      <span></span>
+      ${x.ev ? `<button class="hm-ok-b" data-act="avdone" data-id="${x.ev}" aria-label="Marcar como hecho">${ic("check", 22)}</button>` : "<span></span>"}</div>`;
     }).join("")}
   </section>`;
   }
   const WG = { list: null, edit: false, data: {} };
-  const WG_TYPES = [["foto", "foto", "Una foto", "La foto que m\xE1s te guste, siempre a mano"], ["chat", "chats", "Un chat", "Los \xFAltimos mensajes de una conversaci\xF3n o grupo"], ["comun", "comun", "Chat com\xFAn", "Lo \xFAltimo que se dice en la comunidad"], ["muro", "muro", "Muro", "Lo \xFAltimo que publica la gente que sigues"], ["recuerdo", "libro", "Un recuerdo", "Un recuerdo distinto de tus mascotas cada d\xEDa"], ["peso", "peso", "Peso", "C\xF3mo va el peso de una mascota"]];
+  const WG_TYPES = [["bruce", "chats", "Bruce te dice", "Un consejo de perro distinto cada d\xEDa"], ["foto", "foto", "Una foto", "La foto que m\xE1s te guste, siempre a mano"], ["chat", "chats", "Un chat", "Los \xFAltimos mensajes de una conversaci\xF3n o grupo"], ["comun", "comun", "Chat com\xFAn", "Lo \xFAltimo que se dice en la comunidad"], ["muro", "muro", "Muro", "Lo \xFAltimo que publica la gente que sigues"], ["recuerdo", "libro", "Un recuerdo", "Un recuerdo distinto de tus mascotas cada d\xEDa"], ["peso", "peso", "Peso", "C\xF3mo va el peso de una mascota"]];
   function wgKey() {
     return "wildy.widgets." + (user ? user.id : "");
   }
@@ -14563,7 +14595,8 @@ Gracias.`;
         } catch (_) {
         }
       }
-      WG.list = Array.isArray(l) ? l.slice(0, 12) : [];
+      WG.list = Array.isArray(l) ? l.slice(0, 13) : [];
+      if (!WG.list.some((w) => w.t === "bruce" || w.t === "_nobruce")) WG.list.unshift({ t: "bruce" });
     }
     return WG.list;
   }
@@ -14575,11 +14608,13 @@ Gracias.`;
     });
   }
   function wgTitle(w) {
-    const t = WG_TYPES.find((x) => x[0] === w.t);
-    return w.t === "chat" ? "Chat" : w.t === "peso" ? "Peso de " + ((pets.find((p) => p.id === w.pet) || {}).name || "") : t ? t[2] : "";
+    const pn = (pets.find((p) => p.id === w.pet) || pets[0] || {}).name || "";
+    const T = { chat: "Te han escrito", peso: pn + ": as\xED voy de peso", comun: "Lo que se cuenta en el parque", muro: "Lo que comparten mis amigos", recuerdo: "\xBFTe acuerdas de esto?" };
+    return T[w.t] || "";
   }
   function wgBody(w, i) {
     const D = WG.data;
+    if (w.t === "bruce") return bruceCard();
     if (w.t === "foto") return `<img class="wg-img" src="${esc(w.url)}" alt="Tu foto">`;
     if (w.t === "peso") {
       const p = pets.find((x) => x.id === w.pet);
@@ -14633,11 +14668,11 @@ Gracias.`;
   ${WG.edit || l.length < 12 ? `<button class="wg-add" data-act="wg_add">${ic("mas", 18, 2.2)} A\xF1adir widget</button>` : ""}`;
   }
   function wgListHTML() {
-    const l = wgGet();
+    const l = wgGet().filter((w) => w.t[0] !== "_");
     return l.map((w, i) => {
       const t = WG_TYPES.find((x) => x[0] === w.t) || WG_TYPES[0];
       return `<article class="wg wt-${w.t}">
-    ${w.t === "foto" ? "" : `<header class="wg-h"><span class="wg-ic">${ic(t[1], 15, 2)}</span>${esc(wgTitle(w))}</header>`}
+    ${w.t === "foto" || w.t === "bruce" ? "" : `<header class="wg-h"><span class="wg-ic">${ic(t[1], 15, 2)}</span>${esc(wgTitle(w))}</header>`}
     <div class="wg-b">${wgBody(w, i)}</div>
     ${WG.edit ? `<div class="wg-tools"><button data-act="wg_up" data-i="${i}" aria-label="Subir" ${i ? "" : "disabled"}>${ic("arriba", 18, 2.2)}</button><button data-act="wg_down" data-i="${i}" aria-label="Bajar" ${i < l.length - 1 ? "" : "disabled"}>${ic("abajo", 18, 2.2)}</button><button data-act="wg_rm" data-i="${i}" aria-label="Quitar">${ic("x", 18, 2.2)}</button></div>` : ""}
   </article>`;
@@ -14684,7 +14719,7 @@ Gracias.`;
       });
     }
     let body = "";
-    if (step === "type") body = `<h2>A\xF1adir widget</h2><div class="wgs-list">${WG_TYPES.map(([t, icn, l, s]) => `<button class="wgs-item" data-wg="t" data-t="${t}"><span class="wgs-ic">${ic(icn, 22)}</span><span><b>${l}</b><span class="sub">${s}</span></span></button>`).join("")}</div>`;
+    if (step === "type") body = `<h2>A\xF1adir algo importante</h2><div class="wgs-list">${WG_TYPES.map(([t, icn, l, s]) => `<button class="wgs-item" data-wg="t" data-t="${t}"><span class="wgs-ic">${ic(icn, 22)}</span><span><b>${l}</b><span class="sub">${s}</span></span></button>`).join("")}</div>`;
     else if (step === "foto") {
       const ph = [...new Set(pets.flatMap(photosOf))];
       body = `<h2>Elige una foto</h2><div class="wgs-photos"><button class="wgs-up" data-wg="upload">${ic("mas", 26, 2)}<span>Subir otra</span></button>${ph.map((u) => `<button data-wg="foto" data-u="${esc(u)}"><img src="${esc(u)}" alt=""></button>`).join("")}</div>`;
@@ -14699,6 +14734,9 @@ Gracias.`;
     if (d) d.remove();
   }
   function wgPush(w) {
+    if (w.t === "bruce") {
+      WG.list = wgGet().filter((x) => x.t !== "_nobruce");
+    }
     wgGet().push(w);
     wgSave();
     wgClose();
@@ -14707,7 +14745,7 @@ Gracias.`;
       render();
       wgLoad();
     }
-    toast("Widget a\xF1adido");
+    toast("A\xF1adido a tus cosas importantes");
   }
   async function wgPick(k, b) {
     if (k === "close") return wgClose();
@@ -14736,7 +14774,7 @@ Gracias.`;
         return;
       }
       if (wgGet().some((w) => w.t === t)) {
-        toast("Ya tienes este widget");
+        toast("Ya lo tienes en tus cosas importantes");
         return;
       }
       return wgPush({ t });
@@ -14761,18 +14799,23 @@ Gracias.`;
       return render();
     }
     if (a === "wg_rm") {
-      l.splice(i, 1);
+      const vis2 = l.filter((w2) => w2.t[0] !== "_"), w = vis2[i], k = l.indexOf(w);
+      if (k >= 0) l.splice(k, 1);
+      if (w && w.t === "bruce" && !l.some((x) => x.t === "_nobruce")) l.push({ t: "_nobruce" });
       wgSave();
-      if (!l.length) WG.edit = false;
+      if (!l.some((x) => x.t[0] !== "_")) WG.edit = false;
       return render();
     }
+    const vis = l.filter((w) => w.t[0] !== "_");
     if (a === "wg_up" && i > 0) {
-      [l[i - 1], l[i]] = [l[i], l[i - 1]];
+      const x = l.indexOf(vis[i - 1]), y = l.indexOf(vis[i]);
+      [l[x], l[y]] = [l[y], l[x]];
       wgSave();
       return wgRefresh();
     }
-    if (a === "wg_down" && i < l.length - 1) {
-      [l[i + 1], l[i]] = [l[i], l[i + 1]];
+    if (a === "wg_down" && i < vis.length - 1) {
+      const x = l.indexOf(vis[i + 1]), y = l.indexOf(vis[i]);
+      [l[x], l[y]] = [l[y], l[x]];
       wgSave();
       return wgRefresh();
     }
@@ -14928,7 +14971,7 @@ Gracias.`;
       posts.list = null;
       WG.data.muro = null;
       toast("\xA1Publicado!");
-      view = { name: "explore" };
+      view = { name: "wall" };
       render();
       window.scrollTo(0, 0);
     } catch (e) {
@@ -15084,6 +15127,146 @@ Gracias.`;
   <g fill="rgba(255,255,255,.5)"><path d="M34 70 l8-20 8 20z"/><rect x="40.5" y="70" width="3" height="6"/><path d="M48 72 l6-15 6 15z"/></g>
   <g fill="rgba(255,255,255,.8)"><g transform="translate(86 86) rotate(-20) scale(.22)">${'<ellipse cx="16" cy="21" rx="7" ry="6"/><ellipse cx="7.5" cy="13" rx="3" ry="3.8"/><ellipse cx="24.5" cy="13" rx="3" ry="3.8"/><ellipse cx="12" cy="7" rx="3" ry="3.8"/><ellipse cx="20" cy="7" rx="3" ry="3.8"/>'}</g><g transform="translate(100 78) rotate(-10) scale(.2)"><ellipse cx="16" cy="21" rx="7" ry="6"/><ellipse cx="7.5" cy="13" rx="3" ry="3.8"/><ellipse cx="24.5" cy="13" rx="3" ry="3.8"/><ellipse cx="12" cy="7" rx="3" ry="3.8"/><ellipse cx="20" cy="7" rx="3" ry="3.8"/></g><g transform="translate(115 74) rotate(5) scale(.18)"><ellipse cx="16" cy="21" rx="7" ry="6"/><ellipse cx="7.5" cy="13" rx="3" ry="3.8"/><ellipse cx="24.5" cy="13" rx="3" ry="3.8"/><ellipse cx="12" cy="7" rx="3" ry="3.8"/><ellipse cx="20" cy="7" rx="3" ry="3.8"/></g></g>
 </svg>`;
+  const CH = { last: null };
+  function chatsCount() {
+    return inCommunity() && typeof dmUnread === "function" ? dmUnread() : 0;
+  }
+  function chatsReqs() {
+    return (dm.list || []).filter(dmIncoming).length + (grp.list || []).filter((g) => g.status === "invited").length;
+  }
+  function dmRowHTML(t) {
+    const wait = t.mine_request && t.status !== "accepted";
+    const last = t.blocked ? "Bloqueado" : wait ? "Solicitud enviada" : (t.last_mine ? "T\xFA: " : "") + esc(t.last_text || "");
+    return `<button class="dm-row${t.unread && !t.blocked ? " unread" : ""}" data-act="dm_open" data-id="${esc(t.id)}">${cAv(t.photo, t.name, "dm-av")}
+    <span class="dm-mid"><b>${esc(t.name)}</b><span class="dm-last">${last}</span></span>
+    <span class="dm-when">${dmWhen(t.last_at)}${t.unread && !t.blocked ? '<i class="dm-dot" aria-label="sin leer"></i>' : ""}</span></button>`;
+  }
+  function renderChats() {
+    if (!inCommunity()) {
+      renderCommunityGate();
+      app.insertAdjacentHTML("afterbegin", '<button class="back" data-act="ch_back">\u2039 Volver</button>');
+      return;
+    }
+    if (dm.list === null) loadDM();
+    if (CH.last === null) {
+      CH.last = false;
+      sb.from("community_msgs").select("name,body,created_at").eq("room", "general").order("created_at", { ascending: false }).limit(1).then(({ data }) => {
+        CH.last = (data || [])[0] || {};
+        if (view.name === "chats") renderChats();
+      });
+    }
+    const reqs = chatsReqs(), fol = (comm.reqs || []).length;
+    const rows = (dm.list || []).filter((t) => !dmIncoming(t)).map((t) => ({ at: t.last_at, h: dmRowHTML(t) })).concat((grp.list || []).filter((g) => g.status === "member").map((g) => ({ at: g.last_at, h: grpRow(g) }))).sort((a, b) => a.at < b.at ? 1 : a.at > b.at ? -1 : 0).map((x) => x.h).join("");
+    const L2 = CH.last || {};
+    app.innerHTML = `<div class="ch-top"><button class="back" data-act="ch_back">\u2039 Volver</button><h1>Chats</h1>
+    <button class="ch-ic" data-act="go" data-v="people" aria-label="Buscar personas">${SVG('<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>', 22, 2.2)}</button>
+    <button class="ch-ic" data-act="grp_new" aria-label="Nuevo grupo">${ic("mas", 22, 2.2)}</button></div>
+  ${folRow()}
+  ${reqs ? `<button class="ch-req" data-act="ch_reqs">${ic("chats", 20, 2)}<span><b>${reqs} ${reqs === 1 ? "persona quiere" : "personas quieren"} hablar contigo</b><span>Toca para ver y decidir</span></span><i>\u203A</i></button>` : ""}
+  ${fol ? `<button class="ch-req soft" data-act="go" data-v="people">${ic("persona", 20, 2)}<span><b>${fol} ${fol === 1 ? "persona quiere" : "personas quieren"} seguirte</b></span><i>\u203A</i></button>` : ""}
+  <button class="dm-row ch-common" data-act="go" data-v="chat"><span class="dm-av ch-cav">${ic("comun", 26, 2)}</span>
+    <span class="dm-mid"><b>Chat com\xFAn <em>Todos</em></b><span class="dm-last">${L2.body ? esc(L2.name || "") + ": " + esc(L2.body) : "Habla con toda la comunidad \xB7 se borra cada noche"}</span></span>
+    <span class="dm-when">${L2.created_at ? dmWhen(L2.created_at) : ""}</span></button>
+  <div class="dm-list ch-list">${dm.list === null ? '<p class="sub" style="text-align:center">Cargando\u2026</p>' : rows || `<div class="ai-empty"><div class="ai-hi" aria-hidden="true">${ic("chats", 30)}</div><b>A\xFAn no tienes conversaciones</b><p>Busca a alguien con la lupa o crea un grupo con el +.</p></div>`}</div>`;
+  }
+  function chatFab() {
+    let b = document.getElementById("chatfab");
+    const hide = !user || window.WILDY_LANDING || ["chats", "ask", "dm", "grp", "grpinfo", "grpnew", "memnew", "new", "postnew", "newpass", "share", "join", "inbox"].includes(view.name) || view.name === "chat" && inCommunity();
+    if (hide) {
+      if (b) b.hidden = true;
+      return;
+    }
+    if (!b) {
+      b = document.createElement("button");
+      b.id = "chatfab";
+      b.type = "button";
+      b.addEventListener("click", () => goSec("chats"));
+      document.body.appendChild(b);
+    }
+    const n = chatsCount() + chatsReqs();
+    b.setAttribute("aria-label", n ? `Chats, ${n} sin leer` : "Chats");
+    b.innerHTML = `${ic("chats", 24, 2)}${n ? `<i class="tb-n">${n > 9 ? "9+" : n}</i>` : ""}`;
+    b.hidden = false;
+  }
+  function xpBig(v, icn, l, s, cls) {
+    return `<button class="xp-big ${cls}" data-act="go" data-v="${v}"><span class="xb-ic">${ic(icn, 34, 2)}</span><span class="xb-t"><b>${l}</b><span>${s}</span></span><span class="xb-go" aria-hidden="true">\u203A</span></button>`;
+  }
+  function renderExploreSimple() {
+    app.innerHTML = `<h1 class="feed-title xp-title">Explorar</h1>
+  <p class="xp-intro">\xBFQu\xE9 te apetece hoy?</p>
+  <div class="xp-bigs">
+    ${xpBig("sitios", "sitio", "Sitios", "Parques, playas y bares para ir con tu perro", "c1")}
+    ${xpBig("social", "quedada", "Quedadas", "Queda con otros perros cerca de ti", "c2")}
+    ${xpBig("wall", "foto", "Lo que comparte la gente", "Fotos, sitios favoritos y opiniones", "c3")}
+  </div>`;
+  }
+  function renderWallPage() {
+    app.innerHTML = `<button class="back" data-act="go" data-v="explore">\u2039 Explorar</button>
+  <div class="xp-h"><h1 class="feed-title" style="margin:0">Lo que comparte la gente</h1></div>
+  ${inCommunity() ? `<button class="btn block wall-pub" data-act="post_new">${ic("mas", 18, 2.4)} Compartir una foto</button>` : ""}
+  <section class="xp-sec" style="margin-top:14px"><div class="xp-h"><h2>Sitios favoritos</h2><button class="lnk" data-act="go" data-v="feed">Opiniones \u203A</button></div><div id="xp-favs" class="xp-favs"></div></section>
+  <section class="xp-sec">
+    ${inCommunity() ? `<div class="chips st-cats">${[["all", "Todos"], ["following", "Gente que sigo"]].map((s) => `<button class="chip ${posts.scope === s[0] ? "on" : ""}" data-act="post_scope" data-v="${s[0]}">${s[1]}</button>`).join("")}</div><div id="xp-wall" class="xp-wall"></div>` : `<div class="hm-card hm-empty"><b>Comparte con otros due\xF1os</b><p class="sub">Entra en la comunidad para ver lo que publican y compartir tus fotos.</p><button class="btn small" data-act="go" data-v="chat">Entrar en la comunidad</button></div>`}
+  </section>`;
+    if (comm.feed === null && !comm.feedBusy) {
+      comm.feedBusy = true;
+      sb.rpc("community_feed", { scope: "all", lim: 40 }).then(({ data, error }) => {
+        comm.feedBusy = false;
+        comm.feed = error ? [] : data || [];
+        renderFavs();
+      });
+    }
+    renderFavs();
+    if (inCommunity()) {
+      if (posts.list === null) postsLoad();
+      else renderWall();
+    }
+  }
+  const BRUCE_TIPS = ["En verano s\xE1came temprano o al anochecer: el asfalto me quema las almohadillas.", "Haz la prueba de la mano: si no aguantas 7 segundos la palma en el suelo, a m\xED me quema.", "Uvas, pasas, chocolate, cebolla y chicles con xilitol son t\xF3xicos para m\xED. \xA1Ni un poquito!", "El aguacate, el ajo y las nueces de macadamia tampoco me sientan bien. Mejor no me los des.", "Cuando volvamos del campo, m\xEDrame orejas y patas: las espigas se me clavan.", "Si me ves sacudir mucho la cabeza tras un paseo por el campo, puede ser una espiga en la oreja: al veterinario.", "Un perro cansado es un perro feliz: paseo, olfateo y un rato de juego cada d\xEDa.", "D\xE9jame olfatear en los paseos: diez minutos oliendo me cansan tanto como correr.", "Cep\xEDllame los dientes dos o tres veces por semana, con pasta para perros (la tuya no me vale).", "Revisa que mi chapa QR tiene tu tel\xE9fono al d\xEDa. Es lo que me trae de vuelta a casa.", "Pr\xE9miame justo cuando lo hago bien: as\xED aprendo mucho antes.", "Las sesiones de aprendizaje, cortas: cinco minutos varias veces al d\xEDa funcionan mejor que una hora.", "En los paseos largos, lleva agua para los dos.", "Nunca me dejes en el coche al sol, ni con la ventanilla bajada ni \xABsolo un momento\xBB.", "Si jadeo mucho, babeo y estoy flojo con calor, puede ser un golpe de calor: sombra, agua y al veterinario ya.", "Los huesos cocinados se astillan y me pueden hacer da\xF1o. Mejor juguetes para morder.", "Mi cama, mi comedero y mi agua en un sitio tranquilo: as\xED me siento seguro en casa.", "Cambia mi pienso poco a poco, mezclando durante una semana, o me doler\xE1 la tripa.", "Si tengo sobrepeso, notar\xE1s mal mis costillas. Pregunta al veterinario cu\xE1nto debo comer.", "Las orugas procesionarias de los pinos son muy peligrosas para m\xED en primavera. Al\xE9jame de ellas.", "Antes de ir a la playa o al monte, mira si me dejan entrar. \xA1Hay playas solo para perros!", "Si viajas conmigo en coche, ponme arn\xE9s con cintur\xF3n o transport\xEDn. Por mi seguridad y por la tuya.", "Cuando llegues a casa, no hagas una fiesta enorme: as\xED me cuesta menos quedarme solo.", "Para que me acostumbre a quedarme solo, empieza con ratitos cortos y ve alarg\xE1ndolos.", "Un juguete relleno de comida me entretiene mucho cuando no est\xE1s.", "Los petardos me dan mucho miedo. Esos d\xEDas d\xE9jame un rinc\xF3n tranquilo y no me obligues a salir.", "No me ri\xF1as si me hago pis en casa por miedo o nervios: no lo entiendo y me asusto m\xE1s.", "Social\xEDzame de cachorro con personas, perros, ruidos y sitios nuevos, siempre con calma.", "Hasta que tenga todas las vacunas, pregunta al veterinario d\xF3nde puedo pasear.", "Desparas\xEDtame por dentro y por fuera cuando te diga el veterinario, sobre todo si vamos al campo.", "Las garrapatas se esconden en orejas, cuello y entre los dedos. Rev\xEDsame al volver del monte.", "Si me cortas las u\xF1as, solo la puntita: dentro hay una venita que duele si la tocas.", "B\xE1\xF1ame solo cuando haga falta y con champ\xFA para perros: si no, se me reseca la piel.", "Cep\xEDllame a menudo, sobre todo cuando cambio el pelo en primavera y oto\xF1o.", "Los perros grandes como los mastines crecemos despacio: nada de saltos ni carreras largas de cachorro.", "Si me rasco mucho o me lamo las patas sin parar, cu\xE9ntaselo al veterinario.", "Si bostezo, me relamo o aparto la mirada, te estoy diciendo que algo me incomoda.", "Mover la cola no siempre es alegr\xEDa: mira tambi\xE9n mis orejas y mi cuerpo.", "Para presentarme a otro perro, mejor en terreno neutral y con las correas flojas.", "Ll\xE9vame con correa cerca de carreteras, aunque sea muy obediente.", "Tener mi microchip con tus datos al d\xEDa es obligatorio y me puede salvar.", "Apunta mis vacunas en el calendario: Wildy te lo recuerda para que no se te pase.", "Hazme fotos a menudo: si alg\xFAn d\xEDa me pierdo, una foto reciente ayuda much\xEDsimo.", "Si me pierdo, activa el modo perdida en Wildy: quien escanee mi chapa ver\xE1 que me est\xE1s buscando.", "En casa, guarda productos de limpieza, medicinas y cables fuera de mi alcance.", "Algunas plantas como el lirio, la adelfa o el poto son t\xF3xicas para m\xED.", "Con fr\xEDo, a los perros peque\xF1os o de pelo corto nos viene bien un abriguito.", "Si nieva, s\xE9came bien las patas al volver: la sal de las calles me irrita.", "No me des leche de vaca: a muchos perros nos sienta mal.", "Los premios cuentan como comida: si me das muchos, qu\xEDtame un poco de pienso.", "Juega conmigo a buscar cosas escondidas: me encanta y me cansa la cabeza.", "Ens\xE9\xF1ame a soltar las cosas cambi\xE1ndomelas por un premio, no persigui\xE9ndome.", "Si tiro de la correa, para quieto. Cuando la correa se afloje, seguimos andando.", "Ll\xE1mame siempre para cosas buenas: si me llamas para re\xF1irme, no querr\xE9 venir.", "Las caricias que m\xE1s me gustan son en el pecho y detr\xE1s de las orejas.", "Cuando me vaya haciendo mayor, revisiones m\xE1s a menudo y paseos m\xE1s tranquilos.", "Que siempre tenga agua fresca y limpia, y c\xE1mbiala cada d\xEDa.", "Despu\xE9s de comer mucho, mejor un rato de calma antes de correr. A los perros grandes nos puede sentar fatal.", "Si vomito varias veces, tengo diarrea con sangre o no como en todo un d\xEDa, al veterinario.", "Ten a mano el tel\xE9fono de una urgencia veterinaria 24 horas, por si acaso."];
+  function bruceTip() {
+    const d = /* @__PURE__ */ new Date();
+    return BRUCE_TIPS[(d.getFullYear() * 372 + d.getMonth() * 31 + d.getDate()) % BRUCE_TIPS.length];
+  }
+  function petStory(p) {
+    const ph = photosOf(p)[0], nb = nextCele(p.birth), today2 = nb && nb.days === 0, up = (p.events || []).some((e) => !e.done && Math.round((parse(e.date) - today_()) / 864e5) <= 1);
+    return `<button class="hs-pet${p.lost ? " lost" : up || today2 ? " hot" : ""}" data-act="open" data-id="${p.id}" aria-label="Abrir la ficha de ${esc(p.name)}"><span class="hs-ring"><span class="hs-img">${ph ? `<img src="${esc(ph)}" alt="">` : `<em>${esc((p.name || "?")[0])}</em>`}</span></span><b>${esc(p.name)}</b>${p.lost ? "<i>Perdida</i>" : today2 ? "<i>\xA1Cumple!</i>" : ""}</button>`;
+  }
+  const today_ = () => today();
+  function renderHome() {
+    const nm = String(owner.name || "").trim().split(" ")[0], lost = pets.filter((p) => p.lost);
+    app.innerHTML = `
+  <header class="hm-top"><div><p class="hm-greet">${greet()}${nm ? `, <b>${esc(nm)}</b>` : ""}</p><p class="hm-date">${fechaLarga()}</p></div>
+    <div class="top-r">${bellBtn()}<button class="gear-btn" data-act="settings" aria-label="Ajustes y perfil">${ic("gear", 22)}</button></div></header>
+  ${lost.map((p) => `<button class="hm-lost" data-act="open" data-id="${p.id}">${ic("alerta", 22, 2)}<span><b>${esc(p.name)} est\xE1 en modo perdida</b><span>Toca para ver su ficha</span></span></button>`).join("")}
+  ${pets.length && noTagPets().length ? shopBanner("home") : `<button class="shop-ban" data-act="go" data-v="tienda"><span class="sb-imgs" aria-hidden="true"><img src="chapa-rojo.jpg" alt=""><img src="chapa-rosa.jpg" alt=""><img src="chapa-azul.jpg" alt=""></span><span class="sb-t"><small>WILDY STORE \xB7 Chapa con QR</small><b>Que siempre vuelva a casa</b><span>Desde ${TAG_PRICE} \xB7 Ver colores \u203A</span></span></button>`}
+  ${pets.length && !owner.phone && !pets.every(hasQR) ? `<div class="warnbox" style="margin:12px 0"><span>A\xF1ade tu tel\xE9fono para salir en el QR de emergencia.</span><button class="btn small" data-act="settings">A\xF1adir</button></div>` : ""}
+  <div class="hm-gap"></div>
+  ${homeImportant()}
+  <div class="wg-hd"><b>Cosas importantes</b>${wgVis().length ? `<button class="lnk" data-act="wg_edit">${WG.edit ? "Listo" : "Editar"}</button>` : ""}</div>
+  ${wgVis().length ? `<div id="wg-list" class="wg-list${WG.edit ? " editing" : ""}">${wgListHTML()}</div>` : ""}
+  <button class="wg-add${wgVis().length ? "" : " first"}" data-act="wg_add">${ic("mas", wgVis().length ? 18 : 20, 2.2)}${wgVis().length ? " A\xF1adir algo importante" : '<span><b>A\xF1ade tus cosas importantes</b><span class="sub">El consejo de Bruce, una foto, un chat\u2026</span></span>'}</button>`;
+    if (tagS.list === null) loadTags();
+  }
+  const wgVis = () => wgGet().filter((w) => w.t[0] !== "_");
+  function bruceCard() {
+    return `<button class="hm-bruce" data-act="ai_top"><img src="bruce.png" alt="" width="54" height="54"><span><small>Bruce te dice</small><b>${esc(bruceTip())}</b><em>Preg\xFAntale lo que quieras \u203A</em></span></button>`;
+  }
+  const FOL = { n: null };
+  async function folLoad() {
+    if (FOL.n || !inCommunity()) return;
+    FOL.n = {};
+    const [a, b] = await Promise.all([sb.rpc("people_list", { scope: "following" }), sb.rpc("people_list", { scope: "followers" })]);
+    FOL.n = { following: (a.data || []).length, followers: (b.data || []).length };
+    if (view.name === "chats") renderChats();
+    if (view.name === "settings") renderSettings();
+  }
+  function folRow() {
+    var _a, _b;
+    if (!inCommunity()) return "";
+    if (!FOL.n) setTimeout(folLoad, 0);
+    const n = FOL.n || {};
+    return `<div class="fol-row"><button data-act="comm_pscope" data-v="following"><b>${(_a = n.following) != null ? _a : "\u2013"}</b><span>Sigues</span></button><button data-act="comm_pscope" data-v="followers"><b>${(_b = n.followers) != null ? _b : "\u2013"}</b><span>Te siguen</span></button><button data-act="comm_pscope" data-v="all"><b>${ic("mas", 18, 2.4)}</b><span>Buscar gente</span></button></div>`;
+  }
   const params = new URLSearchParams(location.search);
   const lostId = params.get("perdido");
   if (lostId) {
@@ -16704,6 +16887,575 @@ body:not(.has-tabs) #bruce {
 .post-rep .chip {
   padding: 6px 11px;
   font-size: 13px;
+}
+</style>
+<style>
+#chatfab {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right, 0px));
+  bottom: calc(var(--tabs) + 74px);
+  z-index: 34;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--red);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 22px -8px rgba(212, 42, 58, .7);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+#chatfab[hidden] {
+  display: none;
+}
+#chatfab .tb-n {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #fff;
+  color: var(--red);
+  border-color: var(--red);
+}
+body:not(.has-tabs) #chatfab {
+  display: none;
+}
+.ch-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.ch-top .back {
+  order: 0;
+}
+.ch-top h1 {
+  order: 2;
+  flex-basis: 100%;
+  font-size: 32px;
+  margin: 4px 0 0;
+}
+.ch-top .ch-ic {
+  margin-left: auto;
+  order: 1;
+}
+.ch-top .ch-ic + .ch-ic {
+  margin-left: 0;
+}
+.ch-ic {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--surface);
+  color: var(--red);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.ch-req {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 10px 0 0;
+  border: 0;
+  border-radius: 18px;
+  padding: 12px 14px;
+  background: var(--red);
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ch-req b {
+  display: block;
+  font-size: 16px;
+}
+.ch-req span span {
+  font-size: 13px;
+  opacity: .9;
+}
+.ch-req i {
+  margin-left: auto;
+  font-style: normal;
+  font-size: 26px;
+  line-height: 1;
+}
+.ch-req.soft {
+  background: var(--red-soft);
+  color: var(--red);
+}
+.ch-common {
+  margin-top: 12px;
+  background: var(--surface);
+  border-radius: 20px;
+}
+.ch-cav {
+  background: var(--red-soft) !important;
+  color: var(--red) !important;
+}
+.ch-common em {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--red);
+  background: var(--bg);
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-left: 6px;
+  vertical-align: 2px;
+}
+.ch-list {
+  margin-top: 6px;
+}
+.ch-list .dm-row b,
+.ch-common b {
+  font-size: 17px;
+}
+.ch-list .dm-last,
+.ch-common .dm-last {
+  font-size: 15px;
+}
+.xp-title {
+  font-size: 34px;
+  margin-bottom: 2px;
+}
+.xp-intro {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 17px;
+}
+.xp-bigs {
+  display: grid;
+  gap: 14px;
+}
+.xp-big {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 118px;
+  border: 0;
+  border-radius: 26px;
+  padding: 18px;
+  text-align: left;
+  font: inherit;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 14px 28px -20px rgba(120, 20, 30, .7);
+}
+.xp-big.c1 {
+  background:
+    linear-gradient(
+      130deg,
+      #e9505e,
+      #c41d30);
+}
+.xp-big.c2 {
+  background:
+    linear-gradient(
+      130deg,
+      #f07a5a,
+      #d8442e);
+}
+.xp-big.c3 {
+  background:
+    linear-gradient(
+      130deg,
+      #c43a72,
+      #9a1f4f);
+}
+.xb-ic {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .2);
+  display: grid;
+  place-items: center;
+}
+.xb-t {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+.xb-t b {
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 1.1;
+}
+.xb-t span {
+  font-size: 15px;
+  opacity: .95;
+  line-height: 1.3;
+}
+.xb-go {
+  font-size: 34px;
+  line-height: 1;
+  opacity: .85;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .xp-big {
+    transition: transform .15s;
+  }
+  .xp-big:active {
+    transform: scale(.98);
+  }
+}
+.wall-pub {
+  margin-top: 12px;
+}
+.hm-hero {
+  margin: -12px calc(-1*max(16px, env(safe-area-inset-left, 0px))) 0;
+  padding: calc(14px + env(safe-area-inset-top, 0px)*0) max(16px, env(safe-area-inset-left, 0px)) 46px;
+  background:
+    radial-gradient(
+      120% 90% at 90% 0%,
+      #ff5b69 0%,
+      #d42a3a 45%,
+      #a3121f 100%);
+  color: #fff;
+  border-radius: 0 0 34px 34px;
+  position: relative;
+  overflow: hidden;
+}
+.hm-hero::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -50px;
+  width: 220px;
+  height: 220px;
+  opacity: .09;
+  background: url(wildy-paw.png) center/contain no-repeat;
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+.hh-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  padding-top: 4px;
+}
+.hh-greet {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.hh-greet b {
+  font-weight: 800;
+}
+.hh-date {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: .85;
+}
+.hm-hero .bell-btn,
+.hm-hero .gear-btn {
+  background: rgba(255, 255, 255, .18);
+  color: #fff;
+}
+.hm-hero .bell-btn i {
+  border-color: #c41d30;
+  background: #fff;
+  color: var(--red);
+}
+.hh-pets {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  margin: 18px calc(-1*max(16px, env(safe-area-inset-left, 0px))) 0;
+  padding: 2px max(16px, env(safe-area-inset-left, 0px)) 4px;
+  scrollbar-width: none;
+  position: relative;
+  z-index: 1;
+}
+.hh-pets::-webkit-scrollbar {
+  display: none;
+}
+.hs-pet {
+  flex: none;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+  width: 88px;
+}
+.hs-ring {
+  display: block;
+  padding: 3px;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      140deg,
+      #fff,
+      #ffd1d6);
+}
+.hs-pet.hot .hs-ring {
+  background:
+    conic-gradient(
+      #ffd34d,
+      #fff,
+      #ffd34d);
+}
+.hs-pet.lost .hs-ring {
+  background: #ffd34d;
+}
+.hs-img {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fbe3e6;
+  color: var(--red);
+  border: 3px solid #c41d30;
+}
+.hs-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hs-img em {
+  font-style: normal;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 30px;
+}
+.hs-pet b {
+  font-size: 14px;
+  font-weight: 800;
+  max-width: 88px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hs-pet i {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  background: #ffd34d;
+  color: #5a3a00;
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-top: -4px;
+}
+.hs-add .hs-ring {
+  background: rgba(255, 255, 255, .35);
+}
+.hs-add .hs-img {
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  border-color: transparent;
+  border-style: dashed;
+}
+.hm-body {
+  position: relative;
+  margin-top: -30px;
+  z-index: 2;
+}
+.hm-body .hm-card {
+  margin-bottom: 18px;
+  box-shadow: 0 16px 30px -20px rgba(120, 20, 30, .55);
+}
+.hm-body .shop-ban {
+  margin: 0 0 12px;
+}
+.hm-bruce {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: 0;
+  border-radius: 22px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  background:
+    linear-gradient(
+      120deg,
+      #fff4e6,
+      #ffe3d6);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.hm-bruce img {
+  flex: none;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px -6px rgba(120, 20, 30, .5);
+}
+.hm-bruce small {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #b0541c;
+}
+.hm-bruce b {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.3;
+  margin: 2px 0;
+}
+.hm-bruce em {
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--red);
+}
+@media (prefers-color-scheme: dark) {
+  .hm-bruce {
+    background:
+      linear-gradient(
+        120deg,
+        #3a2418,
+        #3b1d21);
+  }
+  .hm-bruce small {
+    color: #f0a35a;
+  }
+}
+.hm-body .wg-list {
+  margin-bottom: 0;
+}
+.fol-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+.fol-row button {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 18px;
+  padding: 10px 6px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.fol-row b {
+  font-family: var(--display);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--red);
+  display: grid;
+  place-items: center;
+  min-height: 22px;
+}
+.fol-row span {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.hm-say b {
+  white-space: normal;
+  font-size: 16px;
+}
+.hm-row {
+  grid-template-columns: auto 1fr 0 auto;
+}
+</style>
+<style>
+.hm-gap {
+  height: 14px;
+}
+.mem-simple {
+  gap: 12px;
+}
+.mem-pick {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 4px;
+  min-height: 200px;
+  border: 2px dashed rgba(212, 42, 58, .45);
+  border-radius: 24px;
+  background: var(--red-soft);
+  color: var(--red);
+  cursor: pointer;
+  text-align: center;
+}
+.mem-pick b {
+  font-size: 19px;
+}
+.mem-pick span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.mem-pick.small {
+  min-height: 0;
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border-width: 1.5px;
+}
+.mem-pick.small svg {
+  width: 22px;
+  height: 22px;
+}
+.mem-pick.small span {
+  display: none;
+}
+.mem-simple .mem-ph:empty {
+  display: none;
+}
+.mem-simple .mem-ph {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.mem-simple .mem-th {
+  aspect-ratio: 1;
+  width: auto;
+  height: auto;
+}
+.mem-simple .mem-th img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mem-simple textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 12px;
+  font: inherit;
+  background: var(--bg);
+  color: var(--ink);
+  resize: vertical;
+}
+.wt-bruce {
+  padding: 0;
+  background: none;
+}
+.wt-bruce .hm-bruce {
+  margin: 0;
+}
+.wg-list.editing .wt-bruce .wg-b {
+  opacity: .55;
 }
 </style>
 </body>
