@@ -6580,6 +6580,15 @@ button.rev {
   cursor: not-allowed;
 }
 </style>
+<style>
+details.fold{margin-top:26px}
+details.fold>summary{font-size:22px;font-weight:800;list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:2px 0}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"\203A";margin-left:auto;transition:transform .2s;font-weight:700;color:var(--muted)}
+details.fold[open]>summary::after{transform:rotate(90deg)}
+details.fold>summary .fold-n{font-size:14px;font-weight:700;color:var(--muted);background:var(--red-soft,rgba(0,0,0,.06));border-radius:999px;padding:1px 9px}
+details.fold>summary:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:8px}
+</style>
 </head>
 <body>
 <div id="splash" aria-hidden="true"><div class="sp-paw"><img src="splash-emblem.png" alt=""><img class="sp-solid" src="splash-solid.png" alt=""></div><div class="sp-word"><b>W</b><b>I</b><b>L</b><b>D</b><b>Y</b><i></i></div></div>
@@ -8308,7 +8317,8 @@ C\xF3digo: ${inviteCode.code}`;
   ${nb ? `<div class="bday"><div class="big">${nb.days}<small>${nb.days === 1 ? "d\xEDa" : "d\xEDas"}</small></div>
     <div>${nb.days === 0 ? `<b>\xA1Hoy cumple ${nb.turns}!</b>` : `<b>Para su cumplea\xF1os</b><br><span class="sub">Cumple ${nb.turns} ${nb.turns === 1 ? "a\xF1o" : "a\xF1os"} el ${nb.date.getDate()} de ${MES[nb.date.getMonth()]}</span>`}</div></div>` : ""}
 
-  <div class="sec"><h2>Fotos <button class="btn soft small" data-act="addphotos">A\xF1adir fotos</button></h2>
+  <details class="sec fold"><summary>Fotos <span class="fold-n">${photosOf(p).length}</span></summary>
+    <div style="margin:4px 0 10px"><button class="btn soft small" data-act="addphotos">A\xF1adir fotos</button></div>
     ${(() => {
       const l = photosOf(p);
       return l.length ? `<div class="gal">${l.map((u, k) => `<div class="gi"><img src="${esc(u)}" alt="Foto ${k + 1} de ${esc(p.name)}" loading="lazy">
@@ -8316,14 +8326,14 @@ C\xF3digo: ${inviteCode.code}`;
       <button class="gd" data-act="delphoto" data-u="${esc(u)}" aria-label="Quitar esta foto">\xD7</button></div>`).join("")}</div>
       ${l.length > 1 ? '<p class="sub" style="margin:8px 0 0">Las fotos van rotando solas. En la foto grande puedes deslizar para pasarlas.</p>' : '<p class="sub" style="margin:8px 0 0">A\xF1ade m\xE1s fotos y ir\xE1n rotando solas.</p>'}` : '<p class="empty">A\xF1ade una o varias fotos. Si hay m\xE1s de una, ir\xE1n rotando solas.</p>';
     })()}
-  </div>
+  </details>
 
-  <div class="sec"><h2>Qui\xE9n la cuida</h2>
+  <details class="sec fold"><summary>Qui\xE9n la cuida <span class="fold-n">${members.length}</span></summary>
     <div class="items">${members.map((m) => `<div class="item">${avatarHTML(false, m.person)}
       <div class="t"><b>${esc(m.person.name || "Sin nombre")}${m.user_id === user.id ? " (t\xFA)" : ""}</b><span>${m.role === "owner" ? "Due\xF1a o due\xF1o" : "Comparte la mascota"}</span></div>
       ${isOwner && m.user_id !== user.id ? `<button class="x" data-act="kick" data-uid="${m.user_id}" aria-label="Quitar a ${esc(m.person.name)}">\xD7</button>` : ""}</div>`).join("")}</div>
     <button class="btn ghost block" style="margin-top:10px" data-act="invite" data-id="${p.id}">Invitar a alguien</button>
-  </div>
+  </details>
 
   <div class="sec"><h2>Carnet de emergencia</h2>
     ${hasQR(p) ? `<div class="qrcard"><div class="qrbox" data-qr="${p.id}" role="img" aria-label="C\xF3digo QR de emergencia de ${esc(p.name)}"></div>
@@ -14920,7 +14930,7 @@ Gracias.`;
     <span class="post-aud" title="${x.audience === "followers" ? "Solo seguidores" : "Todos"}">${ic(x.audience === "followers" ? "comun" : "mundo", 15)}</span></header>
     ${x.body ? `<p class="post-t">${esc(x.body)}</p>` : ""}
     ${x.photo ? `<div class="post-img">${posts.urls[x.photo] ? `<img src="${esc(posts.urls[x.photo])}" alt="Foto de ${esc(x.name || "")}" loading="lazy">` : ""}</div>` : ""}
-    <footer>${x.user_id === user.id ? `<button class="lnk" data-act="post_del" data-id="${esc(x.id)}">Borrar</button>` : posts.menu === x.id ? `<span class="post-rep">${["Spam", "Ofensivo o acoso", "Sexual o violento", "Maltrato animal", "Otro"].map((r) => `<button class="chip" data-act="post_report" data-id="${esc(x.id)}" data-u="${esc(x.user_id)}" data-r="${r}">${r}</button>`).join("")}<button class="lnk muted" data-act="post_block" data-u="${esc(x.user_id)}" data-name="${esc(x.name || "")}">Bloquear a ${esc(x.name || "esta persona")}</button><button class="lnk muted" data-act="post_menu" data-id="">Cancelar</button></span>` : `<button class="lnk muted" data-act="post_menu" data-id="${esc(x.id)}">Denunciar o bloquear</button>`}</footer></article>`;
+    <footer>${x.user_id === user.id ? `<button class="lnk" data-act="post_edit" data-id="${esc(x.id)}">Editar</button> <button class="lnk" data-act="post_del" data-id="${esc(x.id)}">Borrar</button>` : posts.menu === x.id ? `<span class="post-rep">${["Spam", "Ofensivo o acoso", "Sexual o violento", "Maltrato animal", "Otro"].map((r) => `<button class="chip" data-act="post_report" data-id="${esc(x.id)}" data-u="${esc(x.user_id)}" data-r="${r}">${r}</button>`).join("")}<button class="lnk muted" data-act="post_block" data-u="${esc(x.user_id)}" data-name="${esc(x.name || "")}">Bloquear a ${esc(x.name || "esta persona")}</button><button class="lnk muted" data-act="post_menu" data-id="">Cancelar</button></span>` : `<button class="lnk muted" data-act="post_menu" data-id="${esc(x.id)}">Denunciar o bloquear</button>`}</footer></article>`;
   }
   function renderWall() {
     const el = document.getElementById("xp-wall");
@@ -14935,13 +14945,13 @@ Gracias.`;
     if (!posts.draft) posts.draft = { photo: null, aud: "all" };
     const d = posts.draft;
     app.innerHTML = `<button class="back" data-act="post_cancel">\u2039 Cancelar</button>
-  <h1 class="feed-title">Nueva publicaci\xF3n</h1>
+  <h1 class="feed-title">${d.id ? "Editar publicaci\xF3n" : "Nueva publicaci\xF3n"}</h1>
   <form id="postform" class="form">
     <div class="post-ph" id="post-ph">${d.photo ? `<img src="${esc(d.photo)}" alt=""><button type="button" data-act="post_rmph" aria-label="Quitar foto">\u2715</button>` : `<button type="button" class="post-pick" data-act="post_pick">${ic("foto", 30)}<span>A\xF1adir foto</span></button>`}</div>
-    <label>Texto<textarea id="post-body" maxlength="600" rows="3" placeholder="Cuenta algo\u2026"></textarea></label>
+    <label>Texto<textarea id="post-body" maxlength="600" rows="3" placeholder="Cuenta algo\u2026">${esc(d.body || "")}</textarea></label>
     <div class="sh-lbl">\xBFQui\xE9n lo ve?</div>
     <div class="seg seg2" role="radiogroup">${[["all", "Todos", "mundo"], ["followers", "Mis seguidores", "comun"]].map(([v, l, i]) => `<button type="button" role="radio" aria-checked="${d.aud === v}" class="${d.aud === v ? "on" : ""}" data-act="post_aud" data-v="${v}">${ic(i, 16)} ${l}</button>`).join("")}</div>
-    <button class="btn block" type="submit">Publicar</button>
+    <button class="btn block" type="submit">${d.id ? "Guardar cambios" : "Publicar"}</button>
   </form>`;
   }
   async function postSubmit(f) {
@@ -14963,6 +14973,36 @@ Gracias.`;
     if (BAD_RE.test(body)) {
       toast("Tu texto tiene palabras que no se permiten en Wildy. C\xE1mbialo, por favor");
       return reset();
+    }
+    if (d.id) {
+      try {
+        let finalPath = d.origPath || null;
+        if (d.photo && d.photo.startsWith("data:")) {
+          const np = `${user.id}/${crypto.randomUUID()}.jpg`;
+          const { error: eUp } = await sb.storage.from("posts").upload(np, dataUrlToBlob(d.photo), { contentType: "image/jpeg", upsert: false });
+          if (eUp) throw eUp;
+          finalPath = np;
+        } else if (!d.photo) {
+          finalPath = null;
+        }
+        const { error } = await sb.from("posts").update({ body: body || null, audience: d.aud, photo: finalPath }).eq("id", d.id);
+        if (error) throw error;
+        if (d.origPath && d.origPath !== finalPath) sb.storage.from("posts").remove([d.origPath]).then(() => {
+        }, () => {
+        });
+        posts.draft = null;
+        posts.saving = false;
+        posts.list = null;
+        WG.data.muro = null;
+        toast("Publicaci\xF3n actualizada");
+        view = { name: "wall" };
+        render();
+        window.scrollTo(0, 0);
+      } catch (e) {
+        reset();
+        fail(e);
+      }
+      return;
     }
     try {
       let path = null;
@@ -15029,6 +15069,16 @@ Gracias.`;
         posts.draft.photo = null;
         renderPostNew();
         document.getElementById("post-body").value = v;
+        return;
+      }
+      if (a === "post_edit") {
+        const x = (posts.list || []).find((p) => p.id === b.dataset.id);
+        if (!x) return;
+        if (x.photo && !posts.urls[x.photo]) await postsSign([x]);
+        posts.draft = { id: x.id, body: x.body || "", aud: x.audience || "all", photo: x.photo ? posts.urls[x.photo] || null : null, origPath: x.photo || null };
+        view = { name: "postnew" };
+        render();
+        window.scrollTo(0, 0);
         return;
       }
       if (a === "post_del") {
