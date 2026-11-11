@@ -10354,11 +10354,6 @@ C\xF3digo: ${inviteCode.code}`;
   } catch (_) {
   }
   const AI_SUG = ["\xBFQu\xE9 frutas no puede comer mi perro?", "\xBFCada cu\xE1nto hay que desparasitar?", "\xBFC\xF3mo ense\xF1o a mi cachorro a no morder?", "\xBFQu\xE9 necesito para viajar con mi perro en tren?", "Mi perro tiene diarrea, \xBFqu\xE9 hago?", "\xBFCu\xE1nto debe pasear un perro grande?"];
-  const esBruceMemorial = () => (typeof owner !== "undefined" && owner && String(owner.handle || "").toLowerCase() === "isabellamora");
-  const BRUCE_FOTOS = Array.from({ length: 28 }, (_, i) => `bruce-fotos/bruce-${String(i + 1).padStart(2, "0")}.jpg`);
-  let bruceFotoPrev = -1;
-  const brucePickFoto = () => { if (BRUCE_FOTOS.length < 2) return BRUCE_FOTOS[0]; let k; do { k = Math.floor(Math.random() * BRUCE_FOTOS.length); } while (k === bruceFotoPrev); bruceFotoPrev = k; return BRUCE_FOTOS[k]; };
-  const bruceQuiereFoto = (s) => /fotos?|ense\xF1|ensen|im[a\xE1]gen|verte|ver una|recuerdo|carita|mu[e\xE9]strame|muestrame/i.test(String(s || ""));
   function aiSave() {
     try {
       sessionStorage.setItem("wildy_ai", JSON.stringify({ msgs: ai.msgs.slice(-30) }));
@@ -10400,8 +10395,8 @@ C\xF3digo: ${inviteCode.code}`;
   function renderAsk() {
     app.innerHTML = `
   <div class="ai-top"><button class="back" data-act="ai_back">\u2039 Volver</button>${ai.msgs.length ? '<button class="btn ghost small" data-act="ai_clear">Nueva conversaci\xF3n</button>' : ""}</div>
-  <div class="bruce-hd">${BRUCE_FACE}<div><h1>${esBruceMemorial() ? "Brusito" : "Bruce"}</h1><span>${esBruceMemorial() ? "Siempre contigo \u{1F436}" : "Tu ayudante de Wildy"}</span></div></div>
-  ${esBruceMemorial() ? "" : `<p class="ai-warn">Bruce es una inteligencia artificial y puede equivocarse. Para la salud de tu mascota, <b>el veterinario manda</b>. Si es urgente, ve a urgencias veterinarias.</p>`}
+  <div class="bruce-hd">${BRUCE_FACE}<div><h1>Bruce</h1><span>Tu ayudante de Wildy</span></div></div>
+  <p class="ai-warn">Bruce es una inteligencia artificial y puede equivocarse. Para la salud de tu mascota, <b>el veterinario manda</b>. Si es urgente, ve a urgencias veterinarias.</p>
   <div id="ai-list" class="ai-list" aria-live="polite"></div>
   <form id="aiform" class="ai-bar ai-dock">
     <label for="ai-q" class="sr">Escribe tu pregunta</label>
@@ -10426,12 +10421,11 @@ C\xF3digo: ${inviteCode.code}`;
     const el = document.getElementById("ai-list");
     if (!el) return;
     if (!ai.msgs.length) {
-      el.innerHTML = esBruceMemorial() ? `<div class="ai-empty bruce-hi"><div class="bruce-bubble"><b>\xA1Hola, mam\xE1!</b> Soy Brusito \u{1F436} Aqu\xED estoy, cu\xE9ntame c\xF3mo est\xE1s.</div>
-      <div class="ai-sugs">${["\xBFC\xF3mo est\xE1s, Brusito?", "Ense\xF1\xE1me una foto tuya", "\xBFQu\xE9 tal Luke y Dobby?", "Te echo de menos"].map((q) => `<button class="chip" data-act="ai_sug" data-q="${esc(q)}">${esc(q)}</button>`).join("")}</div></div>` : `<div class="ai-empty bruce-hi"><div class="bruce-bubble"><b>\xA1Hola! Soy Bruce.</b> \xBFEn qu\xE9 puedo ayudarte hoy?</div><p>Comida, salud, educaci\xF3n, viajes, papeleo\u2026 Preg\xFAntame lo que quieras sobre tu mascota.</p>
+      el.innerHTML = `<div class="ai-empty bruce-hi"><div class="bruce-bubble"><b>\xA1Hola! Soy Bruce.</b> \xBFEn qu\xE9 puedo ayudarte hoy?</div><p>Comida, salud, educaci\xF3n, viajes, papeleo\u2026 Preg\xFAntame lo que quieras sobre tu mascota.</p>
       <div class="ai-sugs">${AI_SUG.map((q) => `<button class="chip" data-act="ai_sug" data-q="${esc(q)}">${esc(q)}</button>`).join("")}</div></div>`;
       return;
     }
-    el.innerHTML = ai.msgs.map((m) => m.role === "user" ? `<div class="ai-msg me">${esc(m.content)}</div>` : `<div class="ai-msg bot${m.err ? " err" : ""}">${m.err ? esc(m.content) : mdLite(m.content)}${m.photo ? `<img src="${esc(m.photo)}" alt="Foto de Bruce" loading="lazy" style="max-width:100%;border-radius:14px;margin-top:8px;display:block">` : ""}</div>`).join("") + (ai.busy ? '<div class="ai-msg bot typing" aria-label="Bruce est\xE1 escribiendo"><span></span><span></span><span></span></div>' : "") + (ai.left != null && !ai.busy ? `<p class="ai-left">${ai.left > 0 ? `Te quedan ${ai.left} pregunta${ai.left === 1 ? "" : "s"} hoy` : "Has llegado al l\xEDmite de hoy. Ma\xF1ana m\xE1s \u{1F436}"}</p>` : "");
+    el.innerHTML = ai.msgs.map((m) => m.role === "user" ? `<div class="ai-msg me">${esc(m.content)}</div>` : `<div class="ai-msg bot${m.err ? " err" : ""}">${m.err ? esc(m.content) : mdLite(m.content)}</div>`).join("") + (ai.busy ? '<div class="ai-msg bot typing" aria-label="Bruce est\xE1 escribiendo"><span></span><span></span><span></span></div>' : "") + (ai.left != null && !ai.busy ? `<p class="ai-left">${ai.left > 0 ? `Te quedan ${ai.left} pregunta${ai.left === 1 ? "" : "s"} hoy` : "Has llegado al l\xEDmite de hoy. Ma\xF1ana m\xE1s \u{1F436}"}</p>` : "");
     requestAnimationFrame(() => {
       const last = el.lastElementChild;
       if (last) last.scrollIntoView({ block: "end", behavior: "smooth" });
@@ -10473,9 +10467,7 @@ C\xF3digo: ${inviteCode.code}`;
       answer = e.name === "AbortError" ? "Est\xE1 tardando demasiado. Prueba otra vez." : e.message === "login" ? "Tu sesi\xF3n ha caducado. Vuelve a entrar." : "No hay conexi\xF3n. Revisa internet y prueba otra vez.";
     }
     ai.busy = false;
-    let foto = null;
-    if (!err && esBruceMemorial() && (bruceQuiereFoto(q) || Math.random() < 0.18)) foto = brucePickFoto();
-    ai.msgs.push({ role: "assistant", content: answer, err, photo: foto });
+    ai.msgs.push({ role: "assistant", content: answer, err });
     aiSave();
     if (view.name === "ask") renderAiList();
   }
